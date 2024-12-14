@@ -15,4 +15,12 @@ app.use('/api/v1/notice', notice_route_1.notice_router);
 app.get('/', (req, res) => {
     res.send('Tamirul Ummah Maderasah Server');
 });
+// app.use((err: any, req: Request, res: Response, next: NextFunction) => {
+//   res.status(500).json({
+//     success: false,
+//     message: err.message || "Internal Server Error",
+//     error:  err,
+//   });
+//   next()
+// });
 exports.default = app;
