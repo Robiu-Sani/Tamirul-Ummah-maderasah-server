@@ -77,6 +77,6 @@ const institutionSchema = new mongoose.Schema<InstitutionData>(
   },
 );
 
-const Institution = mongoose.model('Institution', institutionSchema);
+const InstitutionModel = mongoose.model('Institution', institutionSchema);
 
-module.exports = Institution;
+export default InstitutionModel;
