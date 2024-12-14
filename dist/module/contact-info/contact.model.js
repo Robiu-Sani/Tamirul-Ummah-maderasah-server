@@ -76,5 +76,5 @@ const institutionSchema = new mongoose_1.default.Schema({
 }, {
     timestamps: true,
 });
-const Institution = mongoose_1.default.model('Institution', institutionSchema);
-module.exports = Institution;
+const InstitutionModel = mongoose_1.default.model('Institution', institutionSchema);
+exports.default = InstitutionModel;
