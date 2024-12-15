@@ -12,6 +12,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const father_model_1 = __importDefault(require("./father/father.model"));
+const gairdean_model_1 = __importDefault(require("./gairdean/gairdean.model"));
+const mother_model_1 = __importDefault(require("./mother/mother.model"));
 const student_model_1 = __importDefault(require("./student.model"));
 const createStudentIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield student_model_1.default.create(payload);
@@ -22,7 +25,16 @@ const getAllStudentIntoDB = () => __awaiter(void 0, void 0, void 0, function* ()
     return result;
 });
 const getSingleStudentIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield student_model_1.default.findById(id);
+    const student = yield student_model_1.default.findById(id);
+    const father = yield father_model_1.default.findOne({ studentId: id });
+    const mother = yield mother_model_1.default.findOne({ studentId: id });
+    const gairdean = yield gairdean_model_1.default.findOne({ studentId: id });
+    const result = {
+        student,
+        father,
+        mother,
+        gairdean,
+    };
     return result;
 });
 const deleteSingleStudentIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {

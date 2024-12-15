@@ -10,6 +10,9 @@ import { notice_router } from './module/notices/notice.route';
 import { institution_router } from './module/contact-info/contact.route';
 import { slide_router } from './module/carousel/carousel.route';
 import { student_router } from './module/student/student.route';
+import { father_router } from './module/student/father/father.router';
+import { Mother_router } from './module/student/mother/mother.route';
+import { Gairdean_router } from './module/student/gairdean/gairdean.route';
 const app: Application = express();
 
 //parser
@@ -21,6 +24,9 @@ app.use('/api/v1/notice', notice_router);
 app.use('/api/v1/institution', institution_router);
 app.use('/api/v1/slide', slide_router);
 app.use('/api/v1/student', student_router);
+app.use('/api/v1/father', father_router);
+app.use('/api/v1/mother', Mother_router);
+app.use('/api/v1/gairdean', Gairdean_router);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Tamirul Ummah Maderasah Server');

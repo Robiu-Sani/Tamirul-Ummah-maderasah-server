@@ -1,3 +1,6 @@
+import fatherModel from './father/father.model';
+import GairdeanModel from './gairdean/gairdean.model';
+import MotherModel from './mother/mother.model';
 import { StudentInfo } from './student.interface';
 import StudentModel from './student.model';
 
@@ -12,7 +15,16 @@ const getAllStudentIntoDB = async () => {
 };
 
 const getSingleStudentIntoDB = async (id: string | number) => {
-  const result = await StudentModel.findById(id);
+  const student = await StudentModel.findById(id);
+  const father = await fatherModel.findOne({ studentId: id });
+  const mother = await MotherModel.findOne({ studentId: id });
+  const gairdean = await GairdeanModel.findOne({ studentId: id });
+  const result = {
+    student,
+    father,
+    mother,
+    gairdean,
+  };
   return result;
 };
 
