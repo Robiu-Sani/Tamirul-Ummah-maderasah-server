@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 import { StudentInfo } from './student.interface';
 
+const generateRandomPassword = () => {
+  return Math.floor(100000 + Math.random() * 900000).toString();
+};
+
 const studentSchema = new mongoose.Schema<StudentInfo>(
   {
     address: {
@@ -76,8 +80,9 @@ const studentSchema = new mongoose.Schema<StudentInfo>(
       trim: true,
     },
     password: {
-      type: String,
+      type: ['String', 'Number'],
       trim: true,
+      default: generateRandomPassword,
     },
   },
   {

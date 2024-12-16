@@ -17,5 +17,5 @@ export interface StudentInfo {
   studentNameBangla: string;
   studentNameEnglish: string;
   weight: string;
-  password: string;
+  password: string | number | undefined;
 }
