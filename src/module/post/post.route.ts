@@ -1,16 +1,19 @@
 import express from 'express';
-import FeeController from '../student/education-fee/fee.controllar';
+import PostController from './post.controllar';
 
 const router = express.Router();
 
-router.post('/create-fee', FeeController.createFee);
-router.get('/', FeeController.getAllFee);
-router.get('/single-fee/:id', FeeController.getSingleFee);
-router.delete('/delete-fee/:id', FeeController.deleteSingleFee);
+router.post('/create-post', PostController.createPost);
+router.get('/', PostController.getAllPost);
+router.get('/single-post/:id', PostController.getSinglePost);
+router.delete('/delete-post/:id', PostController.deleteSinglePost);
 router.patch(
-  '/update-single-fee-by-patch/:id',
-  FeeController.updateSingleByPatchFee,
+  '/update-single-post-by-patch/:id',
+  PostController.updateSingleByPatchPost,
 );
-router.put('/update-single-fee-by-put/:id', FeeController.updateSingleByPutFee);
+router.put(
+  '/update-single-post-by-put/:id',
+  PostController.updateSingleByPutPost,
+);
 
-export const fee_router = router;
+export const post_router = router;

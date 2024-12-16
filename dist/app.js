@@ -12,6 +12,9 @@ const student_route_1 = require("./module/student/student.route");
 const father_router_1 = require("./module/student/father/father.router");
 const mother_route_1 = require("./module/student/mother/mother.route");
 const gairdean_route_1 = require("./module/student/gairdean/gairdean.route");
+const teacher_route_1 = require("./module/teacher/teacher.route");
+const stafe_route_1 = require("./module/stafe/stafe.route");
+const post_route_1 = require("./module/post/post.route");
 const app = (0, express_1.default)();
 //parser
 app.use(express_1.default.json());
@@ -24,6 +27,9 @@ app.use('/api/v1/student', student_route_1.student_router);
 app.use('/api/v1/father', father_router_1.father_router);
 app.use('/api/v1/mother', mother_route_1.Mother_router);
 app.use('/api/v1/gairdean', gairdean_route_1.Gairdean_router);
+app.use('/api/v1/teacher', teacher_route_1.teacher_router);
+app.use('/api/v1/stafe', stafe_route_1.stafe_router);
+app.use('/api/v1/fee', post_route_1.fee_router);
 app.get('/', (req, res) => {
     res.send('Tamirul Ummah Maderasah Server');
 });
