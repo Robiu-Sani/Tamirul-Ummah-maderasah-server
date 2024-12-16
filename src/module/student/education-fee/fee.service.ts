@@ -7,12 +7,12 @@ const createFeeIntoDB = async (payload: FeeDetails) => {
 };
 
 const getAllFeeIntoDB = async () => {
-  const result = await FeeModel.find();
+  const result = await FeeModel.find().populate('studentId');
   return result;
 };
 
 const getSingleFeeIntoDB = async (id: string | number) => {
-  const result = await FeeModel.findById(id);
+  const result = await FeeModel.findById(id).populate('studentId');
   return result;
 };
 

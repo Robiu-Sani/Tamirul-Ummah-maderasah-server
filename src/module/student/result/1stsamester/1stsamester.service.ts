@@ -10,12 +10,12 @@ const createFirstSamisterIntoDB = async (payload: ExamInterface) => {
 };
 
 const getAllFirstSamisterIntoDB = async () => {
-  const result = await FristSamisterModel.find();
+  const result = await FristSamisterModel.find().populate('studentId');
   return result;
 };
 
 const getSingleFirstSamisterIntoDB = async (id: string | number) => {
-  const result = await FristSamisterModel.findById(id);
+  const result = await FristSamisterModel.findById(id).populate('studentId');
 
   return result;
 };

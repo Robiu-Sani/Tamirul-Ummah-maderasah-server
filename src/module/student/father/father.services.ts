@@ -7,12 +7,12 @@ const createFatherIntoDB = async (payload: UserInformation) => {
 };
 
 const getAllFatherIntoDB = async () => {
-  const result = await fatherModel.find();
+  const result = await fatherModel.find().populate('studentId');
   return result;
 };
 
 const getSingleFatherIntoDB = async (id: string | number) => {
-  const result = await fatherModel.findById(id);
+  const result = await fatherModel.findById(id).populate('studentId');
   return result;
 };
 

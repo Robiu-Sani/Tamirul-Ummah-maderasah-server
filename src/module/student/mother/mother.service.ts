@@ -7,12 +7,12 @@ const createMotherIntoDB = async (payload: MotherInformation) => {
 };
 
 const getAllMotherIntoDB = async () => {
-  const result = await MotherModel.find();
+  const result = await MotherModel.find().populate('studentId');
   return result;
 };
 
 const getSingleMotherIntoDB = async (id: string | number) => {
-  const result = await MotherModel.findById(id);
+  const result = await MotherModel.findById(id).populate('studentId');
   return result;
 };
 

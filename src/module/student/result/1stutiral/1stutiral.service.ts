@@ -10,12 +10,12 @@ const createFirstTutiralIntoDB = async (payload: ExamInterface) => {
 };
 
 const getAllFirstTutiralIntoDB = async () => {
-  const result = await FristTutiralModel.find();
+  const result = await FristTutiralModel.find().populate('studentId');
   return result;
 };
 
 const getSingleFirstTutiralIntoDB = async (id: string | number) => {
-  const result = await FristTutiralModel.findById(id);
+  const result = await FristTutiralModel.findById(id).populate('studentId');
 
   return result;
 };

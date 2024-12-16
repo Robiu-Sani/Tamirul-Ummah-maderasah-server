@@ -7,12 +7,12 @@ const createGairdeanIntoDB = async (payload: GairdeanInformation) => {
 };
 
 const getAllGairdeanIntoDB = async () => {
-  const result = await GairdeanModel.find();
+  const result = await GairdeanModel.find().populate('studentId');
   return result;
 };
 
 const getSingleGairdeanIntoDB = async (id: string | number) => {
-  const result = await GairdeanModel.findById(id);
+  const result = await GairdeanModel.findById(id).populate('studentId');
   return result;
 };
 

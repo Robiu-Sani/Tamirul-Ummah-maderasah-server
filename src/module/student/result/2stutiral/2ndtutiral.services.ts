@@ -10,12 +10,12 @@ const createSecendTutiralIntoDB = async (payload: ExamInterface) => {
 };
 
 const getAllSecendTutiralIntoDB = async () => {
-  const result = await SecendTutiralModel.find();
+  const result = await SecendTutiralModel.find().populate('studentId');
   return result;
 };
 
 const getSingleSecendTutiralIntoDB = async (id: string | number) => {
-  const result = await SecendTutiralModel.findById(id);
+  const result = await SecendTutiralModel.findById(id).populate('studentId');
 
   return result;
 };

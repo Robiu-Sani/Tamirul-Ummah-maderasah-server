@@ -10,12 +10,12 @@ const createSecendSamisterIntoDB = async (payload: ExamInterface) => {
 };
 
 const getAllSecendSamisterIntoDB = async () => {
-  const result = await SecendSamisterModel.find();
+  const result = await SecendSamisterModel.find().populate('studentId');
   return result;
 };
 
 const getSingleSecendSamisterIntoDB = async (id: string | number) => {
-  const result = await SecendSamisterModel.findById(id);
+  const result = await SecendSamisterModel.findById(id).populate('studentId');
 
   return result;
 };
