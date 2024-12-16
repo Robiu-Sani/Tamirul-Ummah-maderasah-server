@@ -14,6 +14,8 @@ import { father_router } from './module/student/father/father.router';
 import { Mother_router } from './module/student/mother/mother.route';
 import { Gairdean_router } from './module/student/gairdean/gairdean.route';
 import { teacher_router } from './module/teacher/teacher.route';
+import { stafe_router } from './module/stafe/stafe.route';
+import { fee_router } from './module/post/post.route';
 const app: Application = express();
 
 //parser
@@ -29,6 +31,8 @@ app.use('/api/v1/father', father_router);
 app.use('/api/v1/mother', Mother_router);
 app.use('/api/v1/gairdean', Gairdean_router);
 app.use('/api/v1/teacher', teacher_router);
+app.use('/api/v1/stafe', stafe_router);
+app.use('/api/v1/fee', fee_router);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Tamirul Ummah Maderasah Server');
