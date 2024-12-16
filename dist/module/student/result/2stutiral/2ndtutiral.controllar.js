@@ -12,122 +12,122 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const post_service_1 = __importDefault(require("./post.service"));
-const createPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const _2ndtutiral_services_1 = __importDefault(require("./2ndtutiral.services"));
+const createSecendTutiral = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const payload = req.body;
-        const data = yield post_service_1.default.createPostIntoDB(payload);
+        const data = yield _2ndtutiral_services_1.default.createSecendTutiralIntoDB(payload);
         res.json({
             status: true,
-            message: 'Post is posted successfully',
+            message: 'SecendTutiral is posted successfully',
             data,
         });
     }
     catch (error) {
         res.json({
             status: false,
-            message: 'Post is not created successfully',
+            message: 'SecendTutiral is not created successfully',
             error,
         });
     }
 });
-const getAllPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllSecendTutiral = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield post_service_1.default.getAllPostIntoDB();
+        const data = yield _2ndtutiral_services_1.default.getAllSecendTutiralIntoDB();
         res.json({
             status: true,
-            message: 'All Post got successfully',
+            message: 'All SecendTutiral got successfully',
             data,
         });
     }
     catch (error) {
         res.json({
             status: false,
-            message: 'Post is not get successfully',
+            message: 'SecendTutiral is not get successfully',
             error,
         });
     }
 });
-const getSinglePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { id } = req.params;
-        const data = yield post_service_1.default.getSinglePostIntoDB(id);
-        res.json({
-            status: true,
-            message: 'Single Post got successfully',
-            data,
-        });
-    }
-    catch (error) {
-        res.json({
-            status: false,
-            message: 'Single Post is not get successfully',
-            error,
-        });
-    }
-});
-const deleteSinglePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getSingleSecendTutiral = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const data = yield post_service_1.default.deleteSinglePostIntoDB(id);
+        const data = yield _2ndtutiral_services_1.default.getSingleSecendTutiralIntoDB(id);
         res.json({
             status: true,
-            message: 'Single Post delete successfully',
+            message: 'Single SecendTutiral got successfully',
             data,
         });
     }
     catch (error) {
         res.json({
             status: false,
-            message: 'Single Post is not delete successfully',
+            message: 'Single SecendTutiral is not get successfully',
             error,
         });
     }
 });
-const updateSingleByPatchPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteSingleSecendTutiral = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const payload = req.body;
         const { id } = req.params;
-        const data = yield post_service_1.default.updateSingleByPatchPostIntoDB(id, payload);
+        const data = yield _2ndtutiral_services_1.default.deleteSingleSecendTutiralIntoDB(id);
         res.json({
             status: true,
-            message: 'Single Post update successfully',
+            message: 'Single SecendTutiral delete successfully',
             data,
         });
     }
     catch (error) {
         res.json({
             status: false,
-            message: 'Single Post is not update successfully',
+            message: 'Single SecendTutiral is not delete successfully',
             error,
         });
     }
 });
-const updateSingleByPutPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const updateSingleByPatchSecendTutiral = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const payload = req.body;
         const { id } = req.params;
-        const data = yield post_service_1.default.updateSingleByPutPostIntoDB(id, payload);
+        const data = yield _2ndtutiral_services_1.default.updateSingleByPatchSecendTutiralIntoDB(id, payload);
         res.json({
             status: true,
-            message: 'Single Post update successfully',
+            message: 'Single SecendTutiral update successfully',
             data,
         });
     }
     catch (error) {
         res.json({
             status: false,
-            message: 'Single Post is not update successfully',
+            message: 'Single SecendTutiral is not update successfully',
             error,
         });
     }
 });
-const PostController = {
-    createPost,
-    getAllPost,
-    getSinglePost,
-    deleteSinglePost,
-    updateSingleByPatchPost,
-    updateSingleByPutPost,
+const updateSingleByPutSecendTutiral = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const payload = req.body;
+        const { id } = req.params;
+        const data = yield _2ndtutiral_services_1.default.updateSingleByPutSecendTutiralIntoDB(id, payload);
+        res.json({
+            status: true,
+            message: 'Single SecendTutiral update successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'Single SecendTutiral is not update successfully',
+            error,
+        });
+    }
+});
+const SecendTutiralController = {
+    createSecendTutiral,
+    getAllSecendTutiral,
+    getSingleSecendTutiral,
+    deleteSingleSecendTutiral,
+    updateSingleByPatchSecendTutiral,
+    updateSingleByPutSecendTutiral,
 };
-exports.default = PostController;
+exports.default = SecendTutiralController;

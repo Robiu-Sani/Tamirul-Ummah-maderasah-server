@@ -12,122 +12,122 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const post_service_1 = __importDefault(require("./post.service"));
-const createPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const _1stsamester_service_1 = __importDefault(require("./1stsamester.service"));
+const createFirstSamister = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const payload = req.body;
-        const data = yield post_service_1.default.createPostIntoDB(payload);
+        const data = yield _1stsamester_service_1.default.createFirstSamisterIntoDB(payload);
         res.json({
             status: true,
-            message: 'Post is posted successfully',
+            message: 'FirstSamister is posted successfully',
             data,
         });
     }
     catch (error) {
         res.json({
             status: false,
-            message: 'Post is not created successfully',
+            message: 'FirstSamister is not created successfully',
             error,
         });
     }
 });
-const getAllPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllFirstSamister = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield post_service_1.default.getAllPostIntoDB();
+        const data = yield _1stsamester_service_1.default.getAllFirstSamisterIntoDB();
         res.json({
             status: true,
-            message: 'All Post got successfully',
+            message: 'All FirstSamister got successfully',
             data,
         });
     }
     catch (error) {
         res.json({
             status: false,
-            message: 'Post is not get successfully',
+            message: 'FirstSamister is not get successfully',
             error,
         });
     }
 });
-const getSinglePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const { id } = req.params;
-        const data = yield post_service_1.default.getSinglePostIntoDB(id);
-        res.json({
-            status: true,
-            message: 'Single Post got successfully',
-            data,
-        });
-    }
-    catch (error) {
-        res.json({
-            status: false,
-            message: 'Single Post is not get successfully',
-            error,
-        });
-    }
-});
-const deleteSinglePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getSingleFirstSamister = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
-        const data = yield post_service_1.default.deleteSinglePostIntoDB(id);
+        const data = yield _1stsamester_service_1.default.getSingleFirstSamisterIntoDB(id);
         res.json({
             status: true,
-            message: 'Single Post delete successfully',
+            message: 'Single FirstSamister got successfully',
             data,
         });
     }
     catch (error) {
         res.json({
             status: false,
-            message: 'Single Post is not delete successfully',
+            message: 'Single FirstSamister is not get successfully',
             error,
         });
     }
 });
-const updateSingleByPatchPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const deleteSingleFirstSamister = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const payload = req.body;
         const { id } = req.params;
-        const data = yield post_service_1.default.updateSingleByPatchPostIntoDB(id, payload);
+        const data = yield _1stsamester_service_1.default.deleteSingleFirstSamisterIntoDB(id);
         res.json({
             status: true,
-            message: 'Single Post update successfully',
+            message: 'Single FirstSamister delete successfully',
             data,
         });
     }
     catch (error) {
         res.json({
             status: false,
-            message: 'Single Post is not update successfully',
+            message: 'Single FirstSamister is not delete successfully',
             error,
         });
     }
 });
-const updateSingleByPutPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const updateSingleByPatchFirstSamister = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const payload = req.body;
         const { id } = req.params;
-        const data = yield post_service_1.default.updateSingleByPutPostIntoDB(id, payload);
+        const data = yield _1stsamester_service_1.default.updateSingleByPatchFirstSamisterIntoDB(id, payload);
         res.json({
             status: true,
-            message: 'Single Post update successfully',
+            message: 'Single FirstSamister update successfully',
             data,
         });
     }
     catch (error) {
         res.json({
             status: false,
-            message: 'Single Post is not update successfully',
+            message: 'Single FirstSamister is not update successfully',
             error,
         });
     }
 });
-const PostController = {
-    createPost,
-    getAllPost,
-    getSinglePost,
-    deleteSinglePost,
-    updateSingleByPatchPost,
-    updateSingleByPutPost,
+const updateSingleByPutFirstSamister = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const payload = req.body;
+        const { id } = req.params;
+        const data = yield _1stsamester_service_1.default.updateSingleByPutFirstSamisterIntoDB(id, payload);
+        res.json({
+            status: true,
+            message: 'Single FirstSamister update successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'Single FirstSamister is not update successfully',
+            error,
+        });
+    }
+});
+const FirstSamisterController = {
+    createFirstSamister,
+    getAllFirstSamister,
+    getSingleFirstSamister,
+    deleteSingleFirstSamister,
+    updateSingleByPatchFirstSamister,
+    updateSingleByPutFirstSamister,
 };
-exports.default = PostController;
+exports.default = FirstSamisterController;

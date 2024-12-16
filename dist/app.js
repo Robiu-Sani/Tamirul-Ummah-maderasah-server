@@ -14,7 +14,12 @@ const mother_route_1 = require("./module/student/mother/mother.route");
 const gairdean_route_1 = require("./module/student/gairdean/gairdean.route");
 const teacher_route_1 = require("./module/teacher/teacher.route");
 const stafe_route_1 = require("./module/stafe/stafe.route");
+const fee_route_1 = require("./module/student/education-fee/fee.route");
 const post_route_1 = require("./module/post/post.route");
+const _1stutiral_route_1 = require("./module/student/result/1stutiral/1stutiral.route");
+const _2ndtutiral_route_1 = require("./module/student/result/2stutiral/2ndtutiral.route");
+const _1stsamester_route_1 = require("./module/student/result/1stsamester/1stsamester.route");
+const _2ndsamester_route_1 = require("./module/student/result/2ndsamester/2ndsamester.route");
 const app = (0, express_1.default)();
 //parser
 app.use(express_1.default.json());
@@ -29,7 +34,12 @@ app.use('/api/v1/mother', mother_route_1.Mother_router);
 app.use('/api/v1/gairdean', gairdean_route_1.Gairdean_router);
 app.use('/api/v1/teacher', teacher_route_1.teacher_router);
 app.use('/api/v1/stafe', stafe_route_1.stafe_router);
-app.use('/api/v1/fee', post_route_1.fee_router);
+app.use('/api/v1/fee', fee_route_1.Fee_router);
+app.use('/api/v1/post', post_route_1.post_router);
+app.use('/api/v1/first-tutiral', _1stutiral_route_1.firstTutiral_router);
+app.use('/api/v1/secend-tutiral', _2ndtutiral_route_1.secendTutiral_router);
+app.use('/api/v1/first-samister', _1stsamester_route_1.firstSamister_router);
+app.use('/api/v1/secend-samister', _2ndsamester_route_1.secendSamister_router);
 app.get('/', (req, res) => {
     res.send('Tamirul Ummah Maderasah Server');
 });
