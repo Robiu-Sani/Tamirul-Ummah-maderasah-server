@@ -18,11 +18,11 @@ const createGairdeanIntoDB = (payload) => __awaiter(void 0, void 0, void 0, func
     return result;
 });
 const getAllGairdeanIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield gairdean_model_1.default.find();
+    const result = yield gairdean_model_1.default.find().populate('studentId');
     return result;
 });
 const getSingleGairdeanIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield gairdean_model_1.default.findById(id);
+    const result = yield gairdean_model_1.default.findById(id).populate('studentId');
     return result;
 });
 const deleteSingleGairdeanIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {

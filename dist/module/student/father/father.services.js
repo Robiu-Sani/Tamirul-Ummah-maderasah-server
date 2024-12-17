@@ -18,11 +18,11 @@ const createFatherIntoDB = (payload) => __awaiter(void 0, void 0, void 0, functi
     return result;
 });
 const getAllFatherIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield father_model_1.default.find();
+    const result = yield father_model_1.default.find().populate('studentId');
     return result;
 });
 const getSingleFatherIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield father_model_1.default.findById(id);
+    const result = yield father_model_1.default.findById(id).populate('studentId');
     return result;
 });
 const deleteSingleFatherIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {

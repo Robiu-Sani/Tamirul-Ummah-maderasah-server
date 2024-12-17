@@ -20,6 +20,9 @@ const _1stutiral_route_1 = require("./module/student/result/1stutiral/1stutiral.
 const _2ndtutiral_route_1 = require("./module/student/result/2stutiral/2ndtutiral.route");
 const _1stsamester_route_1 = require("./module/student/result/1stsamester/1stsamester.route");
 const _2ndsamester_route_1 = require("./module/student/result/2ndsamester/2ndsamester.route");
+const FeesStructure_route_1 = require("./module/FeesStructure/FeesStructure.route");
+const selary_route_1 = require("./module/selary/selary.route");
+const notifection_route_1 = require("./module/notifection/notifection.route");
 const app = (0, express_1.default)();
 //parser
 app.use(express_1.default.json());
@@ -40,6 +43,9 @@ app.use('/api/v1/first-tutiral', _1stutiral_route_1.firstTutiral_router);
 app.use('/api/v1/secend-tutiral', _2ndtutiral_route_1.secendTutiral_router);
 app.use('/api/v1/first-samister', _1stsamester_route_1.firstSamister_router);
 app.use('/api/v1/secend-samister', _2ndsamester_route_1.secendSamister_router);
+app.use('/api/v1/feesStructure', FeesStructure_route_1.feesStructure_router);
+app.use('/api/v1/selary', selary_route_1.selary_router);
+app.use('/api/v1/notifection', notifection_route_1.notifection_router);
 app.get('/', (req, res) => {
     res.send('Tamirul Ummah Maderasah Server');
 });

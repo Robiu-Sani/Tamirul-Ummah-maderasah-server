@@ -20,11 +20,11 @@ const createSecendSamisterIntoDB = (payload) => __awaiter(void 0, void 0, void 0
     return result;
 });
 const getAllSecendSamisterIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendSamisterModel.find();
+    const result = yield SecendSamisterModel.find().populate('studentId');
     return result;
 });
 const getSingleSecendSamisterIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendSamisterModel.findById(id);
+    const result = yield SecendSamisterModel.findById(id).populate('studentId');
     return result;
 });
 const deleteSingleSecendSamisterIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {

@@ -75,6 +75,7 @@ const studentSchema = new mongoose.Schema<StudentInfo>(
       type: String,
       trim: true,
     },
+    classRoll: { type: Number, required: true, default: 0 },
     weight: {
       type: String,
       trim: true,

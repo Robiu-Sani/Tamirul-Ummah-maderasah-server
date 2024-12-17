@@ -20,11 +20,11 @@ const createFirstSamisterIntoDB = (payload) => __awaiter(void 0, void 0, void 0,
     return result;
 });
 const getAllFirstSamisterIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristSamisterModel.find();
+    const result = yield FristSamisterModel.find().populate('studentId');
     return result;
 });
 const getSingleFirstSamisterIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristSamisterModel.findById(id);
+    const result = yield FristSamisterModel.findById(id).populate('studentId');
     return result;
 });
 const deleteSingleFirstSamisterIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {

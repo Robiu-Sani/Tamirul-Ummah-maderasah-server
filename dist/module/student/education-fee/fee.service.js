@@ -18,11 +18,11 @@ const createFeeIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function*
     return result;
 });
 const getAllFeeIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield fee_model_1.default.find();
+    const result = yield fee_model_1.default.find().populate('studentId');
     return result;
 });
 const getSingleFeeIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield fee_model_1.default.findById(id);
+    const result = yield fee_model_1.default.findById(id).populate('studentId');
     return result;
 });
 const deleteSingleFeeIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {

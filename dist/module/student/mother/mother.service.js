@@ -18,11 +18,11 @@ const createMotherIntoDB = (payload) => __awaiter(void 0, void 0, void 0, functi
     return result;
 });
 const getAllMotherIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield mother_model_1.default.find();
+    const result = yield mother_model_1.default.find().populate('studentId');
     return result;
 });
 const getSingleMotherIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield mother_model_1.default.findById(id);
+    const result = yield mother_model_1.default.findById(id).populate('studentId');
     return result;
 });
 const deleteSingleMotherIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {

@@ -20,11 +20,11 @@ const createSecendTutiralIntoDB = (payload) => __awaiter(void 0, void 0, void 0,
     return result;
 });
 const getAllSecendTutiralIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendTutiralModel.find();
+    const result = yield SecendTutiralModel.find().populate('studentId');
     return result;
 });
 const getSingleSecendTutiralIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendTutiralModel.findById(id);
+    const result = yield SecendTutiralModel.findById(id).populate('studentId');
     return result;
 });
 const deleteSingleSecendTutiralIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {

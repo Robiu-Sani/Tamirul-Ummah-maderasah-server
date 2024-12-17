@@ -20,11 +20,11 @@ const createFirstTutiralIntoDB = (payload) => __awaiter(void 0, void 0, void 0, 
     return result;
 });
 const getAllFirstTutiralIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristTutiralModel.find();
+    const result = yield FristTutiralModel.find().populate('studentId');
     return result;
 });
 const getSingleFirstTutiralIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristTutiralModel.findById(id);
+    const result = yield FristTutiralModel.findById(id).populate('studentId');
     return result;
 });
 const deleteSingleFirstTutiralIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
