@@ -8,8 +8,9 @@ export interface StafeDetails {
   gender: string;
   joiningDate: string;
   phone: string;
+  nidNumber: number;
   residentialStatus: string;
   staffName: string;
-  staffImage: string;
+  staffImage?: string;
   stafePassword: string | number | undefined;
 }

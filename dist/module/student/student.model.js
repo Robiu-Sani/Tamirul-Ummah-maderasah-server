@@ -25,7 +25,7 @@ const studentSchema = new mongoose_1.default.Schema({
         trim: true,
     },
     dateOfBirth: {
-        type: Number,
+        type: String,
         trim: true,
     },
     email: {

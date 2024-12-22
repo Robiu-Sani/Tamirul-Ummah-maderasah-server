@@ -19,9 +19,9 @@ const StafeSchema = new mongoose_1.default.Schema({
     phone: { type: String, required: true },
     residentialStatus: { type: String, required: true },
     staffName: { type: String, required: true },
+    nidNumber: { type: Number, required: true },
     staffImage: {
         type: String,
-        required: true,
         default: 'https://i.postimg.cc/8Ph6x2Kc/115-1150152-default-profile-picture-avatar-png-green.png',
     },
     stafePassword: {

@@ -24,6 +24,7 @@ import { secendSamister_router } from './module/student/result/2ndsamester/2ndsa
 import { feesStructure_router } from './module/FeesStructure/FeesStructure.route';
 import { selary_router } from './module/selary/selary.route';
 import { notifection_router } from './module/notifection/notifection.route';
+import { about_router } from './module/about-institute/about.route';
 
 const app: Application = express();
 
@@ -50,6 +51,7 @@ app.use('/api/v1/secend-samister', secendSamister_router);
 app.use('/api/v1/feesStructure', feesStructure_router);
 app.use('/api/v1/selary', selary_router);
 app.use('/api/v1/notifection', notifection_router);
+app.use('/api/v1/about', about_router);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Tamirul Ummah Maderasah Server');

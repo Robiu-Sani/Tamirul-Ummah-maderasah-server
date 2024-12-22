@@ -24,7 +24,7 @@ const studentSchema = new mongoose.Schema<StudentInfo>(
       trim: true,
     },
     dateOfBirth: {
-      type: Number,
+      type: String,
       trim: true,
     },
     email: {

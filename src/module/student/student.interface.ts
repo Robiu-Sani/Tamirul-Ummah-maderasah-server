@@ -3,7 +3,7 @@ export interface StudentInfo {
   birthCertificate: string;
   bloodGroup: string;
   class: string;
-  dateOfBirth: number;
+  dateOfBirth: string | number;
   email: string;
   fathersName: string;
   gender: string;
