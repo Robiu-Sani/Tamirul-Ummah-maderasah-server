@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 const generateRandomPassword = () => {
-    return Math.floor(100000 + Math.random() * 900000).toString();
+    return Math.floor(10000000 + Math.random() * 90000000).toString();
 };
 const studentSchema = new mongoose_1.default.Schema({
     address: {
@@ -44,17 +44,17 @@ const studentSchema = new mongoose_1.default.Schema({
         type: String,
         trim: true,
     },
-    identityEmail: {
-        type: String,
-        trim: true,
-    },
+    // identityEmail: {
+    //   type: String,
+    //   trim: true,
+    // },
     identityMark: {
         type: String,
         trim: true,
     },
     image: {
         type: String,
-        default: null,
+        default: 'https://i.postimg.cc/8Ph6x2Kc/115-1150152-default-profile-picture-avatar-png-green.png',
     },
     mothersName: {
         type: String,
@@ -82,9 +82,10 @@ const studentSchema = new mongoose_1.default.Schema({
         trim: true,
     },
     password: {
-        type: ['String', 'Number'],
+        type: mongoose_1.default.Schema.Types.Mixed,
         trim: true,
         default: generateRandomPassword,
+        unique: true,
     },
 }, {
     timestamps: true,

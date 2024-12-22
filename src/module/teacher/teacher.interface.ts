@@ -13,5 +13,6 @@ export interface TeacherDetails {
   shift: string;
   subject: string;
   teacherName: string;
+  type: 'teacher' | 'admin' | 'blocked';
   teacherPassword: string | number | undefined;
 }

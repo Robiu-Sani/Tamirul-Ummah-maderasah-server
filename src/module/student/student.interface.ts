@@ -3,7 +3,7 @@ export interface StudentInfo {
   birthCertificate: string;
   bloodGroup: string;
   class: string;
-  dateOfBirth: string;
+  dateOfBirth: number;
   email: string;
   fathersName: string;
   gender: string;
@@ -18,5 +18,6 @@ export interface StudentInfo {
   studentNameEnglish: string;
   weight: string;
   classRoll: number;
+  type: 'student' | 'blocked';
   password: string | number | undefined;
 }

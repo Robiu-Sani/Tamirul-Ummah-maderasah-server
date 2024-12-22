@@ -35,7 +35,7 @@ const motherSchema = new mongoose_1.default.Schema({
     },
     motherImage: {
         type: String,
-        default: null,
+        default: 'https://i.postimg.cc/8Ph6x2Kc/115-1150152-default-profile-picture-avatar-png-green.png',
     },
     mobilenumber: {
         type: String,
