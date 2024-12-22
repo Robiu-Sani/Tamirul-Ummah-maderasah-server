@@ -25,6 +25,7 @@ const TeacherDetailsSchema = new mongoose_1.default.Schema({
     shift: { type: String, required: true },
     subject: { type: String, required: true },
     teacherName: { type: String, required: true },
+    type: { type: String, required: true, default: 'teacher' },
     teacherPassword: {
         type: mongoose_1.default.Schema.Types.Mixed,
         required: true,

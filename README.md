@@ -15,21 +15,25 @@ This repository contains the backend server for my application. It is built usin
 To run this project locally, follow these steps:
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/<your-username>/<repo-name>.git
    ```
 
 2. Navigate to the project directory:
+
    ```bash
    cd <repo-name>
    ```
 
 3. Install dependencies:
+
    ```bash
    npm install
    ```
 
 4. Create a `.env` file in the root directory and add your environment variables:
+
    ```plaintext
    PORT=5000
    MONGO_URI=your-mongodb-connection-string
@@ -37,6 +41,7 @@ To run this project locally, follow these steps:
    ```
 
 5. Start the server:
+
    ```bash
    npm start
    ```

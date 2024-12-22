@@ -25,7 +25,7 @@ const studentSchema = new mongoose_1.default.Schema({
         trim: true,
     },
     dateOfBirth: {
-        type: String,
+        type: Number,
         trim: true,
     },
     email: {
@@ -86,6 +86,10 @@ const studentSchema = new mongoose_1.default.Schema({
         trim: true,
         default: generateRandomPassword,
         unique: true,
+    },
+    type: {
+        type: String,
+        default: 'student',
     },
 }, {
     timestamps: true,
