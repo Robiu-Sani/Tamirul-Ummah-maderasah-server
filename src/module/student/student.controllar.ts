@@ -5,6 +5,7 @@ const createStudent = async (req: Request, res: Response) => {
   try {
     const payload = req.body;
     const data = await StudentDB.createStudentIntoDB(payload);
+
     res.json({
       status: true,
       message: 'Student is posted successfully',
