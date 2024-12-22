@@ -10,5 +10,6 @@ export interface StafeDetails {
   phone: string;
   residentialStatus: string;
   staffName: string;
+  staffImage: string;
   stafePassword: string | number | undefined;
 }

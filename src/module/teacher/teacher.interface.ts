@@ -4,7 +4,7 @@ export interface TeacherDetails {
   dateOfBirth: string;
   email: string;
   experience?: string;
-  teacherImage?: string | null;
+  teacherImage?: string;
   gender: string;
   phone: string;
   qualification: string;

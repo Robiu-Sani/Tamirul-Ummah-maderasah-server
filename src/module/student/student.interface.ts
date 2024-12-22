@@ -8,9 +8,9 @@ export interface StudentInfo {
   fathersName: string;
   gender: string;
   height: string;
-  identityEmail: string;
+  // identityEmail: string;
   identityMark: string;
-  image: string | null;
+  image: string;
   mothersName: string;
   residentialStatus: string;
   section: string;

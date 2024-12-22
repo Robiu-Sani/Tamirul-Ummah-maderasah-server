@@ -8,7 +8,7 @@ export interface UserInformation {
   facebook?: string;
   fatherNameBn: string;
   fatherNameEn: string;
-  fatherImage?: string | null;
+  fatherImage?: string;
   mobilenumber: string;
   monthlyIncome: string;
   nidNumber: string;

@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { TeacherDetails } from './teacher.interface';
 
 const generateRandomPassword = () => {
-  return Math.floor(100000 + Math.random() * 900000).toString();
+  return Math.floor(10000000 + Math.random() * 90000000).toString();
 };
 
 const TeacherDetailsSchema = new mongoose.Schema<TeacherDetails>(
@@ -12,7 +12,11 @@ const TeacherDetailsSchema = new mongoose.Schema<TeacherDetails>(
     dateOfBirth: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     experience: { type: String, required: false },
-    teacherImage: { type: String, default: null },
+    teacherImage: {
+      type: String,
+      default:
+        'https://i.postimg.cc/8Ph6x2Kc/115-1150152-default-profile-picture-avatar-png-green.png',
+    },
     gender: { type: String, required: true },
     phone: { type: String, required: true },
     qualification: { type: String, required: true },
@@ -22,7 +26,7 @@ const TeacherDetailsSchema = new mongoose.Schema<TeacherDetails>(
     subject: { type: String, required: true },
     teacherName: { type: String, required: true },
     teacherPassword: {
-      type: String,
+      type: mongoose.Schema.Types.Mixed,
       required: true,
       default: generateRandomPassword,
     },

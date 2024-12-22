@@ -8,7 +8,7 @@ export interface MotherInformation {
   facebook?: string;
   motherNameBn: string;
   motherNameEn: string;
-  motherImage?: string | null;
+  motherImage?: string;
   mobilenumber: string;
   monthlyIncome: string;
   nidNumber: string;
