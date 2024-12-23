@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { ExamInterface } from '../result.interface';
 import examSchema from '../result.model';
 
-const SecendTutiralModel = mongoose.model('secend-tutiral', examSchema);
+export const SecendTutiralModel = mongoose.model('secend-tutiral', examSchema);
 
 const createSecendTutiralIntoDB = async (payload: ExamInterface) => {
   const result = await SecendTutiralModel.create(payload);

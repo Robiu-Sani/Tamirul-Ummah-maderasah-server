@@ -12,31 +12,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FristSamisterModel = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const result_model_1 = __importDefault(require("../result.model"));
-const FristSamisterModel = mongoose_1.default.model('first-samister', result_model_1.default);
+exports.FristSamisterModel = mongoose_1.default.model('first-samister', result_model_1.default);
 const createFirstSamisterIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristSamisterModel.create(payload);
+    const result = yield exports.FristSamisterModel.create(payload);
     return result;
 });
 const getAllFirstSamisterIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristSamisterModel.find().populate('studentId');
+    const result = yield exports.FristSamisterModel.find().populate('studentId');
     return result;
 });
 const getSingleFirstSamisterIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristSamisterModel.findById(id).populate('studentId');
+    const result = yield exports.FristSamisterModel.findById(id).populate('studentId');
     return result;
 });
 const deleteSingleFirstSamisterIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristSamisterModel.findByIdAndDelete(id);
+    const result = yield exports.FristSamisterModel.findByIdAndDelete(id);
     return result;
 });
 const updateSingleByPatchFirstSamisterIntoDB = (id, info) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristSamisterModel.findByIdAndUpdate(id, { $set: info }, { new: true });
+    const result = yield exports.FristSamisterModel.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
 const updateSingleByPutFirstSamisterIntoDB = (id, info) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristSamisterModel.findByIdAndUpdate(id, { $set: info }, { new: true });
+    const result = yield exports.FristSamisterModel.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
 const FirstSamisterDB = {

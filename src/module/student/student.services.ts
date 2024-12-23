@@ -1,6 +1,11 @@
+import PostModel from '../post/post.model';
 import fatherModel from './father/father.model';
 import GairdeanModel from './gairdean/gairdean.model';
 import MotherModel from './mother/mother.model';
+import { FristSamisterModel } from './result/1stsamester/1stsamester.service';
+import { FristTutiralModel } from './result/1stutiral/1stutiral.service';
+import { SecendSamisterModel } from './result/2ndsamester/2ndsamester.service';
+import { SecendTutiralModel } from './result/2stutiral/2ndtutiral.services';
 import { StudentInfo } from './student.interface';
 import StudentModel from './student.model';
 
@@ -41,11 +46,15 @@ export const getTableData = async ({
   // Fetch students, count total students, and fetch unique classes
   const [students, allStudents] = await Promise.all([
     StudentModel.find(query)
-      .select('bloodGroup class gender classRoll section studentNameEnglish')
+      .select(
+        'bloodGroup class gender classRoll type section studentNameEnglish',
+      )
       .skip(skip)
       .limit(limit),
     StudentModel.find(query).select('class'),
   ]);
+
+  const reversedStudents = students.reverse();
 
   const totalMale = await StudentModel.countDocuments({ gender: 'male' });
   const totalFemale = await StudentModel.countDocuments({ gender: 'female' });
@@ -64,7 +73,7 @@ export const getTableData = async ({
     totalPages,
     totalClasses: uniqueClasses.length,
     uniqueClasses,
-    students,
+    students: reversedStudents,
   };
 };
 
@@ -115,18 +124,61 @@ const getSingleStudentIntoDB = async (id: string | number) => {
   const student = await StudentModel.findById(id);
   const father = await fatherModel.findOne({ studentId: id });
   const mother = await MotherModel.findOne({ studentId: id });
+  const posts = await PostModel.find({ studentID: id });
   const gairdean = await GairdeanModel.findOne({ studentId: id });
+  const first_tutiral = await FristTutiralModel.findOne({ studentId: id });
+  const first_samistar = await FristSamisterModel.findOne({ studentId: id });
+  const secend_tutiral = await SecendTutiralModel.findOne({ studentId: id });
+  const secend_samistar = await SecendSamisterModel.findOne({ studentId: id });
   const result = {
     student,
     father,
     mother,
     gairdean,
+    posts,
+    result: {
+      first_tutiral,
+      first_samistar,
+      secend_tutiral,
+      secend_samistar,
+    },
   };
   return result;
 };
 
 const deleteSingleStudentIntoDB = async (id: string | number) => {
-  const result = await StudentModel.findByIdAndDelete(id);
+  // const result = await StudentModel.findByIdAndDelete(id);
+  const student = await StudentModel.findByIdAndDelete(id);
+  const father = await fatherModel.findOneAndDelete({ studentId: id });
+  const mother = await MotherModel.findOneAndDelete({ studentId: id });
+  const posts = await PostModel.deleteMany({ studentID: id });
+  const gairdean = await GairdeanModel.findOneAndDelete({ studentId: id });
+  const first_tutiral = await FristTutiralModel.findOneAndDelete({
+    studentId: id,
+  });
+  const first_samistar = await FristSamisterModel.findOneAndDelete({
+    studentId: id,
+  });
+  const secend_tutiral = await SecendTutiralModel.findOneAndDelete({
+    studentId: id,
+  });
+  const secend_samistar = await SecendSamisterModel.findOneAndDelete({
+    studentId: id,
+  });
+  const result = {
+    student,
+    father,
+    mother,
+    gairdean,
+    posts,
+    result: {
+      first_tutiral,
+      first_samistar,
+      secend_tutiral,
+      secend_samistar,
+    },
+  };
+
   return result;
 };
 

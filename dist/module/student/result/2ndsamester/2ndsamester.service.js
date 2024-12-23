@@ -12,31 +12,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SecendSamisterModel = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const result_model_1 = __importDefault(require("../result.model"));
-const SecendSamisterModel = mongoose_1.default.model('secend-Samister', result_model_1.default);
+exports.SecendSamisterModel = mongoose_1.default.model('secend-Samister', result_model_1.default);
 const createSecendSamisterIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendSamisterModel.create(payload);
+    const result = yield exports.SecendSamisterModel.create(payload);
     return result;
 });
 const getAllSecendSamisterIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendSamisterModel.find().populate('studentId');
+    const result = yield exports.SecendSamisterModel.find().populate('studentId');
     return result;
 });
 const getSingleSecendSamisterIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendSamisterModel.findById(id).populate('studentId');
+    const result = yield exports.SecendSamisterModel.findById(id).populate('studentId');
     return result;
 });
 const deleteSingleSecendSamisterIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendSamisterModel.findByIdAndDelete(id);
+    const result = yield exports.SecendSamisterModel.findByIdAndDelete(id);
     return result;
 });
 const updateSingleByPatchSecendSamisterIntoDB = (id, info) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendSamisterModel.findByIdAndUpdate(id, { $set: info }, { new: true });
+    const result = yield exports.SecendSamisterModel.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
 const updateSingleByPutSecendSamisterIntoDB = (id, info) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendSamisterModel.findByIdAndUpdate(id, { $set: info }, { new: true });
+    const result = yield exports.SecendSamisterModel.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
 const SecendSamisterDB = {

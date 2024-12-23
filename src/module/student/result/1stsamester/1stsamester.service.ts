@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { ExamInterface } from '../result.interface';
 import examSchema from '../result.model';
 
-const FristSamisterModel = mongoose.model('first-samister', examSchema);
+export const FristSamisterModel = mongoose.model('first-samister', examSchema);
 
 const createFirstSamisterIntoDB = async (payload: ExamInterface) => {
   const result = await FristSamisterModel.create(payload);

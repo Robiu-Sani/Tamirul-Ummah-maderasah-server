@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import { ExamInterface } from '../result.interface';
 import examSchema from '../result.model';
 
-const FristTutiralModel = mongoose.model('first-tutiral', examSchema);
+export const FristTutiralModel = mongoose.model('first-tutiral', examSchema);
 
 const createFirstTutiralIntoDB = async (payload: ExamInterface) => {
   const result = await FristTutiralModel.create(payload);

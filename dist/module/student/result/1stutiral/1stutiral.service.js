@@ -12,31 +12,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.FristTutiralModel = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const result_model_1 = __importDefault(require("../result.model"));
-const FristTutiralModel = mongoose_1.default.model('first-tutiral', result_model_1.default);
+exports.FristTutiralModel = mongoose_1.default.model('first-tutiral', result_model_1.default);
 const createFirstTutiralIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristTutiralModel.create(payload);
+    const result = yield exports.FristTutiralModel.create(payload);
     return result;
 });
 const getAllFirstTutiralIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristTutiralModel.find().populate('studentId');
+    const result = yield exports.FristTutiralModel.find().populate('studentId');
     return result;
 });
 const getSingleFirstTutiralIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristTutiralModel.findById(id).populate('studentId');
+    const result = yield exports.FristTutiralModel.findById(id).populate('studentId');
     return result;
 });
 const deleteSingleFirstTutiralIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristTutiralModel.findByIdAndDelete(id);
+    const result = yield exports.FristTutiralModel.findByIdAndDelete(id);
     return result;
 });
 const updateSingleByPatchFirstTutiralIntoDB = (id, info) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristTutiralModel.findByIdAndUpdate(id, { $set: info }, { new: true });
+    const result = yield exports.FristTutiralModel.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
 const updateSingleByPutFirstTutiralIntoDB = (id, info) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield FristTutiralModel.findByIdAndUpdate(id, { $set: info }, { new: true });
+    const result = yield exports.FristTutiralModel.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
 const FirstTutiralDB = {

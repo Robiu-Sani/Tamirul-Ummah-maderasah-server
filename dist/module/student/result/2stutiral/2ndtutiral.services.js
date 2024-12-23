@@ -12,31 +12,32 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.SecendTutiralModel = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const result_model_1 = __importDefault(require("../result.model"));
-const SecendTutiralModel = mongoose_1.default.model('secend-tutiral', result_model_1.default);
+exports.SecendTutiralModel = mongoose_1.default.model('secend-tutiral', result_model_1.default);
 const createSecendTutiralIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendTutiralModel.create(payload);
+    const result = yield exports.SecendTutiralModel.create(payload);
     return result;
 });
 const getAllSecendTutiralIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendTutiralModel.find().populate('studentId');
+    const result = yield exports.SecendTutiralModel.find().populate('studentId');
     return result;
 });
 const getSingleSecendTutiralIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendTutiralModel.findById(id).populate('studentId');
+    const result = yield exports.SecendTutiralModel.findById(id).populate('studentId');
     return result;
 });
 const deleteSingleSecendTutiralIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendTutiralModel.findByIdAndDelete(id);
+    const result = yield exports.SecendTutiralModel.findByIdAndDelete(id);
     return result;
 });
 const updateSingleByPatchSecendTutiralIntoDB = (id, info) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendTutiralModel.findByIdAndUpdate(id, { $set: info }, { new: true });
+    const result = yield exports.SecendTutiralModel.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
 const updateSingleByPutSecendTutiralIntoDB = (id, info) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield SecendTutiralModel.findByIdAndUpdate(id, { $set: info }, { new: true });
+    const result = yield exports.SecendTutiralModel.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
 const SecendTutiralDB = {
