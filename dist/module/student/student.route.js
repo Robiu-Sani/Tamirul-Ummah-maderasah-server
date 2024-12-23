@@ -8,6 +8,7 @@ const express_1 = __importDefault(require("express"));
 const student_controllar_1 = __importDefault(require("./student.controllar"));
 const router = express_1.default.Router();
 router.post('/create-student', student_controllar_1.default.createStudent);
+router.get('/table', student_controllar_1.default.getTableStudent);
 router.get('/', student_controllar_1.default.getAllStudent);
 router.get('/single-student/:id', student_controllar_1.default.getSingleStudent);
 router.delete('/delete-student/:id', student_controllar_1.default.deleteSingleStudent);

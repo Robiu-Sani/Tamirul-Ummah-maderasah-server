@@ -24,6 +24,10 @@ const getAllStudentIntoDB = () => __awaiter(void 0, void 0, void 0, function* ()
     const result = yield student_model_1.default.find();
     return result;
 });
+const getTableData = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield student_model_1.default.find().select('bloodGroup class gender classRoll section studentNameEnglish');
+    return result;
+});
 const getSingleStudentIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const student = yield student_model_1.default.findById(id);
     const father = yield father_model_1.default.findOne({ studentId: id });
@@ -56,5 +60,6 @@ const StudentDB = {
     deleteSingleStudentIntoDB,
     updateSingleByPatchStudentIntoDB,
     updateSingleByPutStudentIntoDB,
+    getTableData,
 };
 exports.default = StudentDB;

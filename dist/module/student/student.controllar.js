@@ -48,6 +48,23 @@ const getAllStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         });
     }
 });
+const getTableStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield student_services_1.default.getTableData();
+        res.json({
+            status: true,
+            message: 'All Student got successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'Student is not get successfully',
+            error,
+        });
+    }
+});
 const getSingleStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
@@ -129,5 +146,6 @@ const StudentController = {
     deleteSingleStudent,
     updateSingleByPatchStudent,
     updateSingleByPutStudent,
+    getTableStudent,
 };
 exports.default = StudentController;
