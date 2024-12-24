@@ -13,6 +13,7 @@ export interface TeacherDetails {
   shift: string;
   subject: string;
   teacherName: string;
+  nidNumber: number;
   type: 'teacher' | 'admin' | 'blocked';
   teacherPassword: string | number | undefined;
 }

@@ -19,6 +19,37 @@ const createTeacher = async (req: Request, res: Response) => {
   }
 };
 
+const getTableTeacher = async (req: Request, res: Response) => {
+  const { page = 1, search = '', class: classFilter = '' } = req.query;
+  const limit = 50;
+  const skip = (Number(page) - 1) * limit;
+
+  try {
+    // Call the service function to fetch data
+    const data = await TeacherDB.getTeacherTableDataDB({
+      page: Number(page),
+      search: String(search),
+      classFilter: String(classFilter),
+      limit,
+      skip,
+    });
+
+    // Respond with the fetched data
+    res.json({
+      status: true,
+      message: 'All teachers retrieved successfully',
+      data,
+    });
+  } catch (error) {
+    // Respond with an error
+    res.json({
+      status: false,
+      message: 'teacher data retrieval failed',
+      error,
+    });
+  }
+};
+
 const getAllTeacher = async (req: Request, res: Response) => {
   try {
     const data = await TeacherDB.getAllTeacherIntoDB();
@@ -117,6 +148,7 @@ const TeacherController = {
   deleteSingleTeacher,
   updateSingleByPatchTeacher,
   updateSingleByPutTeacher,
+  getTableTeacher,
 };
 
 export default TeacherController;

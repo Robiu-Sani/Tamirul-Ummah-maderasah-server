@@ -37,9 +37,46 @@ const updateSingleByPutTeacherIntoDB = (id, info) => __awaiter(void 0, void 0, v
     const result = yield teacher_model_1.default.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
+const getTeacherTableDataDB = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search = '', classFilter = '', limit, skip, }) {
+    // Build the query object based on filters
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query = {};
+    if (search) {
+        query.teacherName = { $regex: search, $options: 'i' };
+    }
+    if (classFilter) {
+        query.shift = classFilter;
+    }
+    // Fetch students, count total students, and fetch unique classes
+    const [teachers, allTeachers] = yield Promise.all([
+        teacher_model_1.default.find(query)
+            .select('bloodGroup phone gender email type residentialStatus teacherName shift')
+            .skip(skip)
+            .limit(limit),
+        teacher_model_1.default.find(query).select('shift'),
+    ]);
+    const reversedTeachers = teachers.reverse();
+    const totalMale = yield teacher_model_1.default.countDocuments({ gender: 'male' });
+    const totalFemale = yield teacher_model_1.default.countDocuments({ gender: 'female' });
+    const uniqueClasses = yield teacher_model_1.default.distinct('shift');
+    // Count total students based on filters
+    const totalTeachers = allTeachers.length;
+    const totalPages = Math.ceil(totalTeachers / limit);
+    // Return the final result
+    return {
+        totalTeachers,
+        totalMale,
+        totalFemale,
+        totalPages,
+        totalClasses: uniqueClasses.length,
+        uniqueClasses,
+        teacher: reversedTeachers,
+    };
+});
 const TeacherDB = {
     createTeacherIntoDB,
     getAllTeacherIntoDB,
+    getTeacherTableDataDB,
     getSingleTeacherIntoDB,
     deleteSingleTeacherIntoDB,
     updateSingleByPatchTeacherIntoDB,

@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/create-teacher', TeacherController.createTeacher);
 router.get('/', TeacherController.getAllTeacher);
+router.get('/table', TeacherController.getTableTeacher);
 router.get('/single-teacher/:id', TeacherController.getSingleTeacher);
 router.delete('/delete-teacher/:id', TeacherController.deleteSingleTeacher);
 router.patch(

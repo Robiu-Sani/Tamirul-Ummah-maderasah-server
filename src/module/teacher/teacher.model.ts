@@ -12,6 +12,7 @@ const TeacherDetailsSchema = new mongoose.Schema<TeacherDetails>(
     dateOfBirth: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     experience: { type: String, required: false },
+    nidNumber: { type: Number, required: false },
     teacherImage: {
       type: String,
       default:

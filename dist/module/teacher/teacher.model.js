@@ -13,6 +13,7 @@ const TeacherDetailsSchema = new mongoose_1.default.Schema({
     dateOfBirth: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     experience: { type: String, required: false },
+    nidNumber: { type: Number, required: false },
     teacherImage: {
         type: String,
         default: 'https://i.postimg.cc/8Ph6x2Kc/115-1150152-default-profile-picture-avatar-png-green.png',
