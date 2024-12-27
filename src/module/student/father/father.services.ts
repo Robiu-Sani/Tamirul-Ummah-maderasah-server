@@ -45,6 +45,51 @@ const updateSingleByPutFatherIntoDB = async (
   return result;
 };
 
+const getFatherTableDataDB = async ({
+  search = '',
+  // classFilter = '',
+  limit,
+  skip,
+}: {
+  page?: number;
+  search?: string;
+  // classFilter?: string;
+  limit: number;
+  skip: number;
+}) => {
+  // Build the query object based on filters
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const query: Record<string, any> = {};
+
+  if (search) {
+    query.fatherNameEn = { $regex: search, $options: 'i' };
+  }
+
+  // Fetch students, count total students, and fetch unique classes
+  const [fathers, allFathers] = await Promise.all([
+    fatherModel
+      .find(query)
+      .select('mobilenumber workLocation bloodGroup monthlyIncome fatherNameEn')
+      .skip(skip)
+      .limit(limit),
+    fatherModel.find(query).select('bloodGroup'),
+  ]);
+
+  const reversedFathers = fathers.reverse();
+
+  // Count total students based on filters
+  const totalFathers = allFathers.length;
+
+  const totalPages = Math.ceil(totalFathers / limit);
+
+  // Return the final result
+  return {
+    totalPages,
+    totalFathers,
+    fathers: reversedFathers,
+  };
+};
+
 const FatherDB = {
   createFatherIntoDB,
   getAllFatherIntoDB,
@@ -52,5 +97,6 @@ const FatherDB = {
   deleteSingleFatherIntoDB,
   updateSingleByPatchFatherIntoDB,
   updateSingleByPutFatherIntoDB,
+  getFatherTableDataDB,
 };
 export default FatherDB;

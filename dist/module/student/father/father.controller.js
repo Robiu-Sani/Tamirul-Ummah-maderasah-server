@@ -122,6 +122,34 @@ const updateSingleByPutFather = (req, res) => __awaiter(void 0, void 0, void 0, 
         });
     }
 });
+const getTableFather = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { page = 1, search = '' } = req.query;
+    const limit = 50;
+    const skip = (Number(page) - 1) * limit;
+    try {
+        // Call the service function to fetch data
+        const data = yield father_services_1.default.getFatherTableDataDB({
+            page: Number(page),
+            search: String(search),
+            limit,
+            skip,
+        });
+        // Respond with the fetched data
+        res.json({
+            status: true,
+            message: 'All fathers retrieved successfully',
+            data,
+        });
+    }
+    catch (error) {
+        // Respond with an error
+        res.json({
+            status: false,
+            message: 'father data retrieval failed',
+            error,
+        });
+    }
+});
 const FatherController = {
     createFather,
     getAllFather,
@@ -129,5 +157,6 @@ const FatherController = {
     deleteSingleFather,
     updateSingleByPatchFather,
     updateSingleByPutFather,
+    getTableFather,
 };
 exports.default = FatherController;

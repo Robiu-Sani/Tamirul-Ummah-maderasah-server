@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/create-mother', MotherController.createMother);
 router.get('/', MotherController.getAllMother);
+router.get('/table', MotherController.getTableMother);
 router.get('/single-mother/:id', MotherController.getSingleMother);
 router.delete('/delete-mother/:id', MotherController.deleteSingleMother);
 router.patch(

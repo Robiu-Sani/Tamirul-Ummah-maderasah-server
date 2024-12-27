@@ -9,6 +9,7 @@ const stafe_controllar_1 = __importDefault(require("./stafe.controllar"));
 const router = express_1.default.Router();
 router.post('/create-stafe', stafe_controllar_1.default.createStafe);
 router.get('/', stafe_controllar_1.default.getAllStafe);
+router.get('/table', stafe_controllar_1.default.getTableStaff);
 router.get('/single-stafe/:id', stafe_controllar_1.default.getSingleStafe);
 router.delete('/delete-stafe/:id', stafe_controllar_1.default.deleteSingleStafe);
 router.patch('/update-single-stafe-by-patch/:id', stafe_controllar_1.default.updateSingleByPatchStafe);

@@ -110,6 +110,36 @@ const updateSingleByPutFather = async (req: Request, res: Response) => {
   }
 };
 
+const getTableFather = async (req: Request, res: Response) => {
+  const { page = 1, search = '' } = req.query;
+  const limit = 50;
+  const skip = (Number(page) - 1) * limit;
+
+  try {
+    // Call the service function to fetch data
+    const data = await FatherDB.getFatherTableDataDB({
+      page: Number(page),
+      search: String(search),
+      limit,
+      skip,
+    });
+
+    // Respond with the fetched data
+    res.json({
+      status: true,
+      message: 'All fathers retrieved successfully',
+      data,
+    });
+  } catch (error) {
+    // Respond with an error
+    res.json({
+      status: false,
+      message: 'father data retrieval failed',
+      error,
+    });
+  }
+};
+
 const FatherController = {
   createFather,
   getAllFather,
@@ -117,6 +147,7 @@ const FatherController = {
   deleteSingleFather,
   updateSingleByPatchFather,
   updateSingleByPutFather,
+  getTableFather,
 };
 
 export default FatherController;

@@ -9,6 +9,7 @@ const father_controller_1 = __importDefault(require("./father.controller"));
 const router = express_1.default.Router();
 router.post('/create-father', father_controller_1.default.createFather);
 router.get('/', father_controller_1.default.getAllFather);
+router.get('/table', father_controller_1.default.getTableFather);
 router.get('/single-father/:id', father_controller_1.default.getSingleFather);
 router.delete('/delete-father/:id', father_controller_1.default.deleteSingleFather);
 router.patch('/update-single-father-by-patch/:id', father_controller_1.default.updateSingleByPatchFather);

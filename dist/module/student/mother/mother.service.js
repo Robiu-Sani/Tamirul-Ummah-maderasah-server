@@ -37,6 +37,34 @@ const updateSingleByPutMotherIntoDB = (id, info) => __awaiter(void 0, void 0, vo
     const result = yield mother_model_1.default.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
+const getMotherTableDataDB = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search = '', 
+// classFilter = '',
+limit, skip, }) {
+    // Build the query object based on filters
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query = {};
+    if (search) {
+        query.motherNameEn = { $regex: search, $options: 'i' };
+    }
+    // Fetch students, count total students, and fetch unique classes
+    const [mothers, allMothers] = yield Promise.all([
+        mother_model_1.default.find(query)
+            .select('mobilenumber workLocation bloodGroup monthlyIncome motherNameEn')
+            .skip(skip)
+            .limit(limit),
+        mother_model_1.default.find(query).select('bloodGroup'),
+    ]);
+    const reversedMothers = mothers.reverse();
+    // Count total students based on filters
+    const totalMothers = allMothers.length;
+    const totalPages = Math.ceil(totalMothers / limit);
+    // Return the final result
+    return {
+        totalPages,
+        totalMothers,
+        fathers: reversedMothers,
+    };
+});
 const MotherDB = {
     createMotherIntoDB,
     getAllMotherIntoDB,
@@ -44,5 +72,6 @@ const MotherDB = {
     deleteSingleMotherIntoDB,
     updateSingleByPatchMotherIntoDB,
     updateSingleByPutMotherIntoDB,
+    getMotherTableDataDB,
 };
 exports.default = MotherDB;

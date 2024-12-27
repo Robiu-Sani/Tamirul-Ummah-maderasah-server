@@ -9,6 +9,7 @@ const mother_controller_1 = __importDefault(require("./mother.controller"));
 const router = express_1.default.Router();
 router.post('/create-mother', mother_controller_1.default.createMother);
 router.get('/', mother_controller_1.default.getAllMother);
+router.get('/table', mother_controller_1.default.getTableMother);
 router.get('/single-mother/:id', mother_controller_1.default.getSingleMother);
 router.delete('/delete-mother/:id', mother_controller_1.default.deleteSingleMother);
 router.patch('/update-single-mother-by-patch/:id', mother_controller_1.default.updateSingleByPatchMother);

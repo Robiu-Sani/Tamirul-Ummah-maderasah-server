@@ -122,6 +122,35 @@ const updateSingleByPutStafe = (req, res) => __awaiter(void 0, void 0, void 0, f
         });
     }
 });
+const getTableStaff = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { page = 1, search = '', class: classFilter = '' } = req.query;
+    const limit = 50;
+    const skip = (Number(page) - 1) * limit;
+    try {
+        // Call the service function to fetch data
+        const data = yield stafe_service_1.default.getStaffTableDataDB({
+            page: Number(page),
+            search: String(search),
+            classFilter: String(classFilter),
+            limit,
+            skip,
+        });
+        // Respond with the fetched data
+        res.json({
+            status: true,
+            message: 'All staff retrieved successfully',
+            data,
+        });
+    }
+    catch (error) {
+        // Respond with an error
+        res.json({
+            status: false,
+            message: 'staff data retrieval failed',
+            error,
+        });
+    }
+});
 const StafeController = {
     createStafe,
     getAllStafe,
@@ -129,5 +158,6 @@ const StafeController = {
     deleteSingleStafe,
     updateSingleByPatchStafe,
     updateSingleByPutStafe,
+    getTableStaff,
 };
 exports.default = StafeController;

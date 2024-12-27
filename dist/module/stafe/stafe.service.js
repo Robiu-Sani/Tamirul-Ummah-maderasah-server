@@ -37,6 +37,42 @@ const updateSingleByPutStafeIntoDB = (id, info) => __awaiter(void 0, void 0, voi
     const result = yield stafe_model_1.default.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
+const getStaffTableDataDB = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search = '', classFilter = '', limit, skip, }) {
+    // Build the query object based on filters
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query = {};
+    if (search) {
+        query.staffName = { $regex: search, $options: 'i' };
+    }
+    if (classFilter) {
+        query.residentialStatus = classFilter;
+    }
+    // Fetch students, count total students, and fetch unique classes
+    const [teachers, allTeachers] = yield Promise.all([
+        stafe_model_1.default.find(query)
+            .select('bloodGroup department staffName phone gender email residentialStatus')
+            .skip(skip)
+            .limit(limit),
+        stafe_model_1.default.find(query).select('residentialStatus'),
+    ]);
+    const reversedStaff = teachers.reverse();
+    const totalMale = yield stafe_model_1.default.countDocuments({ gender: 'male' });
+    const totalFemale = yield stafe_model_1.default.countDocuments({ gender: 'female' });
+    const uniqueClasses = yield stafe_model_1.default.distinct('residentialStatus');
+    // Count total students based on filters
+    const totalStaffs = allTeachers.length;
+    const totalPages = Math.ceil(totalStaffs / limit);
+    // Return the final result
+    return {
+        totalStaffs,
+        totalMale,
+        totalFemale,
+        totalPages,
+        totalClasses: uniqueClasses.length,
+        uniqueClasses,
+        staff: reversedStaff,
+    };
+});
 const StafeDB = {
     createStafeIntoDB,
     getAllStafeIntoDB,
@@ -44,5 +80,6 @@ const StafeDB = {
     deleteSingleStafeIntoDB,
     updateSingleByPatchStafeIntoDB,
     updateSingleByPutStafeIntoDB,
+    getStaffTableDataDB,
 };
 exports.default = StafeDB;

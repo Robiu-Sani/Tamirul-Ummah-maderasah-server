@@ -45,6 +45,50 @@ const updateSingleByPutMotherIntoDB = async (
   return result;
 };
 
+const getMotherTableDataDB = async ({
+  search = '',
+  // classFilter = '',
+  limit,
+  skip,
+}: {
+  page?: number;
+  search?: string;
+  // classFilter?: string;
+  limit: number;
+  skip: number;
+}) => {
+  // Build the query object based on filters
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const query: Record<string, any> = {};
+
+  if (search) {
+    query.motherNameEn = { $regex: search, $options: 'i' };
+  }
+
+  // Fetch students, count total students, and fetch unique classes
+  const [mothers, allMothers] = await Promise.all([
+    MotherModel.find(query)
+      .select('mobilenumber workLocation bloodGroup monthlyIncome motherNameEn')
+      .skip(skip)
+      .limit(limit),
+    MotherModel.find(query).select('bloodGroup'),
+  ]);
+
+  const reversedMothers = mothers.reverse();
+
+  // Count total students based on filters
+  const totalMothers = allMothers.length;
+
+  const totalPages = Math.ceil(totalMothers / limit);
+
+  // Return the final result
+  return {
+    totalPages,
+    totalMothers,
+    fathers: reversedMothers,
+  };
+};
+
 const MotherDB = {
   createMotherIntoDB,
   getAllMotherIntoDB,
@@ -52,5 +96,6 @@ const MotherDB = {
   deleteSingleMotherIntoDB,
   updateSingleByPatchMotherIntoDB,
   updateSingleByPutMotherIntoDB,
+  getMotherTableDataDB,
 };
 export default MotherDB;

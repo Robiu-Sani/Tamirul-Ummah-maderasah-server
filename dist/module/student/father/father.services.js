@@ -37,6 +37,35 @@ const updateSingleByPutFatherIntoDB = (id, info) => __awaiter(void 0, void 0, vo
     const result = yield father_model_1.default.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
+const getFatherTableDataDB = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search = '', 
+// classFilter = '',
+limit, skip, }) {
+    // Build the query object based on filters
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query = {};
+    if (search) {
+        query.fatherNameEn = { $regex: search, $options: 'i' };
+    }
+    // Fetch students, count total students, and fetch unique classes
+    const [fathers, allFathers] = yield Promise.all([
+        father_model_1.default
+            .find(query)
+            .select('mobilenumber workLocation bloodGroup monthlyIncome fatherNameEn')
+            .skip(skip)
+            .limit(limit),
+        father_model_1.default.find(query).select('bloodGroup'),
+    ]);
+    const reversedFathers = fathers.reverse();
+    // Count total students based on filters
+    const totalFathers = allFathers.length;
+    const totalPages = Math.ceil(totalFathers / limit);
+    // Return the final result
+    return {
+        totalPages,
+        totalFathers,
+        fathers: reversedFathers,
+    };
+});
 const FatherDB = {
     createFatherIntoDB,
     getAllFatherIntoDB,
@@ -44,5 +73,6 @@ const FatherDB = {
     deleteSingleFatherIntoDB,
     updateSingleByPatchFatherIntoDB,
     updateSingleByPutFatherIntoDB,
+    getFatherTableDataDB,
 };
 exports.default = FatherDB;

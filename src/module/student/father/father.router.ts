@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/create-father', FatherController.createFather);
 router.get('/', FatherController.getAllFather);
+router.get('/table', FatherController.getTableFather);
 router.get('/single-father/:id', FatherController.getSingleFather);
 router.delete('/delete-father/:id', FatherController.deleteSingleFather);
 router.patch(
