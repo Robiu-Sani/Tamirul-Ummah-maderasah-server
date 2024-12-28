@@ -45,6 +45,52 @@ const updateSingleByPutGairdeanIntoDB = async (
   return result;
 };
 
+const getGairdeanTableDataDB = async ({
+  search = '',
+  // classFilter = '',
+  limit,
+  skip,
+}: {
+  page?: number;
+  search?: string;
+  // classFilter?: string;
+  limit: number;
+  skip: number;
+}) => {
+  // Build the query object based on filters
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const query: Record<string, any> = {};
+
+  if (search) {
+    query.gairdeanNameEn = { $regex: search, $options: 'i' };
+  }
+
+  // Fetch students, count total students, and fetch unique classes
+  const [gairdeans, allGairdeans] = await Promise.all([
+    GairdeanModel.find(query)
+      .select(
+        'mobilenumber workLocation bloodGroup monthlyIncome gairdeanNameEn',
+      )
+      .skip(skip)
+      .limit(limit),
+    GairdeanModel.find(query).select('bloodGroup'),
+  ]);
+
+  const reversedGairdeans = gairdeans.reverse();
+
+  // Count total students based on filters
+  const totalGairdeans = allGairdeans.length;
+
+  const totalPages = Math.ceil(totalGairdeans / limit);
+
+  // Return the final result
+  return {
+    totalPages,
+    totalGairdeans,
+    gairdeans: reversedGairdeans,
+  };
+};
+
 const GairdeanDB = {
   createGairdeanIntoDB,
   getAllGairdeanIntoDB,
@@ -52,5 +98,6 @@ const GairdeanDB = {
   deleteSingleGairdeanIntoDB,
   updateSingleByPatchGairdeanIntoDB,
   updateSingleByPutGairdeanIntoDB,
+  getGairdeanTableDataDB,
 };
 export default GairdeanDB;

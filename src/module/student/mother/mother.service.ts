@@ -85,7 +85,7 @@ const getMotherTableDataDB = async ({
   return {
     totalPages,
     totalMothers,
-    fathers: reversedMothers,
+    mothers: reversedMothers,
   };
 };
 

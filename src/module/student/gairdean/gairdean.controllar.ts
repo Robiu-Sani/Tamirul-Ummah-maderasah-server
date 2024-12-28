@@ -113,6 +113,36 @@ const updateSingleByPutGairdean = async (req: Request, res: Response) => {
   }
 };
 
+const getTableGairdean = async (req: Request, res: Response) => {
+  const { page = 1, search = '' } = req.query;
+  const limit = 50;
+  const skip = (Number(page) - 1) * limit;
+
+  try {
+    // Call the service function to fetch data
+    const data = await GairdeanDB.getGairdeanTableDataDB({
+      page: Number(page),
+      search: String(search),
+      limit,
+      skip,
+    });
+
+    // Respond with the fetched data
+    res.json({
+      status: true,
+      message: 'All mothers retrieved successfully',
+      data,
+    });
+  } catch (error) {
+    // Respond with an error
+    res.json({
+      status: false,
+      message: 'motherr data retrieval failed',
+      error,
+    });
+  }
+};
+
 const GairdeanController = {
   createGairdean,
   getAllGairdean,
@@ -120,6 +150,7 @@ const GairdeanController = {
   deleteSingleGairdean,
   updateSingleByPatchGairdean,
   updateSingleByPutGairdean,
+  getTableGairdean,
 };
 
 export default GairdeanController;

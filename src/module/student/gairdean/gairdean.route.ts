@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/create-gairdean', GairdeanController.createGairdean);
 router.get('/', GairdeanController.getAllGairdean);
+router.get('/table', GairdeanController.getTableGairdean);
 router.get('/single-gairdean/:id', GairdeanController.getSingleGairdean);
 router.delete('/delete-gairdean/:id', GairdeanController.deleteSingleGairdean);
 router.patch(
