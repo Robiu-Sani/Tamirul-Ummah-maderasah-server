@@ -37,6 +37,34 @@ const updateSingleByPutGairdeanIntoDB = (id, info) => __awaiter(void 0, void 0, 
     const result = yield gairdean_model_1.default.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
+const getGairdeanTableDataDB = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search = '', 
+// classFilter = '',
+limit, skip, }) {
+    // Build the query object based on filters
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query = {};
+    if (search) {
+        query.gairdeanNameEn = { $regex: search, $options: 'i' };
+    }
+    // Fetch students, count total students, and fetch unique classes
+    const [gairdeans, allGairdeans] = yield Promise.all([
+        gairdean_model_1.default.find(query)
+            .select('mobilenumber workLocation bloodGroup monthlyIncome gairdeanNameEn')
+            .skip(skip)
+            .limit(limit),
+        gairdean_model_1.default.find(query).select('bloodGroup'),
+    ]);
+    const reversedGairdeans = gairdeans.reverse();
+    // Count total students based on filters
+    const totalGairdeans = allGairdeans.length;
+    const totalPages = Math.ceil(totalGairdeans / limit);
+    // Return the final result
+    return {
+        totalPages,
+        totalGairdeans,
+        gairdeans: reversedGairdeans,
+    };
+});
 const GairdeanDB = {
     createGairdeanIntoDB,
     getAllGairdeanIntoDB,
@@ -44,5 +72,6 @@ const GairdeanDB = {
     deleteSingleGairdeanIntoDB,
     updateSingleByPatchGairdeanIntoDB,
     updateSingleByPutGairdeanIntoDB,
+    getGairdeanTableDataDB,
 };
 exports.default = GairdeanDB;

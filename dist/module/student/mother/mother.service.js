@@ -62,7 +62,7 @@ limit, skip, }) {
     return {
         totalPages,
         totalMothers,
-        fathers: reversedMothers,
+        mothers: reversedMothers,
     };
 });
 const MotherDB = {

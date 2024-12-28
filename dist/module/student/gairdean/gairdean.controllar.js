@@ -122,6 +122,34 @@ const updateSingleByPutGairdean = (req, res) => __awaiter(void 0, void 0, void 0
         });
     }
 });
+const getTableGairdean = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { page = 1, search = '' } = req.query;
+    const limit = 50;
+    const skip = (Number(page) - 1) * limit;
+    try {
+        // Call the service function to fetch data
+        const data = yield gairdean_servece_1.default.getGairdeanTableDataDB({
+            page: Number(page),
+            search: String(search),
+            limit,
+            skip,
+        });
+        // Respond with the fetched data
+        res.json({
+            status: true,
+            message: 'All mothers retrieved successfully',
+            data,
+        });
+    }
+    catch (error) {
+        // Respond with an error
+        res.json({
+            status: false,
+            message: 'motherr data retrieval failed',
+            error,
+        });
+    }
+});
 const GairdeanController = {
     createGairdean,
     getAllGairdean,
@@ -129,5 +157,6 @@ const GairdeanController = {
     deleteSingleGairdean,
     updateSingleByPatchGairdean,
     updateSingleByPutGairdean,
+    getTableGairdean,
 };
 exports.default = GairdeanController;

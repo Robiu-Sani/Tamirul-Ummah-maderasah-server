@@ -9,6 +9,7 @@ const gairdean_controllar_1 = __importDefault(require("./gairdean.controllar"));
 const router = express_1.default.Router();
 router.post('/create-gairdean', gairdean_controllar_1.default.createGairdean);
 router.get('/', gairdean_controllar_1.default.getAllGairdean);
+router.get('/table', gairdean_controllar_1.default.getTableGairdean);
 router.get('/single-gairdean/:id', gairdean_controllar_1.default.getSingleGairdean);
 router.delete('/delete-gairdean/:id', gairdean_controllar_1.default.deleteSingleGairdean);
 router.patch('/update-single-gairdean-by-patch/:id', gairdean_controllar_1.default.updateSingleByPatchGairdean);
