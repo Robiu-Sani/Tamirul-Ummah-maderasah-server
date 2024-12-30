@@ -81,7 +81,7 @@ const getFirstTutiralExamTableData = async ({
 
     // Aggregate data to calculate totalMale, totalFemale, and uniqueClasses
     const aggregationResults = await FristTutiralModel.aggregate([
-      { $match: query }, // Apply the same query filters
+      { $match: query }, // Apply  the same query filters
       {
         $lookup: {
           from: 'students', // Collection name for students
@@ -109,8 +109,8 @@ const getFirstTutiralExamTableData = async ({
       },
     ]);
 
-    if (search) {
-      query['studentId.studentNameEnglish'] = { $regex: search, $options: 'i' };
+    if (search && typeof search === 'string' && search.trim() !== '') {
+      query.studentId.studentNameEnglish = { $regex: search, $options: 'i' };
     }
 
     if (classFilter) {
