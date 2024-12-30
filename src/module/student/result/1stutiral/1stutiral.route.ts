@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/create-firstTutiral', FirstTutiralController.createFirstTutiral);
 router.get('/', FirstTutiralController.getAllFirstTutiral);
+router.get('/table', FirstTutiralController.getTableStudentFirstTutiralResult);
 router.get(
   '/single-firstTutiral/:id',
   FirstTutiralController.getSingleFirstTutiral,
