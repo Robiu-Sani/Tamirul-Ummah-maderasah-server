@@ -188,11 +188,33 @@ const updateSingleByPutStudent = (req, res) => __awaiter(void 0, void 0, void 0,
         });
     }
 });
+const getStudentbyClass = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { gender } = req.query; // gender can be undefined
+        const { className } = req.params;
+        // Ensure `gender` is a string or provide a fallback value
+        const genderString = typeof gender === 'string' ? gender : '';
+        const data = yield student_services_1.default.getStudentByClassIntoDB(className, genderString);
+        res.json({
+            status: true,
+            message: 'Student is retrieved by class successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'Failed to retrieve students by class',
+            error,
+        });
+    }
+});
 const StudentController = {
     createStudent,
     getAllStudent,
     getSingleStudent,
     deleteSingleStudent,
+    getStudentbyClass,
     updateSingleByPatchStudent,
     updateSingleByPutStudent,
     getTableStudent: exports.getTableStudent,

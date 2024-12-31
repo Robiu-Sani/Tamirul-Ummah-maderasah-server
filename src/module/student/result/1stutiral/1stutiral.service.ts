@@ -110,7 +110,7 @@ const getFirstTutiralExamTableData = async ({
     ]);
 
     if (search && typeof search === 'string' && search.trim() !== '') {
-      query.studentId.studentNameEnglish = { $regex: search, $options: 'i' };
+      query['studentId.studentNameEnglish'] = { $regex: search, $options: 'i' };
     }
 
     if (classFilter) {

@@ -77,49 +77,6 @@ export const getTableData = async ({
   };
 };
 
-// const getTableData = async () => {
-//   const students = (await StudentModel.find().select(
-//     'bloodGroup class gender classRoll section studentNameEnglish',
-//   )) as {
-//     bloodGroup: string;
-//     class: string;
-//     gender: string;
-//     classRoll: number;
-//     section: string;
-//     studentNameEnglish: string;
-//   }[];
-
-//   let totalMale: number = 0;
-//   let totalFemale: number = 0;
-//   const classSet = new Set<string>();
-
-//   // Iterate through the students array
-//   students.forEach((student) => {
-//     if (student.gender === 'male') {
-//       totalMale++;
-//     } else if (student.gender === 'female') {
-//       totalFemale++;
-//     }
-//     classSet.add(student.class); // Ensure `student.class` is treated as a string
-//   });
-
-//   const totalStudents: number = students.length;
-
-//   // Convert the set of classes to an array
-//   const uniqueClasses: string[] = Array.from(classSet);
-
-//   const result = {
-//     totalStudents,
-//     totalMale,
-//     totalFemale,
-//     totalClasses: classSet.size, // Total number of unique classes
-//     uniqueClasses, // Array of unique class names
-//     students,
-//   };
-
-//   return result;
-// };
-
 const getSingleStudentIntoDB = async (id: string | number) => {
   const student = await StudentModel.findById(id);
   const father = await fatherModel.findOne({ studentId: id });
@@ -206,6 +163,23 @@ const updateSingleByPutStudentIntoDB = async (
   return result;
 };
 
+const getStudentByClassIntoDB = async (
+  className: string,
+  gender: string,
+): Promise<
+  {
+    studentNameEnglish: string;
+    classRoll: number;
+    gender: string; // Remove `undefined` here
+  }[]
+> => {
+  const result = await StudentModel.find({
+    class: className,
+    gender: gender,
+  }).select('studentNameEnglish classRoll gender');
+  return result;
+};
+
 const StudentDB = {
   createStudentIntoDB,
   getAllStudentIntoDB,
@@ -214,5 +188,6 @@ const StudentDB = {
   updateSingleByPatchStudentIntoDB,
   updateSingleByPutStudentIntoDB,
   getTableData,
+  getStudentByClassIntoDB,
 };
 export default StudentDB;

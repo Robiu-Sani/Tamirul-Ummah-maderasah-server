@@ -67,42 +67,6 @@ const getTableData = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search
     };
 });
 exports.getTableData = getTableData;
-// const getTableData = async () => {
-//   const students = (await StudentModel.find().select(
-//     'bloodGroup class gender classRoll section studentNameEnglish',
-//   )) as {
-//     bloodGroup: string;
-//     class: string;
-//     gender: string;
-//     classRoll: number;
-//     section: string;
-//     studentNameEnglish: string;
-//   }[];
-//   let totalMale: number = 0;
-//   let totalFemale: number = 0;
-//   const classSet = new Set<string>();
-//   // Iterate through the students array
-//   students.forEach((student) => {
-//     if (student.gender === 'male') {
-//       totalMale++;
-//     } else if (student.gender === 'female') {
-//       totalFemale++;
-//     }
-//     classSet.add(student.class); // Ensure `student.class` is treated as a string
-//   });
-//   const totalStudents: number = students.length;
-//   // Convert the set of classes to an array
-//   const uniqueClasses: string[] = Array.from(classSet);
-//   const result = {
-//     totalStudents,
-//     totalMale,
-//     totalFemale,
-//     totalClasses: classSet.size, // Total number of unique classes
-//     uniqueClasses, // Array of unique class names
-//     students,
-//   };
-//   return result;
-// };
 const getSingleStudentIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const student = yield student_model_1.default.findById(id);
     const father = yield father_model_1.default.findOne({ studentId: id });
@@ -170,6 +134,13 @@ const updateSingleByPutStudentIntoDB = (id, info) => __awaiter(void 0, void 0, v
     const result = yield student_model_1.default.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
+const getStudentByClassIntoDB = (className, gender) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield student_model_1.default.find({
+        class: className,
+        gender: gender,
+    }).select('studentNameEnglish classRoll gender');
+    return result;
+});
 const StudentDB = {
     createStudentIntoDB,
     getAllStudentIntoDB,
@@ -178,5 +149,6 @@ const StudentDB = {
     updateSingleByPatchStudentIntoDB,
     updateSingleByPutStudentIntoDB,
     getTableData: exports.getTableData,
+    getStudentByClassIntoDB,
 };
 exports.default = StudentDB;

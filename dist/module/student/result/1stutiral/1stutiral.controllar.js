@@ -122,6 +122,35 @@ const updateSingleByPutFirstTutiral = (req, res) => __awaiter(void 0, void 0, vo
         });
     }
 });
+const getTableStudentFirstTutiralResult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { page = 1, search = '', class: classFilter = '' } = req.query;
+    const limit = 50;
+    const skip = (Number(page) - 1) * limit;
+    try {
+        // Call the service function to fetch data
+        const data = yield _1stutiral_service_1.default.getFirstTutiralExamTableData({
+            page: Number(page),
+            search: String(search),
+            classFilter: String(classFilter),
+            limit,
+            skip,
+        });
+        // Respond with the fetched data
+        res.json({
+            status: true,
+            message: 'All students first tutiral result retrieved successfully',
+            data,
+        });
+    }
+    catch (error) {
+        // Respond with an error
+        res.json({
+            status: false,
+            message: 'Student first tutiral result data retrieval failed',
+            error,
+        });
+    }
+});
 const FirstTutiralController = {
     createFirstTutiral,
     getAllFirstTutiral,
@@ -129,5 +158,6 @@ const FirstTutiralController = {
     deleteSingleFirstTutiral,
     updateSingleByPatchFirstTutiral,
     updateSingleByPutFirstTutiral,
+    getTableStudentFirstTutiralResult,
 };
 exports.default = FirstTutiralController;

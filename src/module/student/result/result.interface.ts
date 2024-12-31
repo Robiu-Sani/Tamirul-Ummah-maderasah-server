@@ -4,6 +4,9 @@ export interface ExamInterface {
   examName: string;
   studentId: ObjectId;
   teacherId: ObjectId;
+  studentName: string;
+  studentGender: string;
+  studentClass: string;
   quran?: number;
   hifz?: number;
   arabicFirst?: number;
@@ -33,5 +36,6 @@ export interface ExamInterface {
   ict?: number;
   physicalEducation?: number;
   piyerAndCarecter?: number;
+  amalAkhlakh?: number;
   total?: number;
 }

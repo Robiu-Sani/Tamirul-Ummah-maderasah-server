@@ -9,6 +9,7 @@ const _1stutiral_controllar_1 = __importDefault(require("./1stutiral.controllar"
 const router = express_1.default.Router();
 router.post('/create-firstTutiral', _1stutiral_controllar_1.default.createFirstTutiral);
 router.get('/', _1stutiral_controllar_1.default.getAllFirstTutiral);
+router.get('/table', _1stutiral_controllar_1.default.getTableStudentFirstTutiralResult);
 router.get('/single-firstTutiral/:id', _1stutiral_controllar_1.default.getSingleFirstTutiral);
 router.delete('/delete-firstTutiral/:id', _1stutiral_controllar_1.default.deleteSingleFirstTutiral);
 router.patch('/update-single-firstTutiral-by-patch/:id', _1stutiral_controllar_1.default.updateSingleByPatchFirstTutiral);
