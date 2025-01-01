@@ -17,14 +17,11 @@ import { teacher_router } from './module/teacher/teacher.route';
 import { stafe_router } from './module/stafe/stafe.route';
 import { Fee_router } from './module/student/education-fee/fee.route';
 import { post_router } from './module/post/post.route';
-import { firstTutiral_router } from './module/student/result/1stutiral/1stutiral.route';
-import { secendTutiral_router } from './module/student/result/2stutiral/2ndtutiral.route';
-import { firstSamister_router } from './module/student/result/1stsamester/1stsamester.route';
-import { secendSamister_router } from './module/student/result/2ndsamester/2ndsamester.route';
 import { feesStructure_router } from './module/FeesStructure/FeesStructure.route';
 import { selary_router } from './module/selary/selary.route';
 import { notifection_router } from './module/notifection/notifection.route';
 import { about_router } from './module/about-institute/about.route';
+import { result_router } from './module/student/result/result.route';
 
 const app: Application = express();
 
@@ -44,10 +41,7 @@ app.use('/api/v1/teacher', teacher_router);
 app.use('/api/v1/stafe', stafe_router);
 app.use('/api/v1/fee', Fee_router);
 app.use('/api/v1/post', post_router);
-app.use('/api/v1/first-tutiral', firstTutiral_router);
-app.use('/api/v1/secend-tutiral', secendTutiral_router);
-app.use('/api/v1/first-samister', firstSamister_router);
-app.use('/api/v1/secend-samister', secendSamister_router);
+app.use('/api/v1/result', result_router);
 app.use('/api/v1/feesStructure', feesStructure_router);
 app.use('/api/v1/selary', selary_router);
 app.use('/api/v1/notifection', notifection_router);

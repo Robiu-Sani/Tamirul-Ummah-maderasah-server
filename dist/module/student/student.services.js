@@ -17,10 +17,6 @@ const post_model_1 = __importDefault(require("../post/post.model"));
 const father_model_1 = __importDefault(require("./father/father.model"));
 const gairdean_model_1 = __importDefault(require("./gairdean/gairdean.model"));
 const mother_model_1 = __importDefault(require("./mother/mother.model"));
-const _1stsamester_service_1 = require("./result/1stsamester/1stsamester.service");
-const _1stutiral_service_1 = require("./result/1stutiral/1stutiral.service");
-const _2ndsamester_service_1 = require("./result/2ndsamester/2ndsamester.service");
-const _2ndtutiral_services_1 = require("./result/2stutiral/2ndtutiral.services");
 const student_model_1 = __importDefault(require("./student.model"));
 const createStudentIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield student_model_1.default.create(payload);
@@ -73,22 +69,22 @@ const getSingleStudentIntoDB = (id) => __awaiter(void 0, void 0, void 0, functio
     const mother = yield mother_model_1.default.findOne({ studentId: id });
     const posts = yield post_model_1.default.find({ studentID: id });
     const gairdean = yield gairdean_model_1.default.findOne({ studentId: id });
-    const first_tutiral = yield _1stutiral_service_1.FristTutiralModel.findOne({ studentId: id });
-    const first_samistar = yield _1stsamester_service_1.FristSamisterModel.findOne({ studentId: id });
-    const secend_tutiral = yield _2ndtutiral_services_1.SecendTutiralModel.findOne({ studentId: id });
-    const secend_samistar = yield _2ndsamester_service_1.SecendSamisterModel.findOne({ studentId: id });
+    // const first_tutiral = await FristTutiralModel.findOne({ studentId: id });
+    // const first_samistar = await FristSamisterModel.findOne({ studentId: id });
+    // const secend_tutiral = await SecendTutiralModel.findOne({ studentId: id });
+    // const secend_samistar = await SecendSamisterModel.findOne({ studentId: id });
     const result = {
         student,
         father,
         mother,
         gairdean,
         posts,
-        result: {
-            first_tutiral,
-            first_samistar,
-            secend_tutiral,
-            secend_samistar,
-        },
+        // result: {
+        //   first_tutiral,
+        //   first_samistar,
+        //   secend_tutiral,
+        //   secend_samistar,
+        // },
     };
     return result;
 });
@@ -99,30 +95,30 @@ const deleteSingleStudentIntoDB = (id) => __awaiter(void 0, void 0, void 0, func
     const mother = yield mother_model_1.default.findOneAndDelete({ studentId: id });
     const posts = yield post_model_1.default.deleteMany({ studentID: id });
     const gairdean = yield gairdean_model_1.default.findOneAndDelete({ studentId: id });
-    const first_tutiral = yield _1stutiral_service_1.FristTutiralModel.findOneAndDelete({
-        studentId: id,
-    });
-    const first_samistar = yield _1stsamester_service_1.FristSamisterModel.findOneAndDelete({
-        studentId: id,
-    });
-    const secend_tutiral = yield _2ndtutiral_services_1.SecendTutiralModel.findOneAndDelete({
-        studentId: id,
-    });
-    const secend_samistar = yield _2ndsamester_service_1.SecendSamisterModel.findOneAndDelete({
-        studentId: id,
-    });
+    // const first_tutiral = await FristTutiralModel.findOneAndDelete({
+    //   studentId: id,
+    // });
+    // const first_samistar = await FristSamisterModel.findOneAndDelete({
+    //   studentId: id,
+    // });
+    // const secend_tutiral = await SecendTutiralModel.findOneAndDelete({
+    //   studentId: id,
+    // });
+    // const secend_samistar = await SecendSamisterModel.findOneAndDelete({
+    //   studentId: id,
+    // });
     const result = {
         student,
         father,
         mother,
         gairdean,
         posts,
-        result: {
-            first_tutiral,
-            first_samistar,
-            secend_tutiral,
-            secend_samistar,
-        },
+        // result: {
+        //   first_tutiral,
+        //   first_samistar,
+        //   secend_tutiral,
+        //   secend_samistar,
+        // },
     };
     return result;
 });

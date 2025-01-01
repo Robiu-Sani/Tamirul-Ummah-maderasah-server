@@ -10,7 +10,7 @@ const examSchema = new mongoose_1.default.Schema({
         type: mongoose_1.default.Schema.Types.ObjectId,
         required: true,
         ref: 'Students',
-        unique: true,
+        // unique: true,
     },
     teacherId: {
         type: mongoose_1.default.Schema.Types.ObjectId,
@@ -18,6 +18,8 @@ const examSchema = new mongoose_1.default.Schema({
         ref: 'teacher',
     },
     studentName: { type: String, required: true },
+    studentClass: { type: String, required: true },
+    studentGender: { type: String, required: true },
     quran: { type: Number, required: false },
     hifz: { type: Number, required: false },
     arabicFirst: { type: Number, required: false },
@@ -52,4 +54,5 @@ const examSchema = new mongoose_1.default.Schema({
 }, {
     timestamps: true,
 });
-exports.default = examSchema;
+const resultModel = mongoose_1.default.model('results', examSchema);
+exports.default = resultModel;

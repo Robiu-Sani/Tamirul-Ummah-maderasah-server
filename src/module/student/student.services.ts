@@ -2,10 +2,6 @@ import PostModel from '../post/post.model';
 import fatherModel from './father/father.model';
 import GairdeanModel from './gairdean/gairdean.model';
 import MotherModel from './mother/mother.model';
-import { FristSamisterModel } from './result/1stsamester/1stsamester.service';
-import { FristTutiralModel } from './result/1stutiral/1stutiral.service';
-import { SecendSamisterModel } from './result/2ndsamester/2ndsamester.service';
-import { SecendTutiralModel } from './result/2stutiral/2ndtutiral.services';
 import { StudentInfo } from './student.interface';
 import StudentModel from './student.model';
 
@@ -83,22 +79,22 @@ const getSingleStudentIntoDB = async (id: string | number) => {
   const mother = await MotherModel.findOne({ studentId: id });
   const posts = await PostModel.find({ studentID: id });
   const gairdean = await GairdeanModel.findOne({ studentId: id });
-  const first_tutiral = await FristTutiralModel.findOne({ studentId: id });
-  const first_samistar = await FristSamisterModel.findOne({ studentId: id });
-  const secend_tutiral = await SecendTutiralModel.findOne({ studentId: id });
-  const secend_samistar = await SecendSamisterModel.findOne({ studentId: id });
+  // const first_tutiral = await FristTutiralModel.findOne({ studentId: id });
+  // const first_samistar = await FristSamisterModel.findOne({ studentId: id });
+  // const secend_tutiral = await SecendTutiralModel.findOne({ studentId: id });
+  // const secend_samistar = await SecendSamisterModel.findOne({ studentId: id });
   const result = {
     student,
     father,
     mother,
     gairdean,
     posts,
-    result: {
-      first_tutiral,
-      first_samistar,
-      secend_tutiral,
-      secend_samistar,
-    },
+    // result: {
+    //   first_tutiral,
+    //   first_samistar,
+    //   secend_tutiral,
+    //   secend_samistar,
+    // },
   };
   return result;
 };
@@ -110,30 +106,30 @@ const deleteSingleStudentIntoDB = async (id: string | number) => {
   const mother = await MotherModel.findOneAndDelete({ studentId: id });
   const posts = await PostModel.deleteMany({ studentID: id });
   const gairdean = await GairdeanModel.findOneAndDelete({ studentId: id });
-  const first_tutiral = await FristTutiralModel.findOneAndDelete({
-    studentId: id,
-  });
-  const first_samistar = await FristSamisterModel.findOneAndDelete({
-    studentId: id,
-  });
-  const secend_tutiral = await SecendTutiralModel.findOneAndDelete({
-    studentId: id,
-  });
-  const secend_samistar = await SecendSamisterModel.findOneAndDelete({
-    studentId: id,
-  });
+  // const first_tutiral = await FristTutiralModel.findOneAndDelete({
+  //   studentId: id,
+  // });
+  // const first_samistar = await FristSamisterModel.findOneAndDelete({
+  //   studentId: id,
+  // });
+  // const secend_tutiral = await SecendTutiralModel.findOneAndDelete({
+  //   studentId: id,
+  // });
+  // const secend_samistar = await SecendSamisterModel.findOneAndDelete({
+  //   studentId: id,
+  // });
   const result = {
     student,
     father,
     mother,
     gairdean,
     posts,
-    result: {
-      first_tutiral,
-      first_samistar,
-      secend_tutiral,
-      secend_samistar,
-    },
+    // result: {
+    //   first_tutiral,
+    //   first_samistar,
+    //   secend_tutiral,
+    //   secend_samistar,
+    // },
   };
 
   return result;

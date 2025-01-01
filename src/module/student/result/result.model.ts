@@ -8,7 +8,7 @@ const examSchema = new mongoose.Schema<ExamInterface>(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: 'Students',
-      unique: true,
+      // unique: true,
     },
     teacherId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -55,4 +55,6 @@ const examSchema = new mongoose.Schema<ExamInterface>(
   },
 );
 
-export default examSchema;
+const resultModel = mongoose.model('results', examSchema);
+
+export default resultModel;
