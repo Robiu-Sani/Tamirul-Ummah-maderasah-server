@@ -22,26 +22,43 @@ const getResultTableDataIntoDB = async (
   search?: string,
   studentClass?: string,
 ) => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const query: Record<string, any> = {};
+  const query: Record<string, unknown> = {};
+  if (search) query.studentName = { $regex: search, $options: 'i' };
+  if (studentClass) query.studentClass = studentClass;
 
-  if (search) {
-    query.studentNameEnglish = { $regex: search, $options: 'i' };
-  }
-
-  if (studentClass) {
-    query.studentClass = studentClass;
-  }
-
-  const result = resultModel
-    .find()
-    .select(
-      'examName studentName studentClass studentGender piyerAndCarecter total',
-    )
+  const data = await resultModel
+    .find(query)
     .skip(skip)
-    .limit(100);
+    .limit(100)
+    .select('studentName studentClass studentGender total examName');
 
-  return result;
+  const stats = await resultModel.aggregate([
+    {
+      $facet: {
+        totalMale: [{ $match: { studentGender: 'male' } }, { $count: 'count' }],
+        totalFemale: [
+          { $match: { studentGender: 'female' } },
+          { $count: 'count' },
+        ],
+        uniqueClasses: [{ $group: { _id: '$studentClass' } }],
+      },
+    },
+  ]);
+
+  const totalMale = stats[0]?.totalMale[0]?.count || 0;
+  const totalFemale = stats[0]?.totalFemale[0]?.count || 0;
+  const uniqueClasses =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    stats[0]?.uniqueClasses.map((cls: any) => cls._id) || [];
+
+  return {
+    totalMale,
+    totalFemale,
+    totalStudents: totalMale + totalFemale,
+    totalClass: uniqueClasses.length,
+    uniqueClasses,
+    data,
+  };
 };
 
 const getSingleResultIntoDB = async (id: number) => {

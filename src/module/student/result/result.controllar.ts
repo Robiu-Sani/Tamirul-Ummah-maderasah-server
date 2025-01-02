@@ -36,7 +36,34 @@ const getAllResult = async (req: Request, res: Response) => {
   }
 };
 
+const getTableResult = async (req: Request, res: Response) => {
+  try {
+    const skip = parseInt(req.query.skip as string) || 0;
+    const search = (req.query.search as string) || '';
+    const studentClass = (req.query.studentClass as string) || '';
+
+    const data = await resultDB.getResultTableDataIntoDB(
+      skip,
+      search,
+      studentClass,
+    );
+
+    res.json({
+      status: true,
+      message: 'Result table data fetched successfully',
+      data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: 'Failed to fetch result table data',
+      error: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+};
+
 export const resultControllar = {
   createResult,
   getAllResult,
+  getTableResult,
 };
