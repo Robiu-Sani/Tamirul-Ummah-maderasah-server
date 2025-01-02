@@ -21,7 +21,7 @@ const createResult = async (req: Request, res: Response) => {
 
 const getAllResult = async (req: Request, res: Response) => {
   try {
-    const data = resultDB.getAllResultIntoDB(1);
+    const data = await resultDB.getAllResultIntoDB(0);
     res.json({
       status: true,
       message: 'result get successfully',

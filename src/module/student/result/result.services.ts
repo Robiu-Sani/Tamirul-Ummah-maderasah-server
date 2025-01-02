@@ -7,12 +7,13 @@ const createResultsIntoDB = async (payload: ExamInterface) => {
 };
 
 const getAllResultIntoDB = async (skip: number) => {
-  const result = resultModel
+  const result = await resultModel
     .find()
     .populate('studentId')
     .populate('teacherId')
     .skip(skip)
     .limit(50);
+
   return result;
 };
 
