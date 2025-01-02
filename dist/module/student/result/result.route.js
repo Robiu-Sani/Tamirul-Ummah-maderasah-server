@@ -8,4 +8,6 @@ const express_1 = __importDefault(require("express"));
 const result_controllar_1 = require("./result.controllar");
 const router = express_1.default.Router();
 router.post('/create-exam-result', result_controllar_1.resultControllar.createResult);
+router.get('/table', result_controllar_1.resultControllar.getTableResult);
+router.get('/', result_controllar_1.resultControllar.getAllResult);
 exports.result_router = router;

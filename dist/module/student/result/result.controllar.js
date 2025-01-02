@@ -29,6 +29,45 @@ const createResult = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         });
     }
 });
+const getAllResult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield result_services_1.resultDB.getAllResultIntoDB(0);
+        res.json({
+            status: true,
+            message: 'result get successfully',
+            data,
+        });
+    }
+    catch (err) {
+        res.json({
+            status: false,
+            message: 'result is not get successfully',
+            error: err,
+        });
+    }
+});
+const getTableResult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const skip = parseInt(req.query.skip) || 0;
+        const search = req.query.search || '';
+        const studentClass = req.query.studentClass || '';
+        const data = yield result_services_1.resultDB.getResultTableDataIntoDB(skip, search, studentClass);
+        res.json({
+            status: true,
+            message: 'Result table data fetched successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.status(500).json({
+            status: false,
+            message: 'Failed to fetch result table data',
+            error: error instanceof Error ? error.message : 'Unknown error',
+        });
+    }
+});
 exports.resultControllar = {
     createResult,
+    getAllResult,
+    getTableResult,
 };
