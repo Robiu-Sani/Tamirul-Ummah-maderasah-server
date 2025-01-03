@@ -15,7 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.resultDB = void 0;
 const result_model_1 = __importDefault(require("./result.model"));
 const createResultsIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = result_model_1.default.create(payload);
+    const existingResult = yield result_model_1.default.findOne({
+        studentId: payload.studentId,
+        examName: payload.examName,
+    });
+    if (existingResult) {
+        return { alert: 'Result for this student and exam already exists.' };
+    }
+    const result = yield result_model_1.default.create(payload);
     return result;
 });
 const getAllResultIntoDB = (skip) => __awaiter(void 0, void 0, void 0, function* () {

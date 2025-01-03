@@ -4,7 +4,8 @@ import { resultDB } from './result.services';
 const createResult = async (req: Request, res: Response) => {
   try {
     const payload = req.body;
-    const data = resultDB.createResultsIntoDB(payload);
+    const data = await resultDB.createResultsIntoDB(payload);
+
     res.json({
       status: true,
       message: 'result submited successfully',

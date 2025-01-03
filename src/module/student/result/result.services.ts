@@ -2,7 +2,16 @@ import { ExamInterface } from './result.interface';
 import resultModel from './result.model';
 
 const createResultsIntoDB = async (payload: ExamInterface) => {
-  const result = resultModel.create(payload);
+  const existingResult = await resultModel.findOne({
+    studentId: payload.studentId,
+    examName: payload.examName,
+  });
+
+  if (existingResult) {
+    return { alert: 'Result for this student and exam already exists.' };
+  }
+
+  const result = await resultModel.create(payload);
   return result;
 };
 

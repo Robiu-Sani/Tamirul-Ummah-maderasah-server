@@ -14,7 +14,7 @@ const result_services_1 = require("./result.services");
 const createResult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const payload = req.body;
-        const data = result_services_1.resultDB.createResultsIntoDB(payload);
+        const data = yield result_services_1.resultDB.createResultsIntoDB(payload);
         res.json({
             status: true,
             message: 'result submited successfully',
