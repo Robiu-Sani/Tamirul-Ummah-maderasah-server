@@ -8,11 +8,15 @@ const createResultsIntoDB = async (payload: ExamInterface) => {
   });
 
   if (existingResult) {
-    return { alert: 'Result for this student and exam already exists.' };
+    return { status: false };
   }
 
   const result = await resultModel.create(payload);
-  return result;
+  const data = {
+    result,
+    status: true,
+  };
+  return data;
 };
 
 const getAllResultIntoDB = async (skip: number) => {
@@ -70,7 +74,7 @@ const getResultTableDataIntoDB = async (
   };
 };
 
-const getSingleResultIntoDB = async (id: number) => {
+const getSingleResultIntoDB = async (id: string | number) => {
   const result = resultModel
     .findById(id)
     .populate('studentId')

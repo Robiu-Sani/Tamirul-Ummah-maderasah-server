@@ -63,8 +63,27 @@ const getTableResult = async (req: Request, res: Response) => {
   }
 };
 
+const getSingleResult = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const data = await resultDB.getSingleResultIntoDB(id);
+    res.json({
+      status: true,
+      message: 'result get successfully',
+      data,
+    });
+  } catch (err) {
+    res.json({
+      status: false,
+      message: 'result is not get successfully',
+      error: err,
+    });
+  }
+};
+
 export const resultControllar = {
   createResult,
   getAllResult,
   getTableResult,
+  getSingleResult,
 };
