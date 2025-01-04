@@ -63,20 +63,60 @@ const getTableResult = async (req: Request, res: Response) => {
   }
 };
 
-const getSingleResult = async (req: Request, res: Response) => {
+const getSingleResult = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
+
+    // Validate 'id' to ensure it's not undefined or null
+    if (!id) {
+      res.status(400).json({
+        status: false,
+        message: 'Invalid or missing ID parameter.',
+      });
+      return;
+    }
+
+    // Fetch the result data from the database
     const data = await resultDB.getSingleResultIntoDB(id);
+
+    // Ensure 'data' is not null or undefined
+    if (!data) {
+      res.status(404).json({
+        status: false,
+        message: 'Result not found for the given ID.',
+      });
+      return;
+    }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let tutiral: any = null;
+
+    // If 'exexamName' matches "Half Yearly Exam", fetch additional data
+    if (data.examName === 'Half Yearly Exam') {
+      tutiral = await resultDB.getOnlySubjectsNumbersIntoDB(
+        data.studentId,
+        'First Tutorial',
+      );
+    }
+
+    if (data.examName === 'Final Exam') {
+      tutiral = await resultDB.getOnlySubjectsNumbersIntoDB(
+        data.studentId,
+        'Second Tutorial',
+      );
+    }
+
     res.json({
       status: true,
-      message: 'result get successfully',
+      message: 'Result retrieved successfully',
+      tutiral: tutiral ? tutiral.subjects : false,
       data,
     });
   } catch (err) {
-    res.json({
+    res.status(500).json({
       status: false,
-      message: 'result is not get successfully',
-      error: err,
+      message: 'Failed to retrieve the result',
+      error: err instanceof Error ? err.message : err,
     });
   }
 };

@@ -1,3 +1,4 @@
+import { ObjectId } from 'mongoose';
 import { ExamInterface } from './result.interface';
 import resultModel from './result.model';
 
@@ -82,9 +83,17 @@ const getSingleResultIntoDB = async (id: string | number) => {
   return result;
 };
 
+const getOnlySubjectsNumbersIntoDB = async (id: ObjectId, exam: string) => {
+  const result = resultModel
+    .findOne({ studentId: id, examName: exam })
+    .select('subjects');
+  return result;
+};
+
 export const resultDB = {
   createResultsIntoDB,
   getAllResultIntoDB,
   getResultTableDataIntoDB,
   getSingleResultIntoDB,
+  getOnlySubjectsNumbersIntoDB,
 };
