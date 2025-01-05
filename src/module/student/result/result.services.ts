@@ -90,10 +90,16 @@ const getOnlySubjectsNumbersIntoDB = async (id: ObjectId, exam: string) => {
   return result;
 };
 
+const deleteResultIntoDB = async (id: string | number) => {
+  const result = resultModel.findByIdAndDelete(id);
+  return result;
+};
+
 export const resultDB = {
   createResultsIntoDB,
   getAllResultIntoDB,
   getResultTableDataIntoDB,
   getSingleResultIntoDB,
   getOnlySubjectsNumbersIntoDB,
+  deleteResultIntoDB,
 };

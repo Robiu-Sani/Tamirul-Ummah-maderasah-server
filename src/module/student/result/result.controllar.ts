@@ -90,6 +90,10 @@ const getSingleResult = async (req: Request, res: Response): Promise<void> => {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let tutiral: any = null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let firstTutiral: any = null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let halfYearly: any = null;
 
     // If 'exexamName' matches "Half Yearly Exam", fetch additional data
     if (data.examName === 'Half Yearly Exam') {
@@ -104,12 +108,22 @@ const getSingleResult = async (req: Request, res: Response): Promise<void> => {
         data.studentId,
         'Second Tutorial',
       );
+      firstTutiral = await resultDB.getOnlySubjectsNumbersIntoDB(
+        data.studentId,
+        'First Tutorial',
+      );
+      halfYearly = await resultDB.getOnlySubjectsNumbersIntoDB(
+        data.studentId,
+        'First Tutorial',
+      );
     }
 
     res.json({
       status: true,
       message: 'Result retrieved successfully',
       tutiral: tutiral ? tutiral.subjects : false,
+      halfYearly: halfYearly ? halfYearly.subjects : false,
+      firstTutiral: firstTutiral ? firstTutiral.subjects : false,
       data,
     });
   } catch (err) {
@@ -121,9 +135,28 @@ const getSingleResult = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+const deleteResult = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const data = await resultDB.deleteResultIntoDB(id);
+    res.json({
+      status: true,
+      message: 'result delete successfully',
+      data,
+    });
+  } catch (err) {
+    res.json({
+      status: false,
+      message: 'result is not delete successfully',
+      error: err,
+    });
+  }
+};
+
 export const resultControllar = {
   createResult,
   getAllResult,
+  deleteResult,
   getTableResult,
   getSingleResult,
 };
