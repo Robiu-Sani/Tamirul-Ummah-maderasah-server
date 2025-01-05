@@ -20,10 +20,14 @@ const createResultsIntoDB = (payload) => __awaiter(void 0, void 0, void 0, funct
         examName: payload.examName,
     });
     if (existingResult) {
-        return { alert: 'Result for this student and exam already exists.' };
+        return { status: false };
     }
     const result = yield result_model_1.default.create(payload);
-    return result;
+    const data = {
+        result,
+        status: true,
+    };
+    return data;
 });
 const getAllResultIntoDB = (skip) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield result_model_1.default
@@ -79,9 +83,21 @@ const getSingleResultIntoDB = (id) => __awaiter(void 0, void 0, void 0, function
         .populate('teacherId');
     return result;
 });
+const getOnlySubjectsNumbersIntoDB = (id, exam) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = result_model_1.default
+        .findOne({ studentId: id, examName: exam })
+        .select('subjects');
+    return result;
+});
+const deleteResultIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = result_model_1.default.findByIdAndDelete(id);
+    return result;
+});
 exports.resultDB = {
     createResultsIntoDB,
     getAllResultIntoDB,
     getResultTableDataIntoDB,
     getSingleResultIntoDB,
+    getOnlySubjectsNumbersIntoDB,
+    deleteResultIntoDB,
 };
