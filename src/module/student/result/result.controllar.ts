@@ -209,6 +209,25 @@ const getByExamName = async (req: Request, res: Response) => {
   }
 };
 
+const updateResult = async (req: Request, res: Response) => {
+  try {
+    const payload = req.body;
+    const { id } = req.params;
+    const data = await resultDB.UpdateResultIntoDB(id, payload);
+    res.json({
+      status: true,
+      message: 'Single result update successfully',
+      data,
+    });
+  } catch (error) {
+    res.json({
+      status: false,
+      message: 'Single result is not update successfully',
+      error,
+    });
+  }
+};
+
 export const resultControllar = {
   createResult,
   getAllResult,
@@ -217,4 +236,5 @@ export const resultControllar = {
   getSingleResult,
   getByTeacherId,
   getByExamName,
+  updateResult,
 };

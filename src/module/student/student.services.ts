@@ -43,7 +43,7 @@ export const getTableData = async ({
   const [students, allStudents] = await Promise.all([
     StudentModel.find(query)
       .select(
-        'bloodGroup class gender classRoll type section studentNameEnglish',
+        'bloodGroup class gender classRoll type section isRunning studentNameEnglish',
       )
       .skip(skip)
       .limit(limit),
@@ -106,30 +106,13 @@ const deleteSingleStudentIntoDB = async (id: string | number) => {
   const mother = await MotherModel.findOneAndDelete({ studentId: id });
   const posts = await PostModel.deleteMany({ studentID: id });
   const gairdean = await GairdeanModel.findOneAndDelete({ studentId: id });
-  // const first_tutiral = await FristTutiralModel.findOneAndDelete({
-  //   studentId: id,
-  // });
-  // const first_samistar = await FristSamisterModel.findOneAndDelete({
-  //   studentId: id,
-  // });
-  // const secend_tutiral = await SecendTutiralModel.findOneAndDelete({
-  //   studentId: id,
-  // });
-  // const secend_samistar = await SecendSamisterModel.findOneAndDelete({
-  //   studentId: id,
-  // });
+
   const result = {
     student,
     father,
     mother,
     gairdean,
     posts,
-    // result: {
-    //   first_tutiral,
-    //   first_samistar,
-    //   secend_tutiral,
-    //   secend_samistar,
-    // },
   };
 
   return result;

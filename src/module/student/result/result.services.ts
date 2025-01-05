@@ -187,6 +187,15 @@ const deleteResultIntoDB = async (id: string | number) => {
   return result;
 };
 
+const UpdateResultIntoDB = async (id: string | number, info: object) => {
+  const result = await resultModel.findByIdAndUpdate(
+    id,
+    { $set: { subjects: info } },
+    { new: true },
+  );
+  return result;
+};
+
 export const resultDB = {
   createResultsIntoDB,
   getAllResultIntoDB,
@@ -196,4 +205,5 @@ export const resultDB = {
   deleteResultIntoDB,
   getResultByTeachersId,
   getResultByExamName,
+  UpdateResultIntoDB,
 };

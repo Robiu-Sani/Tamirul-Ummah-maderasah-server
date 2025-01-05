@@ -19,5 +19,6 @@ export interface StudentInfo {
   weight: string;
   classRoll: number;
   type: 'student' | 'blocked';
+  isRunning: boolean;
   password: string | number | undefined;
 }

@@ -87,6 +87,7 @@ const studentSchema = new mongoose.Schema<StudentInfo>(
       default: generateRandomPassword,
       unique: true,
     },
+    isRunning: { type: Boolean, required: true, default: true },
     type: {
       type: String,
       default: 'student',
