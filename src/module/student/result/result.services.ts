@@ -190,7 +190,7 @@ const deleteResultIntoDB = async (id: string | number) => {
 const UpdateResultIntoDB = async (id: string | number, info: object) => {
   const result = await resultModel.findByIdAndUpdate(
     id,
-    { $set: { subjects: info } },
+    { $set: info },
     { new: true },
   );
   return result;

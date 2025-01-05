@@ -77,7 +77,7 @@ const getResultTableDataIntoDB = (skip, search, studentClass) => __awaiter(void 
     };
 });
 const getSingleResultIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = result_model_1.default
+    const result = yield result_model_1.default
         .findById(id)
         .populate('studentId')
         .populate('teacherId');
@@ -89,8 +89,90 @@ const getOnlySubjectsNumbersIntoDB = (id, exam) => __awaiter(void 0, void 0, voi
         .select('subjects');
     return result;
 });
+const getResultByTeachersId = (id, skip, search, studentClass) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c, _d, _e;
+    const query = { teacherId: id };
+    if (search)
+        query.studentName = { $regex: search, $options: 'i' };
+    if (studentClass)
+        query.studentClass = studentClass;
+    const data = yield result_model_1.default
+        .find(query)
+        .skip(skip)
+        .limit(100)
+        .select('studentName studentClass studentGender total examName');
+    const stats = yield result_model_1.default.aggregate([
+        { $match: { teacherId: id } },
+        {
+            $facet: {
+                totalMale: [{ $match: { studentGender: 'male' } }, { $count: 'count' }],
+                totalFemale: [
+                    { $match: { studentGender: 'female' } },
+                    { $count: 'count' },
+                ],
+                uniqueClasses: [{ $group: { _id: '$studentClass' } }],
+            },
+        },
+    ]);
+    const totalMale = ((_b = (_a = stats[0]) === null || _a === void 0 ? void 0 : _a.totalMale[0]) === null || _b === void 0 ? void 0 : _b.count) || 0;
+    const totalFemale = ((_d = (_c = stats[0]) === null || _c === void 0 ? void 0 : _c.totalFemale[0]) === null || _d === void 0 ? void 0 : _d.count) || 0;
+    const uniqueClasses = 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ((_e = stats[0]) === null || _e === void 0 ? void 0 : _e.uniqueClasses.map((cls) => cls._id)) || [];
+    return {
+        totalMale,
+        totalFemale,
+        totalStudents: totalMale + totalFemale,
+        totalClass: uniqueClasses.length,
+        uniqueClasses,
+        data,
+    };
+});
+const getResultByExamName = (exam, skip, search, studentClass) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c, _d, _e;
+    const query = { examName: exam };
+    if (search)
+        query.studentName = { $regex: search, $options: 'i' };
+    if (studentClass)
+        query.studentClass = studentClass;
+    const data = yield result_model_1.default
+        .find(query)
+        .skip(skip)
+        .limit(100)
+        .select('studentName studentClass studentGender total examName');
+    const stats = yield result_model_1.default.aggregate([
+        { $match: { examName: exam } },
+        {
+            $facet: {
+                totalMale: [{ $match: { studentGender: 'male' } }, { $count: 'count' }],
+                totalFemale: [
+                    { $match: { studentGender: 'female' } },
+                    { $count: 'count' },
+                ],
+                uniqueClasses: [{ $group: { _id: '$studentClass' } }],
+            },
+        },
+    ]);
+    const totalMale = ((_b = (_a = stats[0]) === null || _a === void 0 ? void 0 : _a.totalMale[0]) === null || _b === void 0 ? void 0 : _b.count) || 0;
+    const totalFemale = ((_d = (_c = stats[0]) === null || _c === void 0 ? void 0 : _c.totalFemale[0]) === null || _d === void 0 ? void 0 : _d.count) || 0;
+    const uniqueClasses = 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    ((_e = stats[0]) === null || _e === void 0 ? void 0 : _e.uniqueClasses.map((cls) => cls._id)) || [];
+    return {
+        totalMale,
+        totalFemale,
+        totalStudents: totalMale + totalFemale,
+        totalClass: uniqueClasses.length,
+        uniqueClasses,
+        data,
+    };
+});
 const deleteResultIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = result_model_1.default.findByIdAndDelete(id);
+    return result;
+});
+const UpdateResultIntoDB = (id, info) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield result_model_1.default.findByIdAndUpdate(id, { $set: info }, { new: true });
     return result;
 });
 exports.resultDB = {
@@ -100,4 +182,7 @@ exports.resultDB = {
     getSingleResultIntoDB,
     getOnlySubjectsNumbersIntoDB,
     deleteResultIntoDB,
+    getResultByTeachersId,
+    getResultByExamName,
+    UpdateResultIntoDB,
 };

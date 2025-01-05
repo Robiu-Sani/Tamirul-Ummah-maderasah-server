@@ -39,7 +39,7 @@ const getTableData = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search
     // Fetch students, count total students, and fetch unique classes
     const [students, allStudents] = yield Promise.all([
         student_model_1.default.find(query)
-            .select('bloodGroup class gender classRoll type section studentNameEnglish')
+            .select('bloodGroup class gender classRoll type section isRunning studentNameEnglish')
             .skip(skip)
             .limit(limit),
         student_model_1.default.find(query).select('class'),
@@ -95,30 +95,12 @@ const deleteSingleStudentIntoDB = (id) => __awaiter(void 0, void 0, void 0, func
     const mother = yield mother_model_1.default.findOneAndDelete({ studentId: id });
     const posts = yield post_model_1.default.deleteMany({ studentID: id });
     const gairdean = yield gairdean_model_1.default.findOneAndDelete({ studentId: id });
-    // const first_tutiral = await FristTutiralModel.findOneAndDelete({
-    //   studentId: id,
-    // });
-    // const first_samistar = await FristSamisterModel.findOneAndDelete({
-    //   studentId: id,
-    // });
-    // const secend_tutiral = await SecendTutiralModel.findOneAndDelete({
-    //   studentId: id,
-    // });
-    // const secend_samistar = await SecendSamisterModel.findOneAndDelete({
-    //   studentId: id,
-    // });
     const result = {
         student,
         father,
         mother,
         gairdean,
         posts,
-        // result: {
-        //   first_tutiral,
-        //   first_samistar,
-        //   secend_tutiral,
-        //   secend_samistar,
-        // },
     };
     return result;
 });
