@@ -107,6 +107,53 @@ const getResultByTeachersId = async (
     .select('studentName studentClass studentGender total examName');
 
   const stats = await resultModel.aggregate([
+    { $match: { teacherId: id } },
+    {
+      $facet: {
+        totalMale: [{ $match: { studentGender: 'male' } }, { $count: 'count' }],
+        totalFemale: [
+          { $match: { studentGender: 'female' } },
+          { $count: 'count' },
+        ],
+        uniqueClasses: [{ $group: { _id: '$studentClass' } }],
+      },
+    },
+  ]);
+
+  const totalMale = stats[0]?.totalMale[0]?.count || 0;
+  const totalFemale = stats[0]?.totalFemale[0]?.count || 0;
+  const uniqueClasses =
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    stats[0]?.uniqueClasses.map((cls: any) => cls._id) || [];
+
+  return {
+    totalMale,
+    totalFemale,
+    totalStudents: totalMale + totalFemale,
+    totalClass: uniqueClasses.length,
+    uniqueClasses,
+    data,
+  };
+};
+
+const getResultByExamName = async (
+  exam: string | number,
+  skip: number,
+  search?: string,
+  studentClass?: string,
+) => {
+  const query: Record<string, unknown> = { examName: exam };
+  if (search) query.studentName = { $regex: search, $options: 'i' };
+  if (studentClass) query.studentClass = studentClass;
+
+  const data = await resultModel
+    .find(query)
+    .skip(skip)
+    .limit(100)
+    .select('studentName studentClass studentGender total examName');
+
+  const stats = await resultModel.aggregate([
+    { $match: { examName: exam } },
     {
       $facet: {
         totalMale: [{ $match: { studentGender: 'male' } }, { $count: 'count' }],
@@ -148,4 +195,5 @@ export const resultDB = {
   getOnlySubjectsNumbersIntoDB,
   deleteResultIntoDB,
   getResultByTeachersId,
+  getResultByExamName,
 };

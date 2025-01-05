@@ -181,6 +181,34 @@ const getByTeacherId = async (req: Request, res: Response) => {
   }
 };
 
+const getByExamName = async (req: Request, res: Response) => {
+  try {
+    const { exam } = req.params;
+    const skip = parseInt(req.query.skip as string) || 0;
+    const search = (req.query.search as string) || '';
+    const studentClass = (req.query.studentClass as string) || '';
+
+    const data = await resultDB.getResultByExamName(
+      exam,
+      skip,
+      search,
+      studentClass,
+    );
+
+    res.json({
+      status: true,
+      message: 'Result table data fetched successfully',
+      data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: false,
+      message: 'Failed to fetch result table data',
+      error: error instanceof Error ? error.message : 'Unknown error',
+    });
+  }
+};
+
 export const resultControllar = {
   createResult,
   getAllResult,
@@ -188,4 +216,5 @@ export const resultControllar = {
   getTableResult,
   getSingleResult,
   getByTeacherId,
+  getByExamName,
 };
