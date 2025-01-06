@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTableData = void 0;
 const post_model_1 = __importDefault(require("../post/post.model"));
 const father_model_1 = __importDefault(require("./father/father.model"));
 const gairdean_model_1 = __importDefault(require("./gairdean/gairdean.model"));
@@ -24,6 +23,18 @@ const createStudentIntoDB = (payload) => __awaiter(void 0, void 0, void 0, funct
 });
 const getAllStudentIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield student_model_1.default.find();
+    return result;
+});
+const getSearchBarData = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search = '' }) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query = {};
+    if (search) {
+        query.studentNameEnglish = { $regex: search, $options: 'i' };
+    }
+    const result = yield student_model_1.default.find(query)
+        .select('studentNameEnglish image class gender classRoll ')
+        .skip(0)
+        .limit(15);
     return result;
 });
 const getTableData = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search = '', classFilter = '', limit, skip, }) {
@@ -62,7 +73,6 @@ const getTableData = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search
         students: reversedStudents,
     };
 });
-exports.getTableData = getTableData;
 const getSingleStudentIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const student = yield student_model_1.default.findById(id);
     const father = yield father_model_1.default.findOne({ studentId: id });
@@ -126,7 +136,8 @@ const StudentDB = {
     deleteSingleStudentIntoDB,
     updateSingleByPatchStudentIntoDB,
     updateSingleByPutStudentIntoDB,
-    getTableData: exports.getTableData,
+    getTableData,
     getStudentByClassIntoDB,
+    getSearchBarData,
 };
 exports.default = StudentDB;

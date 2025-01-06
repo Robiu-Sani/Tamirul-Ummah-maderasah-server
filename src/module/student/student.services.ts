@@ -15,7 +15,22 @@ const getAllStudentIntoDB = async () => {
   return result;
 };
 
-export const getTableData = async ({
+const getSearchBarData = async ({ search = '' }: { search: string }) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const query: Record<string, any> = {};
+
+  if (search) {
+    query.studentNameEnglish = { $regex: search, $options: 'i' };
+  }
+
+  const result = await StudentModel.find(query)
+    .select('studentNameEnglish image class gender classRoll ')
+    .skip(0)
+    .limit(15);
+  return result;
+};
+
+const getTableData = async ({
   search = '',
   classFilter = '',
   limit,
@@ -168,5 +183,6 @@ const StudentDB = {
   updateSingleByPutStudentIntoDB,
   getTableData,
   getStudentByClassIntoDB,
+  getSearchBarData,
 };
 export default StudentDB;

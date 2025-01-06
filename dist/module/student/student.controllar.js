@@ -12,7 +12,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTableStudent = void 0;
 const student_services_1 = __importDefault(require("./student.services"));
 // import StudentModel from './student.model';
 const createStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -50,6 +49,29 @@ const getAllStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         });
     }
 });
+const getSearchStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { search = '' } = req.query;
+    try {
+        // Call the service function to fetch data
+        const data = yield student_services_1.default.getSearchBarData({
+            search: String(search),
+        });
+        // Respond with the fetched data
+        res.json({
+            status: true,
+            message: 'search students retrieved successfully',
+            data,
+        });
+    }
+    catch (error) {
+        // Respond with an error
+        res.json({
+            status: false,
+            message: 'Student data retrieval failed',
+            error,
+        });
+    }
+});
 const getTableStudent = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { page = 1, search = '', class: classFilter = '' } = req.query;
     const limit = 50;
@@ -79,7 +101,6 @@ const getTableStudent = (req, res) => __awaiter(void 0, void 0, void 0, function
         });
     }
 });
-exports.getTableStudent = getTableStudent;
 // export const getTableStudent = async (req: Request, res: Response) => {
 //   const { page = 1, search = "", class: classFilter = "" } = req.query;
 //   const limit = 50; // Number of records per page
@@ -217,6 +238,7 @@ const StudentController = {
     getStudentbyClass,
     updateSingleByPatchStudent,
     updateSingleByPutStudent,
-    getTableStudent: exports.getTableStudent,
+    getTableStudent,
+    getSearchStudent,
 };
 exports.default = StudentController;

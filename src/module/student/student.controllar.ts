@@ -38,7 +38,32 @@ const getAllStudent = async (req: Request, res: Response) => {
   }
 };
 
-export const getTableStudent = async (req: Request, res: Response) => {
+const getSearchStudent = async (req: Request, res: Response) => {
+  const { search = '' } = req.query;
+
+  try {
+    // Call the service function to fetch data
+    const data = await StudentDB.getSearchBarData({
+      search: String(search),
+    });
+
+    // Respond with the fetched data
+    res.json({
+      status: true,
+      message: 'search students retrieved successfully',
+      data,
+    });
+  } catch (error) {
+    // Respond with an error
+    res.json({
+      status: false,
+      message: 'Student data retrieval failed',
+      error,
+    });
+  }
+};
+
+const getTableStudent = async (req: Request, res: Response) => {
   const { page = 1, search = '', class: classFilter = '' } = req.query;
   const limit = 50;
   const skip = (Number(page) - 1) * limit;
@@ -216,6 +241,7 @@ const StudentController = {
   updateSingleByPatchStudent,
   updateSingleByPutStudent,
   getTableStudent,
+  getSearchStudent,
 };
 
 export default StudentController;

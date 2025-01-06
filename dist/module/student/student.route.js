@@ -11,6 +11,7 @@ router.post('/create-student', student_controllar_1.default.createStudent);
 router.get('/table', student_controllar_1.default.getTableStudent);
 router.get('/get-by-class/:className', student_controllar_1.default.getStudentbyClass);
 router.get('/', student_controllar_1.default.getAllStudent);
+router.get('/search', student_controllar_1.default.getSearchStudent);
 router.get('/single-student/:id', student_controllar_1.default.getSingleStudent);
 router.delete('/delete-student/:id', student_controllar_1.default.deleteSingleStudent);
 router.patch('/update-single-student-by-patch/:id', student_controllar_1.default.updateSingleByPatchStudent);
