@@ -90,7 +90,6 @@ const getOnlySubjectsNumbersIntoDB = (id, exam) => __awaiter(void 0, void 0, voi
     return result;
 });
 const getResultByTeachersId = (id, skip, search, studentClass) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b, _c, _d, _e;
     const query = { teacherId: id };
     if (search)
         query.studentName = { $regex: search, $options: 'i' };
@@ -100,25 +99,14 @@ const getResultByTeachersId = (id, skip, search, studentClass) => __awaiter(void
         .find(query)
         .skip(skip)
         .limit(100)
-        .select('studentName studentClass studentGender total examName');
-    const stats = yield result_model_1.default.aggregate([
-        { $match: { teacherId: id } },
-        {
-            $facet: {
-                totalMale: [{ $match: { studentGender: 'male' } }, { $count: 'count' }],
-                totalFemale: [
-                    { $match: { studentGender: 'female' } },
-                    { $count: 'count' },
-                ],
-                uniqueClasses: [{ $group: { _id: '$studentClass' } }],
-            },
-        },
-    ]);
-    const totalMale = ((_b = (_a = stats[0]) === null || _a === void 0 ? void 0 : _a.totalMale[0]) === null || _b === void 0 ? void 0 : _b.count) || 0;
-    const totalFemale = ((_d = (_c = stats[0]) === null || _c === void 0 ? void 0 : _c.totalFemale[0]) === null || _d === void 0 ? void 0 : _d.count) || 0;
-    const uniqueClasses = 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    ((_e = stats[0]) === null || _e === void 0 ? void 0 : _e.uniqueClasses.map((cls) => cls._id)) || [];
+        .select('studentName studentClass studentGender teacherId total examName');
+    const totalMale = yield result_model_1.default
+        .find(query)
+        .countDocuments({ studentGender: 'male' });
+    const totalFemale = yield result_model_1.default
+        .find(query)
+        .countDocuments({ studentGender: 'female' });
+    const uniqueClasses = yield result_model_1.default.find(query).distinct('studentClass');
     return {
         totalMale,
         totalFemale,

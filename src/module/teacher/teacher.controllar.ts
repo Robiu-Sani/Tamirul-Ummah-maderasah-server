@@ -50,6 +50,23 @@ const getTableTeacher = async (req: Request, res: Response) => {
   }
 };
 
+const getClientSiteTeacherControllar = async (req: Request, res: Response) => {
+  try {
+    const data = await TeacherDB.getClientSiteTeacher();
+    res.json({
+      status: true,
+      message: 'All Teacher got successfully',
+      data,
+    });
+  } catch (error) {
+    res.json({
+      status: false,
+      message: 'Teacher is not get successfully',
+      error,
+    });
+  }
+};
+
 const getAllTeacher = async (req: Request, res: Response) => {
   try {
     const data = await TeacherDB.getAllTeacherIntoDB();
@@ -149,6 +166,7 @@ const TeacherController = {
   updateSingleByPatchTeacher,
   updateSingleByPutTeacher,
   getTableTeacher,
+  getClientSiteTeacherControllar,
 };
 
 export default TeacherController;

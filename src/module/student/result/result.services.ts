@@ -104,27 +104,15 @@ const getResultByTeachersId = async (
     .find(query)
     .skip(skip)
     .limit(100)
-    .select('studentName studentClass studentGender total examName');
+    .select('studentName studentClass studentGender teacherId total examName');
 
-  const stats = await resultModel.aggregate([
-    { $match: { teacherId: id } },
-    {
-      $facet: {
-        totalMale: [{ $match: { studentGender: 'male' } }, { $count: 'count' }],
-        totalFemale: [
-          { $match: { studentGender: 'female' } },
-          { $count: 'count' },
-        ],
-        uniqueClasses: [{ $group: { _id: '$studentClass' } }],
-      },
-    },
-  ]);
-
-  const totalMale = stats[0]?.totalMale[0]?.count || 0;
-  const totalFemale = stats[0]?.totalFemale[0]?.count || 0;
-  const uniqueClasses =
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    stats[0]?.uniqueClasses.map((cls: any) => cls._id) || [];
+  const totalMale = await resultModel
+    .find(query)
+    .countDocuments({ studentGender: 'male' });
+  const totalFemale = await resultModel
+    .find(query)
+    .countDocuments({ studentGender: 'female' });
+  const uniqueClasses = await resultModel.find(query).distinct('studentClass');
 
   return {
     totalMale,

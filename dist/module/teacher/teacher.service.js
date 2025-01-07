@@ -73,6 +73,10 @@ const getTeacherTableDataDB = (_a) => __awaiter(void 0, [_a], void 0, function* 
         teacher: reversedTeachers,
     };
 });
+const getClientSiteTeacher = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield teacher_model_1.default.find().select('teacherImage phone subject');
+    return result;
+});
 const TeacherDB = {
     createTeacherIntoDB,
     getAllTeacherIntoDB,
@@ -81,5 +85,6 @@ const TeacherDB = {
     deleteSingleTeacherIntoDB,
     updateSingleByPatchTeacherIntoDB,
     updateSingleByPutTeacherIntoDB,
+    getClientSiteTeacher,
 };
 exports.default = TeacherDB;

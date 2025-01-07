@@ -104,6 +104,11 @@ const getTeacherTableDataDB = async ({
   };
 };
 
+const getClientSiteTeacher = async () => {
+  const result = await TeacherModel.find().select('teacherImage phone subject');
+  return result;
+};
+
 const TeacherDB = {
   createTeacherIntoDB,
   getAllTeacherIntoDB,
@@ -112,5 +117,6 @@ const TeacherDB = {
   deleteSingleTeacherIntoDB,
   updateSingleByPatchTeacherIntoDB,
   updateSingleByPutTeacherIntoDB,
+  getClientSiteTeacher,
 };
 export default TeacherDB;

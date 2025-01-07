@@ -9,6 +9,7 @@ const teacher_controllar_1 = __importDefault(require("./teacher.controllar"));
 const router = express_1.default.Router();
 router.post('/create-teacher', teacher_controllar_1.default.createTeacher);
 router.get('/', teacher_controllar_1.default.getAllTeacher);
+router.get('/client', teacher_controllar_1.default.getClientSiteTeacherControllar);
 router.get('/table', teacher_controllar_1.default.getTableTeacher);
 router.get('/single-teacher/:id', teacher_controllar_1.default.getSingleTeacher);
 router.delete('/delete-teacher/:id', teacher_controllar_1.default.deleteSingleTeacher);

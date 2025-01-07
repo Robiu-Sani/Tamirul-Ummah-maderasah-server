@@ -60,6 +60,23 @@ const getTableTeacher = (req, res) => __awaiter(void 0, void 0, void 0, function
         });
     }
 });
+const getClientSiteTeacherControllar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield teacher_service_1.default.getClientSiteTeacher();
+        res.json({
+            status: true,
+            message: 'All Teacher got successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'Teacher is not get successfully',
+            error,
+        });
+    }
+});
 const getAllTeacher = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield teacher_service_1.default.getAllTeacherIntoDB();
@@ -159,5 +176,6 @@ const TeacherController = {
     updateSingleByPatchTeacher,
     updateSingleByPutTeacher,
     getTableTeacher,
+    getClientSiteTeacherControllar,
 };
 exports.default = TeacherController;
