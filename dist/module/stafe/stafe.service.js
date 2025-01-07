@@ -73,6 +73,10 @@ const getStaffTableDataDB = (_a) => __awaiter(void 0, [_a], void 0, function* ({
         staff: reversedStaff,
     };
 });
+const staffClientSideIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield stafe_model_1.default.find().select('staffImage staffName phone');
+    return result;
+});
 const StafeDB = {
     createStafeIntoDB,
     getAllStafeIntoDB,
@@ -81,5 +85,6 @@ const StafeDB = {
     updateSingleByPatchStafeIntoDB,
     updateSingleByPutStafeIntoDB,
     getStaffTableDataDB,
+    staffClientSideIntoDB,
 };
 exports.default = StafeDB;

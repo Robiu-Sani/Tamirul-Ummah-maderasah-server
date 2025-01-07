@@ -31,6 +31,23 @@ const createStafe = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         });
     }
 });
+const staffClientSide = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield stafe_service_1.default.staffClientSideIntoDB();
+        res.json({
+            status: true,
+            message: 'All Stafe got successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'Stafe is not get successfully',
+            error,
+        });
+    }
+});
 const getAllStafe = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield stafe_service_1.default.getAllStafeIntoDB();
@@ -159,5 +176,6 @@ const StafeController = {
     updateSingleByPatchStafe,
     updateSingleByPutStafe,
     getTableStaff,
+    staffClientSide,
 };
 exports.default = StafeController;

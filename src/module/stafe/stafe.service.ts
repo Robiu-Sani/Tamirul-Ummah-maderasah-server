@@ -104,6 +104,11 @@ const getStaffTableDataDB = async ({
   };
 };
 
+const staffClientSideIntoDB = async () => {
+  const result = await StafeModel.find().select('staffImage staffName phone');
+  return result;
+};
+
 const StafeDB = {
   createStafeIntoDB,
   getAllStafeIntoDB,
@@ -112,5 +117,6 @@ const StafeDB = {
   updateSingleByPatchStafeIntoDB,
   updateSingleByPutStafeIntoDB,
   getStaffTableDataDB,
+  staffClientSideIntoDB,
 };
 export default StafeDB;

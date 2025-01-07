@@ -74,7 +74,7 @@ const getTeacherTableDataDB = (_a) => __awaiter(void 0, [_a], void 0, function* 
     };
 });
 const getClientSiteTeacher = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield teacher_model_1.default.find().select('teacherImage phone subject');
+    const result = yield teacher_model_1.default.find().select('teacherImage phone subject teacherName');
     return result;
 });
 const TeacherDB = {

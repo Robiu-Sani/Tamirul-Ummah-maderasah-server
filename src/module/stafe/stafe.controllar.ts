@@ -19,6 +19,23 @@ const createStafe = async (req: Request, res: Response) => {
   }
 };
 
+const staffClientSide = async (req: Request, res: Response) => {
+  try {
+    const data = await StafeDB.staffClientSideIntoDB();
+    res.json({
+      status: true,
+      message: 'All Stafe got successfully',
+      data,
+    });
+  } catch (error) {
+    res.json({
+      status: false,
+      message: 'Stafe is not get successfully',
+      error,
+    });
+  }
+};
+
 const getAllStafe = async (req: Request, res: Response) => {
   try {
     const data = await StafeDB.getAllStafeIntoDB();
@@ -149,6 +166,7 @@ const StafeController = {
   updateSingleByPatchStafe,
   updateSingleByPutStafe,
   getTableStaff,
+  staffClientSide,
 };
 
 export default StafeController;

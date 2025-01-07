@@ -105,7 +105,9 @@ const getTeacherTableDataDB = async ({
 };
 
 const getClientSiteTeacher = async () => {
-  const result = await TeacherModel.find().select('teacherImage phone subject');
+  const result = await TeacherModel.find().select(
+    'teacherImage phone subject teacherName',
+  );
   return result;
 };
 
