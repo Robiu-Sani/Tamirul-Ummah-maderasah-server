@@ -18,11 +18,11 @@ const createPostIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function
     return result;
 });
 const getAllPostIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield post_model_1.default.find().populate('studentId');
+    const result = yield post_model_1.default.find().populate('studentID');
     return result;
 });
 const getSinglePostIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield post_model_1.default.findById(id).populate('studentId');
+    const result = yield post_model_1.default.findById(id).populate('studentID');
     return result;
 });
 const deleteSinglePostIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {

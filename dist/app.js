@@ -21,6 +21,7 @@ const selary_route_1 = require("./module/selary/selary.route");
 const notifection_route_1 = require("./module/notifection/notifection.route");
 const about_route_1 = require("./module/about-institute/about.route");
 const result_route_1 = require("./module/student/result/result.route");
+const consulting_route_1 = require("./module/consulting/consulting.route");
 const app = (0, express_1.default)();
 //parser
 app.use(express_1.default.json());
@@ -42,6 +43,7 @@ app.use('/api/v1/feesStructure', FeesStructure_route_1.feesStructure_router);
 app.use('/api/v1/selary', selary_route_1.selary_router);
 app.use('/api/v1/notifection', notifection_route_1.notifection_router);
 app.use('/api/v1/about', about_route_1.about_router);
+app.use('/api/v1/consult', consulting_route_1.consult_router);
 app.get('/', (req, res) => {
     res.send('Tamirul Ummah Maderasah Server');
 });

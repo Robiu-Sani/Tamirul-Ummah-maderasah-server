@@ -7,12 +7,12 @@ const createPostIntoDB = async (payload: PostDetails) => {
 };
 
 const getAllPostIntoDB = async () => {
-  const result = await PostModel.find().populate('studentId');
+  const result = await PostModel.find().populate('studentID');
   return result;
 };
 
 const getSinglePostIntoDB = async (id: string | number) => {
-  const result = await PostModel.findById(id).populate('studentId');
+  const result = await PostModel.findById(id).populate('studentID');
   return result;
 };
 
