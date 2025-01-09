@@ -22,12 +22,14 @@ const notifection_route_1 = require("./module/notifection/notifection.route");
 const about_route_1 = require("./module/about-institute/about.route");
 const result_route_1 = require("./module/student/result/result.route");
 const consulting_route_1 = require("./module/consulting/consulting.route");
+const auth_route_1 = require("./module/auth/auth.route");
 const app = (0, express_1.default)();
 //parser
 app.use(express_1.default.json());
 app.use((0, cors_1.default)());
 //applycation v1 routes
 app.use('/api/v1/notice', notice_route_1.notice_router);
+app.use('/api/v1/auth', auth_route_1.auth_route);
 app.use('/api/v1/institution', contact_route_1.institution_router);
 app.use('/api/v1/slide', carousel_route_1.slide_router);
 app.use('/api/v1/student', student_route_1.student_router);

@@ -23,6 +23,7 @@ import { notifection_router } from './module/notifection/notifection.route';
 import { about_router } from './module/about-institute/about.route';
 import { result_router } from './module/student/result/result.route';
 import { consult_router } from './module/consulting/consulting.route';
+import { auth_route } from './module/auth/auth.route';
 
 const app: Application = express();
 
@@ -32,6 +33,7 @@ app.use(cors());
 
 //applycation v1 routes
 app.use('/api/v1/notice', notice_router);
+app.use('/api/v1/auth', auth_route);
 app.use('/api/v1/institution', institution_router);
 app.use('/api/v1/slide', slide_router);
 app.use('/api/v1/student', student_router);
