@@ -8,4 +8,6 @@ const express_1 = __importDefault(require("express"));
 const consulting_controllar_1 = __importDefault(require("./consulting.controllar"));
 const router = express_1.default.Router();
 router.post('/create-consulting', consulting_controllar_1.default.createConsult);
+router.get('/', consulting_controllar_1.default.getConsult);
+router.delete('/delete', consulting_controllar_1.default.deleteConsult);
 exports.consult_router = router;

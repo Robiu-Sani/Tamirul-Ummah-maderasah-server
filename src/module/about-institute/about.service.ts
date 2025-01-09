@@ -1,7 +1,7 @@
-import { aboutInterface } from './about.interface';
+import { AboutInterface } from './about.interface';
 import AboutModel from './about.model';
 
-const createAboutIntoDB = async (payload: aboutInterface) => {
+const createAboutIntoDB = async (payload: AboutInterface) => {
   const result = await AboutModel.create(payload);
   return result;
 };

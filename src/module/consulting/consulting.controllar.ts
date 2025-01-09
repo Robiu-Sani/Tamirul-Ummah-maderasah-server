@@ -4,8 +4,42 @@ import consultDB from './consulting.services';
 const createConsult = async (req: Request, res: Response) => {
   try {
     const payload = req.body;
-
     const data = await consultDB.createConsultIntoDB(payload);
+    res.json({
+      status: true,
+      message: 'data got successuflly',
+      data,
+    });
+  } catch (err) {
+    res.json({
+      status: true,
+      message: 'data got successuflly',
+      error: err,
+    });
+  }
+};
+
+const getConsult = async (req: Request, res: Response) => {
+  try {
+    const data = await consultDB.getConsultIntoDB();
+    res.json({
+      status: true,
+      message: 'data got successuflly',
+      data,
+    });
+  } catch (err) {
+    res.json({
+      status: true,
+      message: 'data got successuflly',
+      error: err,
+    });
+  }
+};
+
+const deleteConsult = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const data = await consultDB.deleteConsultIntoDB(id);
     res.json({
       status: true,
       message: 'data got successuflly',
@@ -22,5 +56,7 @@ const createConsult = async (req: Request, res: Response) => {
 
 const consultControllar = {
   createConsult,
+  getConsult,
+  deleteConsult,
 };
 export default consultControllar;

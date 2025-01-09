@@ -17,7 +17,17 @@ const createConsultIntoDB = (payload) => __awaiter(void 0, void 0, void 0, funct
     const result = yield consulting_model_1.default.create(payload);
     return result;
 });
+const getConsultIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield consulting_model_1.default.find();
+    return result;
+});
+const deleteConsultIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = consulting_model_1.default.findByIdAndDelete(id);
+    return result;
+});
 const consultDB = {
     createConsultIntoDB,
+    getConsultIntoDB,
+    deleteConsultIntoDB,
 };
 exports.default = consultDB;

@@ -31,7 +31,44 @@ const createConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         });
     }
 });
+const getConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield consulting_services_1.default.getConsultIntoDB();
+        res.json({
+            status: true,
+            message: 'data got successuflly',
+            data,
+        });
+    }
+    catch (err) {
+        res.json({
+            status: true,
+            message: 'data got successuflly',
+            error: err,
+        });
+    }
+});
+const deleteConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const data = yield consulting_services_1.default.deleteConsultIntoDB(id);
+        res.json({
+            status: true,
+            message: 'data got successuflly',
+            data,
+        });
+    }
+    catch (err) {
+        res.json({
+            status: true,
+            message: 'data got successuflly',
+            error: err,
+        });
+    }
+});
 const consultControllar = {
     createConsult,
+    getConsult,
+    deleteConsult,
 };
 exports.default = consultControllar;

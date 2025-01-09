@@ -5,5 +5,5 @@ export interface PostDetails {
   isSelected: boolean;
   postTitle: string;
   postDescription: string;
-  postImage: string | null;
+  postImage?: string | null;
 }
