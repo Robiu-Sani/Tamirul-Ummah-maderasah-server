@@ -2,6 +2,7 @@ import PostModel from '../post/post.model';
 import fatherModel from './father/father.model';
 import GairdeanModel from './gairdean/gairdean.model';
 import MotherModel from './mother/mother.model';
+import resultModel from './result/result.model';
 import { StudentInfo } from './student.interface';
 import StudentModel from './student.model';
 
@@ -94,15 +95,13 @@ const getSingleStudentIntoDB = async (id: string | number) => {
   const mother = await MotherModel.findOne({ studentId: id });
   const posts = await PostModel.find({ studentID: id });
   const gairdean = await GairdeanModel.findOne({ studentId: id });
-  // const first_tutiral = await FristTutiralModel.findOne({ studentId: id });
-  // const first_samistar = await FristSamisterModel.findOne({ studentId: id });
-  // const secend_tutiral = await SecendTutiralModel.findOne({ studentId: id });
-  // const secend_samistar = await SecendSamisterModel.findOne({ studentId: id });
+  const results = await resultModel.find({ studentId: id });
   const result = {
     student,
     father,
     mother,
     gairdean,
+    results,
     posts,
     // result: {
     //   first_tutiral,
@@ -120,6 +119,7 @@ const deleteSingleStudentIntoDB = async (id: string | number) => {
   const father = await fatherModel.findOneAndDelete({ studentId: id });
   const mother = await MotherModel.findOneAndDelete({ studentId: id });
   const posts = await PostModel.deleteMany({ studentID: id });
+  const results = await resultModel.deleteMany({ studentId: id });
   const gairdean = await GairdeanModel.findOneAndDelete({ studentId: id });
 
   const result = {
@@ -127,6 +127,7 @@ const deleteSingleStudentIntoDB = async (id: string | number) => {
     father,
     mother,
     gairdean,
+    results,
     posts,
   };
 

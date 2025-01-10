@@ -16,6 +16,7 @@ const post_model_1 = __importDefault(require("../post/post.model"));
 const father_model_1 = __importDefault(require("./father/father.model"));
 const gairdean_model_1 = __importDefault(require("./gairdean/gairdean.model"));
 const mother_model_1 = __importDefault(require("./mother/mother.model"));
+const result_model_1 = __importDefault(require("./result/result.model"));
 const student_model_1 = __importDefault(require("./student.model"));
 const createStudentIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield student_model_1.default.create(payload);
@@ -79,15 +80,13 @@ const getSingleStudentIntoDB = (id) => __awaiter(void 0, void 0, void 0, functio
     const mother = yield mother_model_1.default.findOne({ studentId: id });
     const posts = yield post_model_1.default.find({ studentID: id });
     const gairdean = yield gairdean_model_1.default.findOne({ studentId: id });
-    // const first_tutiral = await FristTutiralModel.findOne({ studentId: id });
-    // const first_samistar = await FristSamisterModel.findOne({ studentId: id });
-    // const secend_tutiral = await SecendTutiralModel.findOne({ studentId: id });
-    // const secend_samistar = await SecendSamisterModel.findOne({ studentId: id });
+    const results = yield result_model_1.default.find({ studentId: id });
     const result = {
         student,
         father,
         mother,
         gairdean,
+        results,
         posts,
         // result: {
         //   first_tutiral,
@@ -104,12 +103,14 @@ const deleteSingleStudentIntoDB = (id) => __awaiter(void 0, void 0, void 0, func
     const father = yield father_model_1.default.findOneAndDelete({ studentId: id });
     const mother = yield mother_model_1.default.findOneAndDelete({ studentId: id });
     const posts = yield post_model_1.default.deleteMany({ studentID: id });
+    const results = yield result_model_1.default.deleteMany({ studentId: id });
     const gairdean = yield gairdean_model_1.default.findOneAndDelete({ studentId: id });
     const result = {
         student,
         father,
         mother,
         gairdean,
+        results,
         posts,
     };
     return result;
