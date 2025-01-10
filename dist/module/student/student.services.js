@@ -88,12 +88,6 @@ const getSingleStudentIntoDB = (id) => __awaiter(void 0, void 0, void 0, functio
         gairdean,
         results,
         posts,
-        // result: {
-        //   first_tutiral,
-        //   first_samistar,
-        //   secend_tutiral,
-        //   secend_samistar,
-        // },
     };
     return result;
 });

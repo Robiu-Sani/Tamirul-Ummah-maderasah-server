@@ -103,12 +103,6 @@ const getSingleStudentIntoDB = async (id: string | number) => {
     gairdean,
     results,
     posts,
-    // result: {
-    //   first_tutiral,
-    //   first_samistar,
-    //   secend_tutiral,
-    //   secend_samistar,
-    // },
   };
   return result;
 };

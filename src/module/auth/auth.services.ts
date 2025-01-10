@@ -12,13 +12,9 @@ const studentAuth = async (payload: authInterface) => {
   }
 
   // Check if any student's password matches
-  const matchedStudent = students.find((student) => {
-    // Ensure `student.password` is an array
-    if (Array.isArray(student.password)) {
-      return student.password.includes(password); // Check if password matches
-    }
-    return false; // Return false if password is not an array
-  });
+  const matchedStudent = students.find(
+    (student) => student.password == password,
+  );
 
   if (!matchedStudent) {
     throw new Error('Invalid password');
