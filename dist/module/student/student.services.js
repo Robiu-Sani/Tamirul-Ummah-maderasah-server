@@ -78,7 +78,9 @@ const getSingleStudentIntoDB = (id) => __awaiter(void 0, void 0, void 0, functio
     const student = yield student_model_1.default.findById(id);
     const father = yield father_model_1.default.findOne({ studentId: id });
     const mother = yield mother_model_1.default.findOne({ studentId: id });
-    const posts = yield post_model_1.default.find({ studentID: id });
+    const posts = yield post_model_1.default.find({ studentID: id })
+        .populate('studentID')
+        .sort({ _id: -1 });
     const gairdean = yield gairdean_model_1.default.findOne({ studentId: id });
     const results = yield result_model_1.default.find({ studentId: id });
     const result = {

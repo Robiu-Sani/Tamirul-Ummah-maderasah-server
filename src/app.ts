@@ -24,6 +24,7 @@ import { about_router } from './module/about-institute/about.route';
 import { result_router } from './module/student/result/result.route';
 import { consult_router } from './module/consulting/consulting.route';
 import { auth_route } from './module/auth/auth.route';
+import { gain_router } from './module/gain/gain.router';
 
 const app: Application = express();
 
@@ -50,6 +51,7 @@ app.use('/api/v1/selary', selary_router);
 app.use('/api/v1/notifection', notifection_router);
 app.use('/api/v1/about', about_router);
 app.use('/api/v1/consult', consult_router);
+app.use('/api/v1/gain', gain_router);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Tamirul Ummah Maderasah Server');

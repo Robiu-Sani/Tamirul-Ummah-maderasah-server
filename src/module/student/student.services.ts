@@ -93,7 +93,9 @@ const getSingleStudentIntoDB = async (id: string | number) => {
   const student = await StudentModel.findById(id);
   const father = await fatherModel.findOne({ studentId: id });
   const mother = await MotherModel.findOne({ studentId: id });
-  const posts = await PostModel.find({ studentID: id });
+  const posts = await PostModel.find({ studentID: id })
+    .populate('studentID')
+    .sort({ _id: -1 });
   const gairdean = await GairdeanModel.findOne({ studentId: id });
   const results = await resultModel.find({ studentId: id });
   const result = {

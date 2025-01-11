@@ -18,7 +18,10 @@ const createPostIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function
     return result;
 });
 const getAllPostIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield post_model_1.default.find().populate('studentID');
+    const result = yield post_model_1.default.find()
+        .populate('studentID')
+        .sort({ _id: -1 }) // Sort by _id in descending order
+        .limit(100);
     return result;
 });
 const getSinglePostIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
