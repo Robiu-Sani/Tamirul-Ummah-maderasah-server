@@ -30,7 +30,10 @@ const updateSingleByPatchNotifectionIntoDB = async (
     { $set: info },
     { new: true },
   );
-  return result;
+  const count = await NotifectionModel.find({
+    isClick: true,
+  }).countDocuments();
+  return { result, count: count };
 };
 
 const updateSingleByPutNotifectionIntoDB = async (
@@ -45,12 +48,36 @@ const updateSingleByPutNotifectionIntoDB = async (
   return result;
 };
 
+const noticectionAlertDB = async () => {
+  const result = await NotifectionModel.find({
+    isClick: true,
+  }).countDocuments();
+  return result;
+};
+
+const noticectionAdmitionDB = async () => {
+  const result = await NotifectionModel.find({
+    name: 'Admition Notice',
+  });
+  return result;
+};
+
+const noticectionBoxIntoDB = async () => {
+  const result = await NotifectionModel.find().select(
+    'name messages path isClick',
+  );
+  return result;
+};
+
 const NotifectionDB = {
   createNotifectionIntoDB,
   getAllNotifectionIntoDB,
   getSingleNotifectionIntoDB,
+  noticectionAlertDB,
   deleteSingleNotifectionIntoDB,
   updateSingleByPatchNotifectionIntoDB,
   updateSingleByPutNotifectionIntoDB,
+  noticectionBoxIntoDB,
+  noticectionAdmitionDB,
 };
 export default NotifectionDB;

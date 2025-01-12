@@ -8,5 +8,11 @@ const NotifectionSchema = new mongoose.Schema<NotifectionInterface>({
   path: { type: String, required: true },
   isClick: { type: Boolean, required: true },
 });
+
+NotifectionSchema.index(
+  { createdAt: 1 },
+  { expireAfterSeconds: 20 * 24 * 60 * 60 },
+);
+
 const NotifectionModel = mongoose.model('notifection', NotifectionSchema);
 export default NotifectionModel;

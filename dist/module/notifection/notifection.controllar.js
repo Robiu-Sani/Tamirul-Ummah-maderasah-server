@@ -48,6 +48,57 @@ const getAllNotifection = (req, res) => __awaiter(void 0, void 0, void 0, functi
         });
     }
 });
+const noticectionAlert = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield notifection_service_1.default.noticectionAlertDB();
+        res.json({
+            status: true,
+            message: `total have ${data}`,
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'Notifection is not get successfully',
+            error,
+        });
+    }
+});
+const noticectionAdmition = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield notifection_service_1.default.noticectionAdmitionDB();
+        res.json({
+            status: true,
+            message: 'All Notifection got successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'Notifection is not get successfully',
+            error,
+        });
+    }
+});
+const noticectionBox = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield notifection_service_1.default.noticectionBoxIntoDB();
+        res.json({
+            status: true,
+            message: 'All Notifection got successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'Notifection is not get successfully',
+            error,
+        });
+    }
+});
 const getSingleNotifection = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
@@ -69,6 +120,7 @@ const getSingleNotifection = (req, res) => __awaiter(void 0, void 0, void 0, fun
 const deleteSingleNotifection = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
+        console.log(id);
         const data = yield notifection_service_1.default.deleteSingleNotifectionIntoDB(id);
         res.json({
             status: true,
@@ -129,5 +181,8 @@ const NotifectionController = {
     deleteSingleNotifection,
     updateSingleByPatchNotifection,
     updateSingleByPutNotifection,
+    noticectionBox,
+    noticectionAlert,
+    noticectionAdmition,
 };
 exports.default = NotifectionController;

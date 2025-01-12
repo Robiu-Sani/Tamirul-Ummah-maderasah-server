@@ -9,6 +9,9 @@ const notifection_controllar_1 = __importDefault(require("./notifection.controll
 const router = express_1.default.Router();
 router.post('/create-notifection', notifection_controllar_1.default.createNotifection);
 router.get('/', notifection_controllar_1.default.getAllNotifection);
+router.get('/box', notifection_controllar_1.default.noticectionBox);
+router.get('/admition', notifection_controllar_1.default.noticectionAdmition);
+router.get('/alert', notifection_controllar_1.default.noticectionAlert);
 router.get('/single-notifection/:id', notifection_controllar_1.default.getSingleNotifection);
 router.delete('/delete-notifection/:id', notifection_controllar_1.default.deleteSingleNotifection);
 router.patch('/update-single-notifection-by-patch/:id', notifection_controllar_1.default.updateSingleByPatchNotifection);

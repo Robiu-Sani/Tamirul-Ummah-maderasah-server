@@ -11,5 +11,6 @@ const NotifectionSchema = new mongoose_1.default.Schema({
     path: { type: String, required: true },
     isClick: { type: Boolean, required: true },
 });
+NotifectionSchema.index({ createdAt: 1 }, { expireAfterSeconds: 20 * 24 * 60 * 60 });
 const NotifectionModel = mongoose_1.default.model('notifection', NotifectionSchema);
 exports.default = NotifectionModel;

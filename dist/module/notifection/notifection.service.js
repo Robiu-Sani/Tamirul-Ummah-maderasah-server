@@ -31,18 +31,40 @@ const deleteSingleNotifectionIntoDB = (id) => __awaiter(void 0, void 0, void 0, 
 });
 const updateSingleByPatchNotifectionIntoDB = (id, info) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield notifection_model_1.default.findByIdAndUpdate(id, { $set: info }, { new: true });
-    return result;
+    const count = yield notifection_model_1.default.find({
+        isClick: true,
+    }).countDocuments();
+    return { result, count: count };
 });
 const updateSingleByPutNotifectionIntoDB = (id, info) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield notifection_model_1.default.findByIdAndUpdate(id, { $set: info }, { new: true });
+    return result;
+});
+const noticectionAlertDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield notifection_model_1.default.find({
+        isClick: true,
+    }).countDocuments();
+    return result;
+});
+const noticectionAdmitionDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield notifection_model_1.default.find({
+        name: 'Admition Notice',
+    });
+    return result;
+});
+const noticectionBoxIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield notifection_model_1.default.find().select('name messages path isClick');
     return result;
 });
 const NotifectionDB = {
     createNotifectionIntoDB,
     getAllNotifectionIntoDB,
     getSingleNotifectionIntoDB,
+    noticectionAlertDB,
     deleteSingleNotifectionIntoDB,
     updateSingleByPatchNotifectionIntoDB,
     updateSingleByPutNotifectionIntoDB,
+    noticectionBoxIntoDB,
+    noticectionAdmitionDB,
 };
 exports.default = NotifectionDB;
