@@ -67,7 +67,8 @@ const noticectionAlert = (req, res) => __awaiter(void 0, void 0, void 0, functio
 });
 const noticectionAdmition = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield notifection_service_1.default.noticectionAdmitionDB();
+        const { cetagory } = req.params;
+        const data = yield notifection_service_1.default.noticectionAdmitionDB(cetagory);
         res.json({
             status: true,
             message: 'All Notifection got successfully',

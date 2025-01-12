@@ -55,7 +55,9 @@ const noticectionAlert = async (req: Request, res: Response) => {
 
 const noticectionAdmition = async (req: Request, res: Response) => {
   try {
-    const data = await NotifectionDB.noticectionAdmitionDB();
+    const { cetagory } = req.params;
+
+    const data = await NotifectionDB.noticectionAdmitionDB(cetagory);
     res.json({
       status: true,
       message: 'All Notifection got successfully',

@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/create-notifection', NotifectionController.createNotifection);
 router.get('/', NotifectionController.getAllNotifection);
 router.get('/box', NotifectionController.noticectionBox);
-router.get('/admition', NotifectionController.noticectionAdmition);
+router.get('/cetagory/:cetagory', NotifectionController.noticectionAdmition);
 router.get('/alert', NotifectionController.noticectionAlert);
 router.get(
   '/single-notifection/:id',

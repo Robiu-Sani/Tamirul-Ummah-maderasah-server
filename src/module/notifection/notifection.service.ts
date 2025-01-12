@@ -55,17 +55,17 @@ const noticectionAlertDB = async () => {
   return result;
 };
 
-const noticectionAdmitionDB = async () => {
+const noticectionAdmitionDB = async (cetagory: string) => {
   const result = await NotifectionModel.find({
-    name: 'Admition Notice',
+    name: cetagory,
   });
   return result;
 };
 
 const noticectionBoxIntoDB = async () => {
-  const result = await NotifectionModel.find().select(
-    'name messages path isClick',
-  );
+  const result = await NotifectionModel.find()
+    .select('name messages path isClick')
+    .sort({ _id: -1 });
   return result;
 };
 

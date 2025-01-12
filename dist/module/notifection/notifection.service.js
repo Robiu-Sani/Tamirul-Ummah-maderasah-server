@@ -46,14 +46,16 @@ const noticectionAlertDB = () => __awaiter(void 0, void 0, void 0, function* () 
     }).countDocuments();
     return result;
 });
-const noticectionAdmitionDB = () => __awaiter(void 0, void 0, void 0, function* () {
+const noticectionAdmitionDB = (cetagory) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield notifection_model_1.default.find({
-        name: 'Admition Notice',
+        name: cetagory,
     });
     return result;
 });
 const noticectionBoxIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield notifection_model_1.default.find().select('name messages path isClick');
+    const result = yield notifection_model_1.default.find()
+        .select('name messages path isClick')
+        .sort({ _id: -1 });
     return result;
 });
 const NotifectionDB = {
