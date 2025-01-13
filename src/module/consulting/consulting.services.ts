@@ -16,9 +16,19 @@ const deleteConsultIntoDB = async (id: string | number) => {
   return result;
 };
 
+const messagesCategoryDB = async (cetagory: string) => {
+  const result = await consoltModel
+    .find({
+      type: cetagory,
+    })
+    .sort({ _id: -1 });
+  return result;
+};
+
 const consultDB = {
   createConsultIntoDB,
   getConsultIntoDB,
   deleteConsultIntoDB,
+  messagesCategoryDB,
 };
 export default consultDB;

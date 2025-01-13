@@ -9,6 +9,7 @@ const notice_controllar_1 = __importDefault(require("./notice.controllar"));
 const router = express_1.default.Router();
 router.post('/create-notice', notice_controllar_1.default.createNotice);
 router.get('/', notice_controllar_1.default.getAllNotice);
+router.get('/banner', notice_controllar_1.default.getBannerNotice);
 router.get('/single-notice/:id', notice_controllar_1.default.getSingleNotice);
 router.delete('/delete-notice/:id', notice_controllar_1.default.deleteSingleNotice);
 router.patch('/update-single-notice-by-patch/:id', notice_controllar_1.default.updateSingleByPatchNotice);

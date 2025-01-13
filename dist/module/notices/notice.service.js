@@ -21,6 +21,14 @@ const getAllNoticeIntoDB = () => __awaiter(void 0, void 0, void 0, function* () 
     const result = yield notice_model_1.default.find();
     return result;
 });
+const getBannerNoticeIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield notice_model_1.default
+        .find()
+        .sort({ _id: -1 }) // Sort in descending order (latest first)
+        .limit(4) // Limit to 4 documents
+        .select('title submissionDate'); // Select only `title` and `submissionDate`
+    return result;
+});
 const getSingleNoticeIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield notice_model_1.default.findById(id);
     return result;
@@ -41,6 +49,7 @@ const noticeDB = {
     createNoticeIntoDB,
     getAllNoticeIntoDB,
     getSingleNoticeIntoDB,
+    getBannerNoticeIntoDB,
     deleteSingleNoticeIntoDB,
     updateSingleByPatchNoticeIntoDB,
     updateSingleByPutNoticeIntoDB,

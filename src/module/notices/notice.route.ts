@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/create-notice', noticeController.createNotice);
 router.get('/', noticeController.getAllNotice);
+router.get('/banner', noticeController.getBannerNotice);
 router.get('/single-notice/:id', noticeController.getSingleNotice);
 router.delete('/delete-notice/:id', noticeController.deleteSingleNotice);
 router.patch(

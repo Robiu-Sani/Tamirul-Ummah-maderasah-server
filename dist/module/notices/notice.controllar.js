@@ -48,6 +48,23 @@ const getAllNotice = (req, res) => __awaiter(void 0, void 0, void 0, function* (
         });
     }
 });
+const getBannerNotice = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield notice_service_1.default.getBannerNoticeIntoDB();
+        res.json({
+            status: true,
+            message: 'All notice got successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'Notice is not get successfully',
+            error,
+        });
+    }
+});
 const getSingleNotice = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
@@ -129,5 +146,6 @@ const noticeController = {
     deleteSingleNotice,
     updateSingleByPatchNotice,
     updateSingleByPutNotice,
+    getBannerNotice,
 };
 exports.default = noticeController;

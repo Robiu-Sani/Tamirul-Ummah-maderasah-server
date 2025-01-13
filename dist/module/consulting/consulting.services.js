@@ -25,9 +25,18 @@ const deleteConsultIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* 
     const result = consulting_model_1.default.findByIdAndDelete(id);
     return result;
 });
+const messagesCategoryDB = (cetagory) => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield consulting_model_1.default
+        .find({
+        type: cetagory,
+    })
+        .sort({ _id: -1 });
+    return result;
+});
 const consultDB = {
     createConsultIntoDB,
     getConsultIntoDB,
     deleteConsultIntoDB,
+    messagesCategoryDB,
 };
 exports.default = consultDB;

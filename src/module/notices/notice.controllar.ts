@@ -36,6 +36,23 @@ const getAllNotice = async (req: Request, res: Response) => {
   }
 };
 
+const getBannerNotice = async (req: Request, res: Response) => {
+  try {
+    const data = await noticeDB.getBannerNoticeIntoDB();
+    res.json({
+      status: true,
+      message: 'All notice got successfully',
+      data,
+    });
+  } catch (error) {
+    res.json({
+      status: false,
+      message: 'Notice is not get successfully',
+      error,
+    });
+  }
+};
+
 const getSingleNotice = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -117,6 +134,7 @@ const noticeController = {
   deleteSingleNotice,
   updateSingleByPatchNotice,
   updateSingleByPutNotice,
+  getBannerNotice,
 };
 
 export default noticeController;

@@ -66,9 +66,28 @@ const deleteConsult = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         });
     }
 });
+const getbycategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { cetagory } = req.params;
+        const data = yield consulting_services_1.default.messagesCategoryDB(cetagory);
+        res.json({
+            status: true,
+            message: 'All Notifection got successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'Notifection is not get successfully',
+            error,
+        });
+    }
+});
 const consultControllar = {
     createConsult,
     getConsult,
     deleteConsult,
+    getbycategory,
 };
 exports.default = consultControllar;

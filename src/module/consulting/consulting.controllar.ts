@@ -54,9 +54,29 @@ const deleteConsult = async (req: Request, res: Response) => {
   }
 };
 
+const getbycategory = async (req: Request, res: Response) => {
+  try {
+    const { cetagory } = req.params;
+
+    const data = await consultDB.messagesCategoryDB(cetagory);
+    res.json({
+      status: true,
+      message: 'All Notifection got successfully',
+      data,
+    });
+  } catch (error) {
+    res.json({
+      status: false,
+      message: 'Notifection is not get successfully',
+      error,
+    });
+  }
+};
+
 const consultControllar = {
   createConsult,
   getConsult,
   deleteConsult,
+  getbycategory,
 };
 export default consultControllar;

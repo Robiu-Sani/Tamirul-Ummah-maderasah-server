@@ -11,6 +11,15 @@ const getAllNoticeIntoDB = async () => {
   return result;
 };
 
+const getBannerNoticeIntoDB = async () => {
+  const result = await noticeModel
+    .find()
+    .sort({ _id: -1 }) // Sort in descending order (latest first)
+    .limit(4) // Limit to 4 documents
+    .select('title submissionDate'); // Select only `title` and `submissionDate`
+  return result;
+};
+
 const getSingleNoticeIntoDB = async (id: string | number) => {
   const result = await noticeModel.findById(id);
   return result;
@@ -49,6 +58,7 @@ const noticeDB = {
   createNoticeIntoDB,
   getAllNoticeIntoDB,
   getSingleNoticeIntoDB,
+  getBannerNoticeIntoDB,
   deleteSingleNoticeIntoDB,
   updateSingleByPatchNoticeIntoDB,
   updateSingleByPutNoticeIntoDB,
