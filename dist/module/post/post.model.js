@@ -14,6 +14,6 @@ const postSchema = new mongoose_1.default.Schema({
     postDescription: { type: String, required: true },
     isSelected: { type: Boolean, required: true, default: false },
     postImage: { type: String, required: false },
-});
+}, { timestamps: true });
 const PostModel = mongoose_1.default.model('posts', postSchema);
 exports.default = PostModel;

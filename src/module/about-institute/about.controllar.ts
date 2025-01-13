@@ -36,6 +36,23 @@ const getAllAbout = async (req: Request, res: Response) => {
   }
 };
 
+const getBannerData = async (req: Request, res: Response) => {
+  try {
+    const data = await AboutDB.bannerInfo();
+    res.json({
+      status: true,
+      message: 'All banner info successfully',
+      data,
+    });
+  } catch (error) {
+    res.json({
+      status: false,
+      message: 'banner info is not get successfully',
+      error,
+    });
+  }
+};
+
 const getSingleAbout = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -117,6 +134,7 @@ const AboutController = {
   deleteSingleAbout,
   updateSingleByPatchAbout,
   updateSingleByPutAbout,
+  getBannerData,
 };
 
 export default AboutController;

@@ -48,6 +48,23 @@ const getAllAbout = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         });
     }
 });
+const getBannerData = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield about_service_1.default.bannerInfo();
+        res.json({
+            status: true,
+            message: 'All banner info successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'banner info is not get successfully',
+            error,
+        });
+    }
+});
 const getSingleAbout = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = req.params;
@@ -129,5 +146,6 @@ const AboutController = {
     deleteSingleAbout,
     updateSingleByPatchAbout,
     updateSingleByPutAbout,
+    getBannerData,
 };
 exports.default = AboutController;

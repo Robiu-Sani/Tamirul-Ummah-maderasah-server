@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post('/create-about', AboutController.createAbout);
 router.get('/', AboutController.getAllAbout);
+router.get('/banner', AboutController.getBannerData);
 router.get('/single-about/:id', AboutController.getSingleAbout);
 router.delete('/delete-about/:id', AboutController.deleteSingleAbout);
 router.patch(
