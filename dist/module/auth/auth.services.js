@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const student_model_1 = __importDefault(require("../student/student.model"));
+const teacher_model_1 = __importDefault(require("../teacher/teacher.model"));
 const studentAuth = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = payload;
     // Find all students with the provided email
@@ -31,7 +32,29 @@ const studentAuth = (payload) => __awaiter(void 0, void 0, void 0, function* () 
     // Return the matched student data
     return matchedStudent;
 });
+const teacherAuth = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, password } = payload;
+    // Find the teacher with the provided email
+    const teacher = yield teacher_model_1.default.findOne({ email });
+    if (!teacher) {
+        throw new Error('Invalid email');
+    }
+    // Compare the provided password with the stored password
+    const teacherPassword = teacher.teacherPassword;
+    // Check if the passwords match
+    const isPasswordMatched = teacherPassword === password;
+    if (!isPasswordMatched) {
+        throw new Error('Invalid password');
+    }
+    // Check if the teacher has the correct type
+    if (teacher.type === 'blocked') {
+        throw new Error('You are blocked');
+    }
+    // Return the teacher data if authentication is successful
+    return teacher;
+});
 const authDB = {
     studentAuth,
+    teacherAuth,
 };
 exports.default = authDB;

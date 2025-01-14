@@ -75,6 +75,7 @@ const deleteSinglePost = async (req: Request, res: Response) => {
 const updateSingleByPatchPost = async (req: Request, res: Response) => {
   try {
     const payload = req.body;
+
     const { id } = req.params;
     const data = await PostDB.updateSingleByPatchPostIntoDB(id, payload);
     res.json({

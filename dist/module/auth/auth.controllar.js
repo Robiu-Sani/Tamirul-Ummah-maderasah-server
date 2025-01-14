@@ -33,7 +33,28 @@ const authStudentControllar = (req, res) => __awaiter(void 0, void 0, void 0, fu
         });
     }
 });
+const authTeacherControllar = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const payload = req.body;
+        const data = yield auth_services_1.default.teacherAuth(payload);
+        res.json({
+            status: true,
+            message: 'Login Successful',
+            data,
+        });
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }
+    catch (error) {
+        // Extract the error message to send to the frontend
+        res.json({
+            status: false,
+            message: 'Login is not Successful',
+            error: error.message || 'An error occurred',
+        });
+    }
+});
 const authControllar = {
     authStudentControllar,
+    authTeacherControllar,
 };
 exports.default = authControllar;

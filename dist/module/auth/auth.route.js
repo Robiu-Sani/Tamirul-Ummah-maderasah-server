@@ -8,4 +8,5 @@ const express_1 = __importDefault(require("express"));
 const auth_controllar_1 = __importDefault(require("./auth.controllar"));
 const router = express_1.default.Router();
 router.post('/student', auth_controllar_1.default.authStudentControllar);
+router.post('/teacher', auth_controllar_1.default.authTeacherControllar);
 exports.auth_route = router;
