@@ -24,6 +24,35 @@ const getAllPostIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
         .limit(100);
     return result;
 });
+const getPostTableData = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search = '', selectFilter = undefined, skip, limit = 50, }) {
+    const totalPosts = yield post_model_1.default.countDocuments();
+    const selectedPosts = yield post_model_1.default.countDocuments({ isSelected: true });
+    // Build query
+    const query = {};
+    if (search) {
+        query.$or = [
+            { postTitle: { $regex: search, $options: 'i' } }, // Search in postTitle
+            { 'studentID.studentNameEnglish': { $regex: search, $options: 'i' } }, // Search in studentNameEnglish
+        ];
+    }
+    if (selectFilter) {
+        query.isSelected = selectFilter === 'true';
+    }
+    const data = yield post_model_1.default.find(query)
+        .populate({
+        path: 'studentID',
+        select: 'studentNameEnglish', // Select only the required fields to avoid overpopulation
+    })
+        .select('studentID createdAt postTitle postDescription isSelected') // Select specific fields for posts
+        .limit(limit)
+        .skip(skip)
+        .lean(); // Use lean for better performance with read-only data
+    return {
+        totalPosts,
+        selectedPosts,
+        data,
+    };
+});
 const getSinglePostIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield post_model_1.default.findById(id).populate('studentID');
     return result;
@@ -47,5 +76,6 @@ const PostDB = {
     deleteSinglePostIntoDB,
     updateSingleByPatchPostIntoDB,
     updateSingleByPutPostIntoDB,
+    getPostTableData,
 };
 exports.default = PostDB;

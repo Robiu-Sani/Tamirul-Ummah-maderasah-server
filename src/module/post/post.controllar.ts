@@ -110,10 +110,42 @@ const updateSingleByPutPost = async (req: Request, res: Response) => {
   }
 };
 
+const getTablePost = async (req: Request, res: Response) => {
+  const { page = '1', search = '', selectFilter = '' } = req.query;
+  const limit = 50;
+  const skip = (Number(page) - 1) * limit;
+
+  try {
+    // Call the service function to fetch data
+    const data = await PostDB.getPostTableData({
+      search: String(search),
+      selectFilter: String(selectFilter),
+      skip,
+      limit,
+    });
+
+    // Respond with the fetched data
+    res.json({
+      status: true,
+      message: 'All posts retrieved successfully',
+      data,
+    });
+  } catch (error) {
+    // Respond with an error
+    console.error('Error fetching posts:', error);
+    res.status(500).json({
+      status: false,
+      message: 'Post data retrieval failed',
+      error: error instanceof Error ? error.message : error,
+    });
+  }
+};
+
 const PostController = {
   createPost,
   getAllPost,
   getSinglePost,
+  getTablePost,
   deleteSinglePost,
   updateSingleByPatchPost,
   updateSingleByPutPost,
