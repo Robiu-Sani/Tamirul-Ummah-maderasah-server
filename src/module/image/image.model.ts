@@ -6,7 +6,7 @@ const imageSchema = new mongoose.Schema<imageInterface>(
     image: { type: String, required: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
-    year: {
+    date: {
       type: String,
       required: true,
       default: () => new Date().getFullYear().toString(),
