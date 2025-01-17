@@ -25,6 +25,7 @@ const authTeacherControllar = async (req: Request, res: Response) => {
   try {
     const payload = req.body;
     const data = await authDB.teacherAuth(payload);
+
     res.json({
       status: true,
       message: 'Login Successful',

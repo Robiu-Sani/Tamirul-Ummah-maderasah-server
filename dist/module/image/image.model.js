@@ -8,7 +8,7 @@ const imageSchema = new mongoose_1.default.Schema({
     image: { type: String, required: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
-    year: {
+    date: {
         type: String,
         required: true,
         default: () => new Date().getFullYear().toString(),

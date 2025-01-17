@@ -174,3 +174,22 @@ exports.resultDB = {
     getResultByExamName,
     UpdateResultIntoDB,
 };
+// separate data to delete data
+const node_cron_1 = __importDefault(require("node-cron"));
+// Function to delete data on 1st February every year
+const scheduleAnnualDeletion = () => {
+    // Schedule the task to run at midnight on February 1st every year
+    node_cron_1.default.schedule('0 0 1 2 *', () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            console.log('Running scheduled job to delete old data...');
+            // Delete all data from the results collection
+            const result = yield result_model_1.default.deleteMany({});
+            console.log(`Deleted ${result.deletedCount} records successfully.`);
+        }
+        catch (error) {
+            console.error('Error occurred while deleting data:', error);
+        }
+    }));
+};
+// Call the function to schedule the job
+scheduleAnnualDeletion();

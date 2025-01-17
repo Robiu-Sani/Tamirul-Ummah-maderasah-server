@@ -195,3 +195,25 @@ export const resultDB = {
   getResultByExamName,
   UpdateResultIntoDB,
 };
+
+// separate data to delete data
+import cron from 'node-cron';
+
+// Function to delete data on 1st February every year
+const scheduleAnnualDeletion = () => {
+  // Schedule the task to run at midnight on February 1st every year
+  cron.schedule('0 0 1 2 *', async () => {
+    try {
+      console.log('Running scheduled job to delete old data...');
+
+      // Delete all data from the results collection
+      const result = await resultModel.deleteMany({});
+      console.log(`Deleted ${result.deletedCount} records successfully.`);
+    } catch (error) {
+      console.error('Error occurred while deleting data:', error);
+    }
+  });
+};
+
+// Call the function to schedule the job
+scheduleAnnualDeletion();
