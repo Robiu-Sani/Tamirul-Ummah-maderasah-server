@@ -18,10 +18,7 @@ const createPostIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function
     return result;
 });
 const getAllPostIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield post_model_1.default.find()
-        .populate('studentID')
-        .sort({ _id: -1 }) // Sort by _id in descending order
-        .limit(100);
+    const result = yield post_model_1.default.find().populate('studentID').sort({ _id: -1 }); // Sort by _id in descending order
     return result;
 });
 const getPostTableData = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search = '', selectFilter = undefined, skip, limit = 50, }) {

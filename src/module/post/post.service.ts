@@ -7,10 +7,7 @@ const createPostIntoDB = async (payload: PostDetails) => {
 };
 
 const getAllPostIntoDB = async () => {
-  const result = await PostModel.find()
-    .populate('studentID')
-    .sort({ _id: -1 }) // Sort by _id in descending order
-    .limit(100);
+  const result = await PostModel.find().populate('studentID').sort({ _id: -1 }); // Sort by _id in descending order
   return result;
 };
 
