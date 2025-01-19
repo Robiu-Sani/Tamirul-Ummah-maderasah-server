@@ -26,7 +26,7 @@ const updateGainIntoDB = (payload, id) => __awaiter(void 0, void 0, void 0, func
     return result;
 });
 const deleteGainIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield gain_model_1.default.findOneAndDelete({ id });
+    const result = yield gain_model_1.default.findByIdAndDelete(id);
     return result;
 });
 const gainDB = {

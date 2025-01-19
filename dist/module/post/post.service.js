@@ -21,6 +21,15 @@ const getAllPostIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield post_model_1.default.find().populate('studentID').sort({ _id: -1 }); // Sort by _id in descending order
     return result;
 });
+const getReportPost = () => __awaiter(void 0, void 0, void 0, function* () {
+    const result = yield post_model_1.default.find({
+        reports: {
+            $exists: true,
+            $ne: '',
+        },
+    }).select('postTitle postImage reports');
+    return result;
+});
 const getPostTableData = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search = '', selectFilter = undefined, skip, limit = 50, }) {
     const totalPosts = yield post_model_1.default.countDocuments();
     const selectedPosts = yield post_model_1.default.countDocuments({ isSelected: true });
@@ -74,5 +83,6 @@ const PostDB = {
     updateSingleByPatchPostIntoDB,
     updateSingleByPutPostIntoDB,
     getPostTableData,
+    getReportPost,
 };
 exports.default = PostDB;

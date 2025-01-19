@@ -31,6 +31,15 @@ const releaseSchema = new mongoose.Schema<releaseInterface>(
   { timestamps: true },
 );
 
+releaseSchema.pre('save', async function (next) {
+  const existingData = await ReleaseModel.findOne();
+  if (existingData) {
+    // Replace the existing document with the new data
+    await ReleaseModel.deleteMany(); // Remove all existing documents
+  }
+  next();
+});
+
 // Create the model from the schema
-const Release = mongoose.model('Release', releaseSchema);
-export default Release;
+const ReleaseModel = mongoose.model('Release', releaseSchema);
+export default ReleaseModel;

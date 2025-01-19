@@ -31,6 +31,23 @@ const createPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         });
     }
 });
+const getAllreportPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const data = yield post_service_1.default.getReportPost();
+        res.json({
+            status: true,
+            message: 'All Post got successfully',
+            data,
+        });
+    }
+    catch (error) {
+        res.json({
+            status: false,
+            message: 'Post is not get successfully',
+            error,
+        });
+    }
+});
 const getAllPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield post_service_1.default.getAllPostIntoDB();
@@ -159,5 +176,6 @@ const PostController = {
     deleteSinglePost,
     updateSingleByPatchPost,
     updateSingleByPutPost,
+    getAllreportPost,
 };
 exports.default = PostController;

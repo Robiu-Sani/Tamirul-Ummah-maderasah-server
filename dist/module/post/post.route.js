@@ -10,6 +10,7 @@ const router = express_1.default.Router();
 router.post('/create-post', post_controllar_1.default.createPost);
 router.get('/', post_controllar_1.default.getAllPost);
 router.get('/table', post_controllar_1.default.getTablePost);
+router.get('/report', post_controllar_1.default.getAllreportPost);
 router.get('/single-post/:id', post_controllar_1.default.getSinglePost);
 router.delete('/delete-post/:id', post_controllar_1.default.deleteSinglePost);
 router.patch('/update-single-post-by-patch/:id', post_controllar_1.default.updateSingleByPatchPost);
