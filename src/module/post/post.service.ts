@@ -11,6 +11,16 @@ const getAllPostIntoDB = async () => {
   return result;
 };
 
+const getReportPost = async () => {
+  const result = await PostModel.find({
+    reports: {
+      $exists: true,
+      $ne: '',
+    },
+  }).select('postTitle postImage reports');
+  return result;
+};
+
 const getPostTableData = async ({
   search = '',
   selectFilter = undefined,
@@ -96,5 +106,6 @@ const PostDB = {
   updateSingleByPatchPostIntoDB,
   updateSingleByPutPostIntoDB,
   getPostTableData,
+  getReportPost,
 };
 export default PostDB;

@@ -19,6 +19,23 @@ const createPost = async (req: Request, res: Response) => {
   }
 };
 
+const getAllreportPost = async (req: Request, res: Response) => {
+  try {
+    const data = await PostDB.getReportPost();
+    res.json({
+      status: true,
+      message: 'All Post got successfully',
+      data,
+    });
+  } catch (error) {
+    res.json({
+      status: false,
+      message: 'Post is not get successfully',
+      error,
+    });
+  }
+};
+
 const getAllPost = async (req: Request, res: Response) => {
   try {
     const data = await PostDB.getAllPostIntoDB();
@@ -150,6 +167,7 @@ const PostController = {
   deleteSinglePost,
   updateSingleByPatchPost,
   updateSingleByPutPost,
+  getAllreportPost,
 };
 
 export default PostController;

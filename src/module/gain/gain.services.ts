@@ -24,7 +24,7 @@ const updateGainIntoDB = async (
 };
 
 const deleteGainIntoDB = async (id: string | number) => {
-  const result = await gainModel.findOneAndDelete({ id });
+  const result = await gainModel.findByIdAndDelete(id);
   return result;
 };
 
