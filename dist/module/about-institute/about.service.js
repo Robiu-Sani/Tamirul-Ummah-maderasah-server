@@ -12,6 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const mongoose_1 = __importDefault(require("mongoose"));
 const consulting_model_1 = __importDefault(require("../consulting/consulting.model"));
 const student_model_1 = __importDefault(require("../student/student.model"));
 const teacher_model_1 = __importDefault(require("../teacher/teacher.model"));
@@ -41,9 +42,15 @@ const updateSingleByPutAboutIntoDB = (id, info) => __awaiter(void 0, void 0, voi
     return result;
 });
 const bannerInfo = () => __awaiter(void 0, void 0, void 0, function* () {
+    // Import ObjectId from mongoose
+    const ObjectId = mongoose_1.default.Types.ObjectId;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const teacherquery = {
+        _id: { $ne: new ObjectId('678fd6cc7ea4d5600640e9ba') }, // Exclude the specific ID
+    };
     const totalUser = yield student_model_1.default.countDocuments();
     const totalStudent = yield student_model_1.default.countDocuments({ isRunning: true });
-    const totalTeacher = yield teacher_model_1.default.countDocuments();
+    const totalTeacher = yield teacher_model_1.default.countDocuments(teacherquery);
     const totalMessage = yield consulting_model_1.default.countDocuments();
     const classes = yield student_model_1.default.aggregate([
         {
@@ -69,6 +76,9 @@ const bannerInfo = () => __awaiter(void 0, void 0, void 0, function* () {
     ]);
     const shifts = yield teacher_model_1.default.aggregate([
         {
+            $match: teacherquery, // Use the teacherquery for filtering
+        },
+        {
             $group: {
                 _id: '$shift', // Group by shift
                 totalTeachers: { $sum: 1 }, // Total teachers in each shift
@@ -84,6 +94,9 @@ const bannerInfo = () => __awaiter(void 0, void 0, void 0, function* () {
     ]);
     // Group data by residentialStatus
     const residentialStatuses = yield teacher_model_1.default.aggregate([
+        {
+            $match: teacherquery, // Use the teacherquery for filtering
+        },
         {
             $group: {
                 _id: '$residentialStatus', // Group by residentialStatus

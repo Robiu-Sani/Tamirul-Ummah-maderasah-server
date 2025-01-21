@@ -1,3 +1,4 @@
+import mongoose from 'mongoose';
 import consoltModel from '../consulting/consulting.model';
 import StudentModel from '../student/student.model';
 import TeacherModel from '../teacher/teacher.model';
@@ -50,10 +51,20 @@ const updateSingleByPutAboutIntoDB = async (
 };
 
 const bannerInfo = async () => {
+  // Import ObjectId from mongoose
+
+  const ObjectId = mongoose.Types.ObjectId;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const teacherquery: Record<string, any> = {
+    _id: { $ne: new ObjectId('678fd6cc7ea4d5600640e9ba') }, // Exclude the specific ID
+  };
+
   const totalUser = await StudentModel.countDocuments();
   const totalStudent = await StudentModel.countDocuments({ isRunning: true });
-  const totalTeacher = await TeacherModel.countDocuments();
+  const totalTeacher = await TeacherModel.countDocuments(teacherquery);
   const totalMessage = await consoltModel.countDocuments();
+
   const classes = await StudentModel.aggregate([
     {
       $match: { isRunning: true },
@@ -79,6 +90,9 @@ const bannerInfo = async () => {
 
   const shifts = await TeacherModel.aggregate([
     {
+      $match: teacherquery, // Use the teacherquery for filtering
+    },
+    {
       $group: {
         _id: '$shift', // Group by shift
         totalTeachers: { $sum: 1 }, // Total teachers in each shift
@@ -95,6 +109,9 @@ const bannerInfo = async () => {
 
   // Group data by residentialStatus
   const residentialStatuses = await TeacherModel.aggregate([
+    {
+      $match: teacherquery, // Use the teacherquery for filtering
+    },
     {
       $group: {
         _id: '$residentialStatus', // Group by residentialStatus
