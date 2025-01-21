@@ -77,6 +77,15 @@ const institutionSchema = new mongoose.Schema<InstitutionData>(
   },
 );
 
+institutionSchema.pre('save', async function (next) {
+  const existingData = await InstitutionModel.findOne();
+  if (existingData) {
+    // Replace the existing document with the new data
+    await InstitutionModel.deleteMany(); // Remove all existing documents
+  }
+  next();
+});
+
 const InstitutionModel = mongoose.model('Institution', institutionSchema);
 
 export default InstitutionModel;

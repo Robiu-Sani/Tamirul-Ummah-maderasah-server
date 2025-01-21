@@ -34,5 +34,14 @@ const FeesStructureSchema = new mongoose.Schema<FeesStructure>(
   },
 );
 
+FeesStructureSchema.pre('save', async function (next) {
+  const existingData = await FeesStructureModel.findOne();
+  if (existingData) {
+    // Replace the existing document with the new data
+    await FeesStructureModel.deleteMany(); // Remove all existing documents
+  }
+  next();
+});
+
 const FeesStructureModel = mongoose.model('fee-structure', FeesStructureSchema);
 export default FeesStructureModel;

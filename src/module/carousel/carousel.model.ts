@@ -59,6 +59,15 @@ const slideSchema = new mongoose.Schema<SlideData>(
   },
 );
 
+slideSchema.pre('save', async function (next) {
+  const existingData = await SlideModel.findOne();
+  if (existingData) {
+    // Replace the existing document with the new data
+    await SlideModel.deleteMany(); // Remove all existing documents
+  }
+  next();
+});
+
 const SlideModel = mongoose.model('Slide', slideSchema);
 
 export default SlideModel;
