@@ -60,7 +60,9 @@ const getTeacherTableDataDB = async ({
 }) => {
   // Build the query object based on filters
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const query: Record<string, any> = {};
+  const query: Record<string, any> = {
+    _id: { $ne: '678fd6cc7ea4d5600640e9ba' }, // Exclude the specific ID
+  };
 
   if (search) {
     query.teacherName = { $regex: search, $options: 'i' };
@@ -70,31 +72,34 @@ const getTeacherTableDataDB = async ({
     query.shift = classFilter;
   }
 
-  // Fetch students, count total students, and fetch unique classes
-  const [teachers, allTeachers] = await Promise.all([
+  // Fetch teachers with pagination
+  const [teachers, totalTeachers, uniqueClasses] = await Promise.all([
     TeacherModel.find(query)
       .select(
         'bloodGroup phone gender email type residentialStatus teacherName shift',
       )
       .skip(skip)
       .limit(limit),
-    TeacherModel.find(query).select('shift'),
+    TeacherModel.countDocuments(query), // Proper count for total teachers
+    TeacherModel.distinct('shift', query), // Fetch unique classes
   ]);
 
   const reversedTeachers = teachers.reverse();
 
-  const totalMale = await TeacherModel.countDocuments({ gender: 'male' });
-  const totalFemale = await TeacherModel.countDocuments({ gender: 'female' });
-  const uniqueClasses = await TeacherModel.distinct('shift');
-
-  // Count total students based on filters
-  const totalTeachers = allTeachers.length;
+  const totalMale = await TeacherModel.countDocuments({
+    ...query,
+    gender: 'male',
+  });
+  const totalFemale = await TeacherModel.countDocuments({
+    ...query,
+    gender: 'female',
+  });
 
   const totalPages = Math.ceil(totalTeachers / limit);
 
   // Return the final result
   return {
-    totalTeachers,
+    totalTeachers, // Total teachers count based on filters
     totalMale,
     totalFemale,
     totalPages,
@@ -105,7 +110,11 @@ const getTeacherTableDataDB = async ({
 };
 
 const getClientSiteTeacher = async () => {
-  const result = await TeacherModel.find().select(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const query: Record<string, any> = {
+    _id: { $ne: '678fd6cc7ea4d5600640e9ba' }, // Exclude the specific ID
+  };
+  const result = await TeacherModel.find(query).select(
     'teacherImage phone subject teacherName',
   );
   return result;

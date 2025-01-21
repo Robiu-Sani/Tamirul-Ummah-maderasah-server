@@ -88,6 +88,7 @@ const studentSchema = new mongoose_1.default.Schema({
         unique: true,
     },
     isRunning: { type: Boolean, required: true, default: true },
+    monthlyFee: { type: Number, required: true, default: 750 },
     type: {
         type: String,
         default: 'student',

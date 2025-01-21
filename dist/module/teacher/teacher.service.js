@@ -40,31 +40,31 @@ const updateSingleByPutTeacherIntoDB = (id, info) => __awaiter(void 0, void 0, v
 const getTeacherTableDataDB = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search = '', classFilter = '', limit, skip, }) {
     // Build the query object based on filters
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const query = {};
+    const query = {
+        _id: { $ne: '678fd6cc7ea4d5600640e9ba' }, // Exclude the specific ID
+    };
     if (search) {
         query.teacherName = { $regex: search, $options: 'i' };
     }
     if (classFilter) {
         query.shift = classFilter;
     }
-    // Fetch students, count total students, and fetch unique classes
-    const [teachers, allTeachers] = yield Promise.all([
+    // Fetch teachers with pagination
+    const [teachers, totalTeachers, uniqueClasses] = yield Promise.all([
         teacher_model_1.default.find(query)
             .select('bloodGroup phone gender email type residentialStatus teacherName shift')
             .skip(skip)
             .limit(limit),
-        teacher_model_1.default.find(query).select('shift'),
+        teacher_model_1.default.countDocuments(query), // Proper count for total teachers
+        teacher_model_1.default.distinct('shift', query), // Fetch unique classes
     ]);
     const reversedTeachers = teachers.reverse();
-    const totalMale = yield teacher_model_1.default.countDocuments({ gender: 'male' });
-    const totalFemale = yield teacher_model_1.default.countDocuments({ gender: 'female' });
-    const uniqueClasses = yield teacher_model_1.default.distinct('shift');
-    // Count total students based on filters
-    const totalTeachers = allTeachers.length;
+    const totalMale = yield teacher_model_1.default.countDocuments(Object.assign(Object.assign({}, query), { gender: 'male' }));
+    const totalFemale = yield teacher_model_1.default.countDocuments(Object.assign(Object.assign({}, query), { gender: 'female' }));
     const totalPages = Math.ceil(totalTeachers / limit);
     // Return the final result
     return {
-        totalTeachers,
+        totalTeachers, // Total teachers count based on filters
         totalMale,
         totalFemale,
         totalPages,
@@ -74,7 +74,11 @@ const getTeacherTableDataDB = (_a) => __awaiter(void 0, [_a], void 0, function* 
     };
 });
 const getClientSiteTeacher = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield teacher_model_1.default.find().select('teacherImage phone subject teacherName');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const query = {
+        _id: { $ne: '678fd6cc7ea4d5600640e9ba' }, // Exclude the specific ID
+    };
+    const result = yield teacher_model_1.default.find(query).select('teacherImage phone subject teacherName');
     return result;
 });
 const TeacherDB = {

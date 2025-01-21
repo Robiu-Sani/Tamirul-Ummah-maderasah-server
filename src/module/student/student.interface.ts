@@ -20,5 +20,6 @@ export interface StudentInfo {
   classRoll: number;
   type: 'student' | 'blocked';
   isRunning: boolean;
+  monthlyFee: number;
   password: string | number | undefined;
 }
