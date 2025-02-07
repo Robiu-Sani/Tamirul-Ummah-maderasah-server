@@ -27,7 +27,7 @@ const getImagesIntoDB = (skip) => __awaiter(void 0, void 0, void 0, function* ()
     return data;
 });
 const getClientImagesIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
-    const result = (yield image_model_1.default.find().limit(12)).reverse();
+    const result = yield image_model_1.default.find().sort({ _id: -1 }).limit(12);
     return result;
 });
 const deleteImageIntoDB = (id) => __awaiter(void 0, void 0, void 0, function* () {

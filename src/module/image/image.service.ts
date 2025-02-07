@@ -17,7 +17,7 @@ const getImagesIntoDB = async (skip: number) => {
 };
 
 const getClientImagesIntoDB = async () => {
-  const result = (await imageModel.find().limit(12)).reverse();
+  const result = await imageModel.find().sort({ _id: -1 }).limit(12);
   return result;
 };
 
