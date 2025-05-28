@@ -26,6 +26,7 @@ const auth_route_1 = require("./module/auth/auth.route");
 const gain_router_1 = require("./module/gain/gain.router");
 const image_route_1 = require("./module/image/image.route");
 const release_route_1 = require("./module/student/result/release/release.route");
+// import { user_router } from './module/user/user.router';
 const app = (0, express_1.default)();
 //parser
 app.use(express_1.default.json());
@@ -52,6 +53,7 @@ app.use('/api/v1/consult', consulting_route_1.consult_router);
 app.use('/api/v1/gain', gain_router_1.gain_router);
 app.use('/api/v1/image', image_route_1.image_router);
 app.use('/api/v1/release', release_route_1.release_route);
+// app.use('/api/v1/user', user_router);
 app.get('/', (req, res) => {
     res.send('Tamirul Ummah Maderasah Server');
 });

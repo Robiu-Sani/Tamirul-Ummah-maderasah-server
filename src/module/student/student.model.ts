@@ -11,6 +11,7 @@ const studentSchema = new mongoose.Schema<StudentInfo>(
       type: String,
       trim: true,
     },
+
     birthCertificate: {
       type: String,
       trim: true,
@@ -51,6 +52,7 @@ const studentSchema = new mongoose.Schema<StudentInfo>(
       type: String,
       trim: true,
     },
+
     image: {
       type: String,
       default:
@@ -85,13 +87,18 @@ const studentSchema = new mongoose.Schema<StudentInfo>(
       type: mongoose.Schema.Types.Mixed,
       trim: true,
       default: generateRandomPassword,
-      unique: true,
     },
+
     isRunning: { type: Boolean, required: true, default: true },
     monthlyFee: { type: Number, required: true, default: 750 },
     type: {
       type: String,
       default: 'student',
+    },
+    studentId: {
+      type: String,
+      trim: true,
+      unique: true,
     },
   },
   {

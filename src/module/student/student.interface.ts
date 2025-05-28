@@ -8,6 +8,7 @@ export interface StudentInfo {
   fathersName: string;
   gender: string;
   height: string;
+  studentId: string;
   // identityEmail: string;
   identityMark: string;
   image: string;
