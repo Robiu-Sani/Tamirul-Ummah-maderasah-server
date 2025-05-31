@@ -2,7 +2,32 @@ import UserModel from './user.model';
 import { UserInfo } from './user.interface';
 
 export const createUser = async (user: UserInfo) => {
-  const newUser = await UserModel.create(user);
+  // Get current year
+  const currentYear = new Date().getFullYear();
+
+  // Find the last user with an ID starting with the current year
+  const lastUser = await UserModel.findOne(
+    { id: { $regex: `^${currentYear}` } },
+    {},
+    { sort: { id: -1 } },
+  );
+
+  let newId;
+  if (lastUser && lastUser.id) {
+    // Extract the serial number part and increment
+    const lastSerial = parseInt(lastUser.id.toString().slice(4), 10);
+    newId = currentYear * 10000 + lastSerial + 1;
+  } else {
+    // First user of the year
+    newId = currentYear * 10000 + 1;
+  }
+
+  // Create new user with the generated ID
+  const newUser = await UserModel.create({
+    ...user,
+    id: newId,
+  });
+
   return newUser;
 };
 

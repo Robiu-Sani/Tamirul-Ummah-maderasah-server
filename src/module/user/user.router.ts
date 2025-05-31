@@ -14,7 +14,8 @@ import {
 const router = express.Router();
 
 // User CRUD routes
-router.route('/').post(createUserController).get(getAllUsersController);
+router.post('/', createUserController);
+router.get('/', getAllUsersController);
 
 // Search routes
 router.get('/search', getUserByNameController as express.RequestHandler);

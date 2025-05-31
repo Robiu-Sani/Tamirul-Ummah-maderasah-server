@@ -15,7 +15,22 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.hardDeleteUser = exports.getUserByName = exports.getUserByRole = exports.getAllUsers = exports.deleteUser = exports.updateUser = exports.getByMongooseId = exports.getUserById = exports.createUser = void 0;
 const user_model_1 = __importDefault(require("./user.model"));
 const createUser = (user) => __awaiter(void 0, void 0, void 0, function* () {
-    const newUser = yield user_model_1.default.create(user);
+    // Get current year
+    const currentYear = new Date().getFullYear();
+    // Find the last user with an ID starting with the current year
+    const lastUser = yield user_model_1.default.findOne({ id: { $regex: `^${currentYear}` } }, {}, { sort: { id: -1 } });
+    let newId;
+    if (lastUser && lastUser.id) {
+        // Extract the serial number part and increment
+        const lastSerial = parseInt(lastUser.id.toString().slice(4), 10);
+        newId = currentYear * 10000 + lastSerial + 1;
+    }
+    else {
+        // First user of the year
+        newId = currentYear * 10000 + 1;
+    }
+    // Create new user with the generated ID
+    const newUser = yield user_model_1.default.create(Object.assign(Object.assign({}, user), { id: newId }));
     return newUser;
 });
 exports.createUser = createUser;

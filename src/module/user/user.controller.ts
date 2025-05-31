@@ -4,7 +4,7 @@ import {
   createUser,
   deleteUser,
   getAllUsers,
-  getByMongooseId, // Changed from getbymongooseId to match the service fix
+  getByMongooseId,
   getUserById,
   getUserByName,
   getUserByRole,

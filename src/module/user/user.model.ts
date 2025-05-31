@@ -1,6 +1,10 @@
 import { UserInfo } from './user.interface';
 import mongoose from 'mongoose';
 
+const generateRandomPassword = () => {
+  return Math.floor(10000000 + Math.random() * 90000000).toString();
+};
+
 const userSchema = new mongoose.Schema<UserInfo>(
   {
     name: {
@@ -22,6 +26,7 @@ const userSchema = new mongoose.Schema<UserInfo>(
     password: {
       type: String,
       required: true,
+      default: generateRandomPassword,
     },
     image: {
       type: String,
@@ -31,6 +36,10 @@ const userSchema = new mongoose.Schema<UserInfo>(
     isDeleted: {
       type: Boolean,
       default: false,
+    },
+    class: {
+      type: String,
+      default: 'teacher',
     },
   },
   { timestamps: true },

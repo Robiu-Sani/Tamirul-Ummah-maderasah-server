@@ -4,5 +4,6 @@ export interface UserInfo {
   role: 'admin' | 'teacher' | 'student' | 'parent';
   password: string;
   image?: string;
+  class?: string;
   isDeleted?: boolean;
 }

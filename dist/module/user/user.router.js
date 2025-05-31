@@ -8,7 +8,8 @@ const express_1 = __importDefault(require("express"));
 const user_controller_1 = require("./user.controller");
 const router = express_1.default.Router();
 // User CRUD routes
-router.route('/').post(user_controller_1.createUserController).get(user_controller_1.getAllUsersController);
+router.post('/', user_controller_1.createUserController);
+router.get('/', user_controller_1.getAllUsersController);
 // Search routes
 router.get('/search', user_controller_1.getUserByNameController);
 router.get('/role/:role', user_controller_1.getUserByRoleController);

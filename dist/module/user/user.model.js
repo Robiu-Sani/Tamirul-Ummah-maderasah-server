@@ -4,6 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
+const generateRandomPassword = () => {
+    return Math.floor(10000000 + Math.random() * 90000000).toString();
+};
 const userSchema = new mongoose_1.default.Schema({
     name: {
         type: String,
@@ -24,6 +27,7 @@ const userSchema = new mongoose_1.default.Schema({
     password: {
         type: String,
         required: true,
+        default: generateRandomPassword,
     },
     image: {
         type: String,
@@ -32,6 +36,10 @@ const userSchema = new mongoose_1.default.Schema({
     isDeleted: {
         type: Boolean,
         default: false,
+    },
+    class: {
+        type: String,
+        default: 'teacher',
     },
 }, { timestamps: true });
 const UserModel = mongoose_1.default.model('User', userSchema);
