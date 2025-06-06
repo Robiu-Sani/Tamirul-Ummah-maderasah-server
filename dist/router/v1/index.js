@@ -27,6 +27,8 @@ const gain_router_1 = require("../../module/gain/gain.router");
 const image_route_1 = require("../../module/image/image.route");
 const release_route_1 = require("../../module/student/result/release/release.route");
 const user_router_1 = require("../../module/user/user.router");
+const class_router_1 = require("../../module/class/class.router");
+const subject_router_1 = require("../../module/subject/subject.router");
 const router = express_1.default.Router();
 const moduleRoute = [
     {
@@ -116,6 +118,14 @@ const moduleRoute = [
     {
         path: '/user',
         route: user_router_1.user_router,
+    },
+    {
+        path: '/class',
+        route: class_router_1.class_rouote,
+    },
+    {
+        path: '/subject',
+        route: subject_router_1.subject_router,
     },
 ];
 moduleRoute.forEach((route) => router.use(route.path, route.route));

@@ -11,6 +11,7 @@ const modeltest_router_1 = require("../../v2-module/modeltest/modeltest.router")
 const test_router_1 = require("../../v2-module/test/test.router");
 const admition_router_1 = require("../../v2-module/admition/admition.router");
 const Healf_router_1 = require("../../v2-module/Healf/Healf.router");
+const final_router_1 = require("../../v2-module/final/final.router");
 const router = express_1.default.Router();
 const moduleRoute = [
     {
@@ -36,6 +37,10 @@ const moduleRoute = [
     {
         path: '/healf-year-exam',
         route: Healf_router_1.healf_year_exam,
+    },
+    {
+        path: '/final-exam',
+        route: final_router_1.final_exam,
     },
 ];
 moduleRoute.forEach((route) => router.use(route.path, route.route));

@@ -5,6 +5,7 @@ import { modeltest } from '../../v2-module/modeltest/modeltest.router';
 import { test_tutiral } from '../../v2-module/test/test.router';
 import { admition_tutiral } from '../../v2-module/admition/admition.router';
 import { healf_year_exam } from '../../v2-module/Healf/Healf.router';
+import { final_exam } from '../../v2-module/final/final.router';
 
 const router = express.Router();
 
@@ -32,6 +33,10 @@ const moduleRoute = [
   {
     path: '/healf-year-exam',
     route: healf_year_exam,
+  },
+  {
+    path: '/final-exam',
+    route: final_exam,
   },
 ];
 

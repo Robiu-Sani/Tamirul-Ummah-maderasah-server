@@ -21,6 +21,8 @@ import { gain_router } from '../../module/gain/gain.router';
 import { image_router } from '../../module/image/image.route';
 import { release_route } from '../../module/student/result/release/release.route';
 import { user_router } from '../../module/user/user.router';
+import { class_rouote } from '../../module/class/class.router';
+import { subject_router } from '../../module/subject/subject.router';
 
 const router = express.Router();
 
@@ -112,6 +114,14 @@ const moduleRoute = [
   {
     path: '/user',
     route: user_router,
+  },
+  {
+    path: '/class',
+    route: class_rouote,
+  },
+  {
+    path: '/subject',
+    route: subject_router,
   },
 ];
 
