@@ -7,25 +7,39 @@ const generateRandomPassword = () => {
 
 const TeacherDetailsSchema = new mongoose.Schema<TeacherDetails>(
   {
-    address: { type: String, required: true },
-    bloodGroup: { type: String, required: true },
-    dateOfBirth: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    experience: { type: String, required: false },
+    address: { type: String, required: true, default: 'not provided yet' },
+    id: { type: String, required: true, unique: true, trim: true },
+    bloodGroup: { type: String, required: true, default: 'not provided yet' },
+    dateOfBirth: { type: String, required: true, default: 'not provided yet' },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      default: 'not provided yet',
+    },
+    experience: { type: String, required: false, default: 'not provided yet' },
     nidNumber: { type: Number, required: false },
     teacherImage: {
       type: String,
       default:
         'https://i.postimg.cc/8Ph6x2Kc/115-1150152-default-profile-picture-avatar-png-green.png',
     },
-    gender: { type: String, required: true },
-    phone: { type: String, required: true },
-    qualification: { type: String, required: true },
-    residentialStatus: { type: String, required: false },
-    section: { type: String, required: true },
-    shift: { type: String, required: true },
-    subject: { type: String, required: true },
-    teacherName: { type: String, required: true },
+    gender: { type: String, required: true, default: 'not provided yet' },
+    phone: { type: String, required: true, default: 'not provided yet' },
+    qualification: {
+      type: String,
+      required: true,
+      default: 'not provided yet',
+    },
+    residentialStatus: {
+      type: String,
+      required: false,
+      default: 'not provided yet',
+    },
+    section: { type: String, required: true, default: 'not provided yet' },
+    shift: { type: String, required: true, default: 'not provided yet' },
+    subject: { type: String, required: true, default: 'not provided yet' },
+    teacherName: { type: String, required: true, default: 'not provided yet' },
     type: { type: String, required: true, default: 'teacher' },
     teacherPassword: {
       type: mongoose.Schema.Types.Mixed,

@@ -13,14 +13,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const post_model_1 = __importDefault(require("../post/post.model"));
+const user_model_1 = __importDefault(require("../user/user.model"));
 const father_model_1 = __importDefault(require("./father/father.model"));
 const gairdean_model_1 = __importDefault(require("./gairdean/gairdean.model"));
 const mother_model_1 = __importDefault(require("./mother/mother.model"));
 const result_model_1 = __importDefault(require("./result/result.model"));
 const student_model_1 = __importDefault(require("./student.model"));
 const createStudentIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const currentYear = new Date().getFullYear().toString();
+    const yearPrefix = currentYear;
+    const lastStudentOfYear = yield student_model_1.default.findOne({
+        id: { $regex: `^${yearPrefix}` },
+    }).sort({ createdAt: -1 });
+    let newSerialNumber = 1;
+    if (lastStudentOfYear && lastStudentOfYear.id) {
+        const lastId = lastStudentOfYear.id;
+        const lastSerial = parseInt(lastId.slice(4), 10);
+        newSerialNumber = lastSerial + 1;
+    }
+    const serialPart = newSerialNumber.toString().padStart(4, '0');
+    const studentId = `${yearPrefix}${serialPart}`;
+    payload.id = studentId;
+    const password = Math.floor(10000000 + Math.random() * 90000000).toString();
+    payload.password = password;
+    const userData = {
+        name: payload.studentNameEnglish,
+        id: studentId,
+        role: 'student',
+        password,
+        image: payload.image || '',
+        class: payload.class || '',
+    };
+    // Create the user in the UserModel
+    const user = yield user_model_1.default.create(userData);
     const result = yield student_model_1.default.create(payload);
-    return result;
+    return { result, user };
 });
 const getAllStudentIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield student_model_1.default.find();

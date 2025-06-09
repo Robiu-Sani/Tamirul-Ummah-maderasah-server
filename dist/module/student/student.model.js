@@ -11,38 +11,53 @@ const studentSchema = new mongoose_1.default.Schema({
     address: {
         type: String,
         trim: true,
+        default: 'not provided yet',
+    },
+    id: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
     },
     birthCertificate: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     bloodGroup: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     class: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     dateOfBirth: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     email: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     fathersName: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     gender: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     height: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     // identityEmail: {
     //   type: String,
@@ -51,6 +66,7 @@ const studentSchema = new mongoose_1.default.Schema({
     identityMark: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     image: {
         type: String,
@@ -59,27 +75,33 @@ const studentSchema = new mongoose_1.default.Schema({
     mothersName: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     residentialStatus: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     section: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     studentNameBangla: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     studentNameEnglish: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     classRoll: { type: Number, required: false, default: 0 },
     weight: {
         type: String,
         trim: true,
+        default: 'not provided yet',
     },
     password: {
         type: mongoose_1.default.Schema.Types.Mixed,
@@ -96,6 +118,7 @@ const studentSchema = new mongoose_1.default.Schema({
         type: String,
         trim: true,
         unique: true,
+        default: 'not provided yet',
     },
 }, {
     timestamps: true,

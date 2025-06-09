@@ -1,5 +1,6 @@
 export interface TeacherDetails {
   address: string;
+  id: string;
   bloodGroup: string;
   dateOfBirth: string;
   email: string;

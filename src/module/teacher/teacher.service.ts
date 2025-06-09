@@ -1,9 +1,49 @@
+import UserModel from '../user/user.model';
 import { TeacherDetails } from './teacher.interface';
 import TeacherModel from './teacher.model';
 
 const createTeacherIntoDB = async (payload: TeacherDetails) => {
-  const result = await TeacherModel.create(payload);
-  return result;
+  const currentYear = new Date().getFullYear().toString();
+  const yearPrefix = currentYear;
+
+  const lastTeacherOfYear = await TeacherModel.findOne({
+    id: { $regex: `^${yearPrefix}` },
+  }).sort({ createdAt: -1 });
+
+  let newSerialNumber = 1;
+  if (lastTeacherOfYear && lastTeacherOfYear.id) {
+    const lastId = lastTeacherOfYear.id;
+    const lastSerial = parseInt(lastId.slice(4), 10);
+    newSerialNumber = lastSerial + 1;
+  }
+
+  const serialPart = newSerialNumber.toString().padStart(4, '0');
+  const teacherId = `${yearPrefix}${serialPart}`;
+
+  const password = Math.floor(10000000 + Math.random() * 90000000).toString();
+
+  const userData = {
+    name: payload.teacherName,
+    id: teacherId,
+    role: 'teacher',
+    password,
+    image: payload.teacherImage || '',
+    class: payload.shift,
+  };
+
+  const TeacherData = {
+    ...payload,
+    id: teacherId,
+    teacherPassword: password,
+  };
+
+  const teacher = await TeacherModel.create(TeacherData);
+  const user = await UserModel.create(userData);
+
+  return {
+    teacher,
+    user,
+  };
 };
 
 const getAllTeacherIntoDB = async () => {

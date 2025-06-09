@@ -1,5 +1,6 @@
 export interface StudentInfo {
   address: string;
+  id: string;
   birthCertificate: string;
   bloodGroup: string;
   class: string;

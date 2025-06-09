@@ -12,10 +12,38 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const user_model_1 = __importDefault(require("../user/user.model"));
 const teacher_model_1 = __importDefault(require("./teacher.model"));
 const createTeacherIntoDB = (payload) => __awaiter(void 0, void 0, void 0, function* () {
-    const result = yield teacher_model_1.default.create(payload);
-    return result;
+    const currentYear = new Date().getFullYear().toString();
+    const yearPrefix = currentYear;
+    const lastTeacherOfYear = yield teacher_model_1.default.findOne({
+        id: { $regex: `^${yearPrefix}` },
+    }).sort({ createdAt: -1 });
+    let newSerialNumber = 1;
+    if (lastTeacherOfYear && lastTeacherOfYear.id) {
+        const lastId = lastTeacherOfYear.id;
+        const lastSerial = parseInt(lastId.slice(4), 10);
+        newSerialNumber = lastSerial + 1;
+    }
+    const serialPart = newSerialNumber.toString().padStart(4, '0');
+    const teacherId = `${yearPrefix}${serialPart}`;
+    const password = Math.floor(10000000 + Math.random() * 90000000).toString();
+    const userData = {
+        name: payload.teacherName,
+        id: teacherId,
+        role: 'teacher',
+        password,
+        image: payload.teacherImage || '',
+        class: payload.shift,
+    };
+    const TeacherData = Object.assign(Object.assign({}, payload), { id: teacherId, teacherPassword: password });
+    const teacher = yield teacher_model_1.default.create(TeacherData);
+    const user = yield user_model_1.default.create(userData);
+    return {
+        teacher,
+        user,
+    };
 });
 const getAllTeacherIntoDB = () => __awaiter(void 0, void 0, void 0, function* () {
     const result = yield teacher_model_1.default.find();

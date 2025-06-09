@@ -1,4 +1,5 @@
 import PostModel from '../post/post.model';
+import UserModel from '../user/user.model';
 import fatherModel from './father/father.model';
 import GairdeanModel from './gairdean/gairdean.model';
 import MotherModel from './mother/mother.model';
@@ -7,8 +8,39 @@ import { StudentInfo } from './student.interface';
 import StudentModel from './student.model';
 
 const createStudentIntoDB = async (payload: StudentInfo) => {
+  const currentYear = new Date().getFullYear().toString();
+  const yearPrefix = currentYear;
+  const lastStudentOfYear = await StudentModel.findOne({
+    id: { $regex: `^${yearPrefix}` },
+  }).sort({ createdAt: -1 });
+
+  let newSerialNumber = 1;
+  if (lastStudentOfYear && lastStudentOfYear.id) {
+    const lastId = lastStudentOfYear.id;
+    const lastSerial = parseInt(lastId.slice(4), 10);
+    newSerialNumber = lastSerial + 1;
+  }
+  const serialPart = newSerialNumber.toString().padStart(4, '0');
+  const studentId = `${yearPrefix}${serialPart}`;
+  payload.id = studentId;
+
+  const password = Math.floor(10000000 + Math.random() * 90000000).toString();
+  payload.password = password;
+
+  const userData = {
+    name: payload.studentNameEnglish,
+    id: studentId,
+    role: 'student',
+    password,
+    image: payload.image || '',
+    class: payload.class || '',
+  };
+
+  // Create the user in the UserModel
+  const user = await UserModel.create(userData);
+
   const result = await StudentModel.create(payload);
-  return result;
+  return { result, user };
 };
 
 const getAllStudentIntoDB = async () => {
