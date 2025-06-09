@@ -26,6 +26,7 @@ const createTeacherIntoDB = (payload) => __awaiter(void 0, void 0, void 0, funct
         const lastSerial = parseInt(lastId.slice(4), 10);
         newSerialNumber = lastSerial + 1;
     }
+    console.log(newSerialNumber, lastTeacherOfYear);
     const serialPart = newSerialNumber.toString().padStart(4, '0');
     const teacherId = `${yearPrefix}${serialPart}`;
     const password = Math.floor(10000000 + Math.random() * 90000000).toString();

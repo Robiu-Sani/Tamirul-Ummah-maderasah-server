@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const student_model_1 = __importDefault(require("../student/student.model"));
 const teacher_model_1 = __importDefault(require("../teacher/teacher.model"));
+const user_model_1 = __importDefault(require("../user/user.model"));
 const studentAuth = (payload) => __awaiter(void 0, void 0, void 0, function* () {
     const { email, password } = payload;
     // Find all students with the provided email
@@ -53,8 +54,31 @@ const teacherAuth = (payload) => __awaiter(void 0, void 0, void 0, function* () 
     // Return the teacher data if authentication is successful
     return teacher;
 });
+const userAuth = (payload) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id, password } = payload;
+    // Find the user with the provided ID
+    const user = (yield user_model_1.default.findOne({ id: id })) ||
+        (yield teacher_model_1.default.findOne({ id: id }));
+    if (!user) {
+        throw new Error('Invalid user ID');
+    }
+    // Compare the provided password with the stored password
+    const isPasswordMatched = user.password === password;
+    if (!isPasswordMatched) {
+        throw new Error('Invalid password');
+    }
+    let member;
+    if (user.role === 'student') {
+        member = yield student_model_1.default.findOne({ id: user.id });
+    }
+    else {
+        member = yield teacher_model_1.default.findOne({ id: user.id });
+    }
+    return { user, member };
+});
 const authDB = {
     studentAuth,
     teacherAuth,
+    userAuth,
 };
 exports.default = authDB;

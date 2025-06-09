@@ -17,6 +17,8 @@ const createTeacherIntoDB = async (payload: TeacherDetails) => {
     newSerialNumber = lastSerial + 1;
   }
 
+  console.log(newSerialNumber, lastTeacherOfYear);
+
   const serialPart = newSerialNumber.toString().padStart(4, '0');
   const teacherId = `${yearPrefix}${serialPart}`;
 

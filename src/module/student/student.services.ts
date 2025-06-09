@@ -20,6 +20,7 @@ const createStudentIntoDB = async (payload: StudentInfo) => {
     const lastSerial = parseInt(lastId.slice(4), 10);
     newSerialNumber = lastSerial + 1;
   }
+
   const serialPart = newSerialNumber.toString().padStart(4, '0');
   const studentId = `${yearPrefix}${serialPart}`;
   payload.id = studentId;
