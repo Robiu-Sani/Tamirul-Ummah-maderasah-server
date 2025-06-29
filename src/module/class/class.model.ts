@@ -5,6 +5,8 @@ import { IClass } from './class.interface';
 const classSchema = new Schema<IClass>(
   {
     name: { type: String, required: true },
+    nameBangla: { type: String, required: true },
+    code: { type: String, required: false },
     isDeleted: { type: Boolean, default: false },
   },
   {

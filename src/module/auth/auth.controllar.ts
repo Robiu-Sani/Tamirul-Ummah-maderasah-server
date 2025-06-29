@@ -11,7 +11,6 @@ const authStudentControllar = async (req: Request, res: Response) => {
       message: 'Login Successful',
       data,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     // Extract the error message to send to the frontend
     res.json({
@@ -32,7 +31,6 @@ const authTeacherControllar = async (req: Request, res: Response) => {
       message: 'Login Successful',
       data,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     // Extract the error message to send to the frontend
     res.json({
@@ -52,7 +50,6 @@ const userAuthControllar = async (req: Request, res: Response) => {
       message: 'Login Successful',
       data,
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     // Extract the error message to send to the frontend
     res.json({

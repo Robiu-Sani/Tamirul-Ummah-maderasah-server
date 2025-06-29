@@ -11,6 +11,7 @@ export interface ISubject {
 export interface IFirstTutorialExam {
   userId: mongoose.Types.ObjectId;
   examName: string;
+  releasDate: Date;
   examYear: number;
   totatlMarks: number;
   parcentage: number;

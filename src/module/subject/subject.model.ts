@@ -6,6 +6,8 @@ export interface ISubjectModel extends ISubject, Document {}
 const subjectSchema = new Schema<ISubjectModel>(
   {
     name: { type: String, required: true },
+    nameBangla: { type: String, required: true },
+    code: { type: String, required: false },
     isDeleted: { type: Boolean, default: false },
   },
   {

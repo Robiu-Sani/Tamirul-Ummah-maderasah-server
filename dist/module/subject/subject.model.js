@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
 const subjectSchema = new mongoose_1.Schema({
     name: { type: String, required: true },
+    nameBangla: { type: String, required: true },
+    code: { type: String, required: false },
     isDeleted: { type: Boolean, default: false },
 }, {
     timestamps: true,

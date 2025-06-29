@@ -49,6 +49,7 @@ const FirstTutorialExamSchema = new mongoose_1.Schema({
         required: true,
     },
     examName: { type: String, required: true },
+    releasDate: { type: Date, required: true },
     examYear: { type: Number, required: true },
     totatlMarks: { type: Number, required: true },
     parcentage: { type: Number, required: true },

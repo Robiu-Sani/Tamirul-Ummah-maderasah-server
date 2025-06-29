@@ -17,6 +17,7 @@ const FirstTutorialExamSchema: Schema = new Schema<IFirstTutorialExam>(
       required: true,
     },
     examName: { type: String, required: true },
+    releasDate: { type: Date, required: true },
     examYear: { type: Number, required: true },
     totatlMarks: { type: Number, required: true },
     parcentage: { type: Number, required: true },

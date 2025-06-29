@@ -13,13 +13,13 @@ const createTeacherIntoDB = async (payload: TeacherDetails) => {
   let newSerialNumber = 1;
   if (lastTeacherOfYear && lastTeacherOfYear.id) {
     const lastId = lastTeacherOfYear.id;
-    const lastSerial = parseInt(lastId.slice(4), 10);
+    const lastSerial = parseInt(lastId.slice(3), 10);
     newSerialNumber = lastSerial + 1;
   }
 
   console.log(newSerialNumber, lastTeacherOfYear);
 
-  const serialPart = newSerialNumber.toString().padStart(4, '0');
+  const serialPart = newSerialNumber.toString().padStart(3, '0');
   const teacherId = `${yearPrefix}${serialPart}`;
 
   const password = Math.floor(10000000 + Math.random() * 90000000).toString();

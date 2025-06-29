@@ -22,7 +22,6 @@ const authStudentControllar = (req, res) => __awaiter(void 0, void 0, void 0, fu
             message: 'Login Successful',
             data,
         });
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }
     catch (error) {
         // Extract the error message to send to the frontend
@@ -42,7 +41,6 @@ const authTeacherControllar = (req, res) => __awaiter(void 0, void 0, void 0, fu
             message: 'Login Successful',
             data,
         });
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }
     catch (error) {
         // Extract the error message to send to the frontend
@@ -62,7 +60,6 @@ const userAuthControllar = (req, res) => __awaiter(void 0, void 0, void 0, funct
             message: 'Login Successful',
             data,
         });
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }
     catch (error) {
         // Extract the error message to send to the frontend
