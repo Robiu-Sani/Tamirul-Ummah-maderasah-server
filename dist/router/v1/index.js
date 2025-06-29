@@ -29,6 +29,7 @@ const release_route_1 = require("../../module/student/result/release/release.rou
 const user_router_1 = require("../../module/user/user.router");
 const class_router_1 = require("../../module/class/class.router");
 const subject_router_1 = require("../../module/subject/subject.router");
+const exam_subject_router_1 = require("../../module/exam-subject/exam-subject.router");
 const router = express_1.default.Router();
 const moduleRoute = [
     {
@@ -126,6 +127,10 @@ const moduleRoute = [
     {
         path: '/subject',
         route: subject_router_1.subject_router,
+    },
+    {
+        path: '/exam-subject',
+        route: exam_subject_router_1.exam_subject,
     },
 ];
 moduleRoute.forEach((route) => router.use(route.path, route.route));

@@ -23,6 +23,7 @@ import { release_route } from '../../module/student/result/release/release.route
 import { user_router } from '../../module/user/user.router';
 import { class_rouote } from '../../module/class/class.router';
 import { subject_router } from '../../module/subject/subject.router';
+import { exam_subject } from '../../module/exam-subject/exam-subject.router';
 
 const router = express.Router();
 
@@ -122,6 +123,10 @@ const moduleRoute = [
   {
     path: '/subject',
     route: subject_router,
+  },
+  {
+    path: '/exam-subject',
+    route: exam_subject,
   },
 ];
 
