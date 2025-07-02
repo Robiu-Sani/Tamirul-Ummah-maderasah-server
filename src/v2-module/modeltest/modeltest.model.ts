@@ -2,8 +2,8 @@ import mongoose, { Schema } from 'mongoose';
 import { ImodeltestTutorialExam } from './modeltest.interface';
 
 const SubjectSchema: Schema = new Schema({
-  subjectName: { type: String, required: true },
-  marks: { type: Number, required: true },
+  subjectName: { type: String, required: true, default: 0 },
+  marks: { type: Number, required: true, default: 0 },
   heightNumber: { type: Number, required: true, default: 100 },
   grade: { type: String, required: true },
 });
@@ -15,8 +15,13 @@ const modeltestTutorialExamSchema: Schema = new Schema<ImodeltestTutorialExam>(
       ref: 'Students',
       required: true,
     },
-    examName: { type: String, required: true },
-    examYear: { type: Number, required: true },
+    releasDate: { type: Date, required: true },
+    examName: {
+      type: String,
+      required: true,
+      default: `Model Test ${new Date().getFullYear()}`,
+    },
+    examYear: { type: Date, required: true, default: new Date().getFullYear() },
     totatlMarks: { type: Number, required: true },
     parcentage: { type: Number, required: true },
     position: { type: Number, required: true },

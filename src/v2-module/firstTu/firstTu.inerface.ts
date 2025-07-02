@@ -12,7 +12,7 @@ export interface IFirstTutorialExam {
   userId: mongoose.Types.ObjectId;
   examName: string;
   releasDate: Date;
-  examYear: number;
+  examYear: Date;
   totatlMarks: number;
   parcentage: number;
   position: number;

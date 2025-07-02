@@ -37,10 +37,10 @@ exports.healfTutiral = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const SubjectSchema = new mongoose_1.Schema({
     subjectName: { type: String, required: true },
-    marks: { type: Number, required: true },
-    parcentage: { type: Number, required: true },
-    firstTutiralParcentage: { type: Number, required: true },
-    totalParcentage: { type: Number, required: true },
+    marks: { type: Number, required: true, default: 0 },
+    parcentage: { type: Number, required: true, default: 0 },
+    firstTutiralParcentage: { type: Number, required: true, default: 0 },
+    totalParcentage: { type: Number, required: true, default: 0 },
     heightNumber: { type: Number, required: true, default: 100 },
     grade: { type: String, required: true },
 });
@@ -50,8 +50,13 @@ const healfTutorialExamSchema = new mongoose_1.Schema({
         ref: 'Students',
         required: true,
     },
-    examName: { type: String, required: true },
-    examYear: { type: Number, required: true },
+    releasDate: { type: Date, required: true },
+    examName: {
+        type: String,
+        required: true,
+        default: `Half Yearly Exam ${new Date().getFullYear()}`,
+    },
+    examYear: { type: Date, required: true, default: new Date().getFullYear() },
     totatlMarks: { type: Number, required: true },
     parcentage: { type: Number, required: true },
     parcentageTotal: { type: Number, required: true },

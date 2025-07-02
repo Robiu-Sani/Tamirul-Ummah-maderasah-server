@@ -11,7 +11,8 @@ export interface IadmitionTutorialExam {
   userId: string;
   name: string;
   examName: string;
-  examYear: number;
+  releasDate: Date;
+  examYear: Date;
   totatlMarks: number;
   parcentage: number;
   position: number;

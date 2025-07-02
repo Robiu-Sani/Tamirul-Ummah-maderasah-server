@@ -4,13 +4,13 @@ import { IfinalTutorialExam, ISubject } from './final.interface';
 const subjectSchema = new Schema<ISubject>(
   {
     subjectName: { type: String, required: true },
-    marks: { type: Number, required: true },
-    parcentage: { type: Number, required: true },
-    secondTutiralParcentage: { type: Number, required: true },
-    totalParcentage: { type: Number, required: true },
-    helfYearlyExamTotal: { type: Number, required: true },
-    total: { type: Number, required: true },
-    heightNumber: { type: Number, required: true },
+    marks: { type: Number, required: true, default: 0 },
+    parcentage: { type: Number, required: true, default: 0 },
+    secondTutiralParcentage: { type: Number, required: true, default: 0 },
+    totalParcentage: { type: Number, required: true, default: 0 },
+    helfYearlyExamTotal: { type: Number, required: true, default: 0 },
+    total: { type: Number, required: true, default: 0 },
+    heightNumber: { type: Number, required: true, default: 100 },
     grade: { type: String, required: true },
   },
   { _id: false },
@@ -20,8 +20,13 @@ const subjectSchema = new Schema<ISubject>(
 const finalTutorialExamSchema = new Schema<IfinalTutorialExam>(
   {
     userId: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
-    examName: { type: String, required: true },
-    examYear: { type: Number, required: true },
+    releasDate: { type: Date, required: true },
+    examName: {
+      type: String,
+      required: true,
+      default: `Final Exam ${new Date().getFullYear()}`,
+    },
+    examYear: { type: Date, required: true, default: new Date().getFullYear() },
     totatlMarks: { type: Number, required: true },
     parcentage: { type: Number, required: true },
     position: { type: Number, required: true },

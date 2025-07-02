@@ -3,8 +3,8 @@ import { ItestTutorialExam } from './test.interface';
 
 const SubjectSchema: Schema = new Schema({
   subjectName: { type: String, required: true },
-  marks: { type: Number, required: true },
-  parcentage: { type: Number, required: true },
+  marks: { type: Number, required: true, default: 0 },
+  parcentage: { type: Number, required: true, default: 0 },
   heightNumber: { type: Number, required: true, default: 100 },
   grade: { type: String, required: true },
 });
@@ -16,8 +16,13 @@ const testTutorialExamSchema: Schema = new Schema<ItestTutorialExam>(
       ref: 'Students',
       required: true,
     },
-    examName: { type: String, required: true },
-    examYear: { type: Number, required: true },
+    examName: {
+      type: String,
+      required: true,
+      default: `Test ${new Date().getFullYear()}`,
+    },
+    releasDate: { type: Date, required: true },
+    examYear: { type: Date, required: true, default: new Date().getFullYear() },
     totatlMarks: { type: Number, required: true },
     parcentage: { type: Number, required: true },
     position: { type: Number, required: true },

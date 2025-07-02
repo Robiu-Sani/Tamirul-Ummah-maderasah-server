@@ -36,8 +36,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.modeltestTutiral = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const SubjectSchema = new mongoose_1.Schema({
-    subjectName: { type: String, required: true },
-    marks: { type: Number, required: true },
+    subjectName: { type: String, required: true, default: 0 },
+    marks: { type: Number, required: true, default: 0 },
     heightNumber: { type: Number, required: true, default: 100 },
     grade: { type: String, required: true },
 });
@@ -47,8 +47,13 @@ const modeltestTutorialExamSchema = new mongoose_1.Schema({
         ref: 'Students',
         required: true,
     },
-    examName: { type: String, required: true },
-    examYear: { type: Number, required: true },
+    releasDate: { type: Date, required: true },
+    examName: {
+        type: String,
+        required: true,
+        default: `Model Test ${new Date().getFullYear()}`,
+    },
+    examYear: { type: Date, required: true, default: new Date().getFullYear() },
     totatlMarks: { type: Number, required: true },
     parcentage: { type: Number, required: true },
     position: { type: Number, required: true },

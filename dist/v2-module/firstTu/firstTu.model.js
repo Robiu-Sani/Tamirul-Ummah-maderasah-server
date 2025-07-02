@@ -37,8 +37,8 @@ exports.FirstTutiral = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const SubjectSchema = new mongoose_1.Schema({
     subjectName: { type: String, required: true },
-    marks: { type: Number, required: true },
-    parcentage: { type: Number, required: true },
+    marks: { type: Number, required: true, default: 0 },
+    parcentage: { type: Number, required: true, default: 0 },
     heightNumber: { type: Number, required: true, default: 100 },
     grade: { type: String, required: true },
 });
@@ -48,9 +48,13 @@ const FirstTutorialExamSchema = new mongoose_1.Schema({
         ref: 'Students',
         required: true,
     },
-    examName: { type: String, required: true },
     releasDate: { type: Date, required: true },
-    examYear: { type: Number, required: true },
+    examName: {
+        type: String,
+        required: true,
+        default: `First Tutorial ${new Date().getFullYear()}`,
+    },
+    examYear: { type: Date, required: true, default: new Date().getFullYear() },
     totatlMarks: { type: Number, required: true },
     parcentage: { type: Number, required: true },
     position: { type: Number, required: true },
