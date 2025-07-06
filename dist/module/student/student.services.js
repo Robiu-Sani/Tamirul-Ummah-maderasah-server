@@ -147,12 +147,29 @@ const updateSingleByPutStudentIntoDB = (id, info) => __awaiter(void 0, void 0, v
     return result;
 });
 const getStudentByClassIntoDB = (className, gender) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(gender);
     const result = yield student_model_1.default.find({
         class: className,
-        gender: gender,
+        // gender: gender,
     }).select('studentNameEnglish classRoll gender');
     return result;
 });
+// const getStudentByClassIDIntoDB = async (
+//   className: string,
+//   gender: string,
+// ): Promise<
+//   {
+//     studentNameEnglish: string;
+//     classRoll: number;
+//     gender: string;
+//   }[]
+// > => {
+//   const result = await StudentModel.find({
+//     class: className,
+//     gender: gender,
+//   }).select('studentNameEnglish classRoll gender');
+//   return result;
+// };
 const StudentDB = {
     createStudentIntoDB,
     getAllStudentIntoDB,

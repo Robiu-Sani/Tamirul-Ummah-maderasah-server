@@ -193,15 +193,33 @@ const getStudentByClassIntoDB = async (
   {
     studentNameEnglish: string;
     classRoll: number;
-    gender: string; // Remove `undefined` here
+    gender: string;
   }[]
 > => {
+  console.log(gender);
   const result = await StudentModel.find({
     class: className,
-    gender: gender,
+    // gender: gender,
   }).select('studentNameEnglish classRoll gender');
   return result;
 };
+
+// const getStudentByClassIDIntoDB = async (
+//   className: string,
+//   gender: string,
+// ): Promise<
+//   {
+//     studentNameEnglish: string;
+//     classRoll: number;
+//     gender: string;
+//   }[]
+// > => {
+//   const result = await StudentModel.find({
+//     class: className,
+//     gender: gender,
+//   }).select('studentNameEnglish classRoll gender');
+//   return result;
+// };
 
 const StudentDB = {
   createStudentIntoDB,

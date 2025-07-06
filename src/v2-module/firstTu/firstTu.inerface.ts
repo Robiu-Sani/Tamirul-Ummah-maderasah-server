@@ -9,15 +9,15 @@ export interface ISubject {
 }
 
 export interface IFirstTutorialExam {
-  userId: mongoose.Types.ObjectId;
-  examName: string;
-  releasDate: Date;
-  examYear: Date;
+  userId: mongoose.Types.ObjectId; //
+  examName: string; //
+  releasDate: Date; //
+  examYear: Date; //
   totatlMarks: number;
   parcentage: number;
   position: number;
-  teacherId: mongoose.Types.ObjectId;
-  isDeleted?: boolean;
-  class: string;
+  teacherId: mongoose.Types.ObjectId; //
+  isDeleted?: boolean; //
+  class: string; //
   subject: ISubject[];
 }
