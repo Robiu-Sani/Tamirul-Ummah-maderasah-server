@@ -20,8 +20,9 @@ const admitionTutorialExamSchema: Schema = new Schema<IadmitionTutorialExam>(
     releasDate: { type: Date, required: true },
     examYear: { type: Date, required: true, default: new Date().getFullYear() },
     totatlMarks: { type: Number, required: true },
+    class: { type: String, default: 'not set' },
     parcentage: { type: Number, required: true },
-    position: { type: Number, required: true },
+    position: { type: Number, required: false },
     teacherId: {
       type: Schema.Types.ObjectId,
       ref: 'teacher',

@@ -13,7 +13,6 @@ const createStudentIntoDB = async (payload: StudentInfo) => {
   const lastStudentOfYear = await StudentModel.findOne({
     id: { $regex: `^${yearPrefix}` },
   }).sort({ createdAt: -1 });
-
   let newSerialNumber = 1;
   if (lastStudentOfYear && lastStudentOfYear.id) {
     const lastId = lastStudentOfYear.id;
@@ -92,7 +91,7 @@ const getTableData = async ({
   const [students, allStudents] = await Promise.all([
     StudentModel.find(query)
       .select(
-        'bloodGroup class gender classRoll type section isRunning studentNameEnglish',
+        'bloodGroup class gender classRoll type section isRunning id studentNameEnglish',
       )
       .skip(skip)
       .limit(limit),

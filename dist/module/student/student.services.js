@@ -78,7 +78,7 @@ const getTableData = (_a) => __awaiter(void 0, [_a], void 0, function* ({ search
     // Fetch students, count total students, and fetch unique classes
     const [students, allStudents] = yield Promise.all([
         student_model_1.default.find(query)
-            .select('bloodGroup class gender classRoll type section isRunning studentNameEnglish')
+            .select('bloodGroup class gender classRoll type section isRunning id studentNameEnglish')
             .skip(skip)
             .limit(limit),
         student_model_1.default.find(query).select('class'),

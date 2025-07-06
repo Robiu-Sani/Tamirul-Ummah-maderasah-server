@@ -57,12 +57,13 @@ const FirstTutorialExamSchema = new mongoose_1.Schema({
     examYear: { type: Date, required: true, default: new Date().getFullYear() },
     totatlMarks: { type: Number, required: true },
     parcentage: { type: Number, required: true },
-    position: { type: Number, required: true },
+    position: { type: Number, required: false },
     teacherId: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'teacher',
         required: true,
     },
+    class: { type: String, default: 'not set' },
     isDeleted: { type: Boolean, default: false },
     subject: [SubjectSchema],
 }, { timestamps: true });

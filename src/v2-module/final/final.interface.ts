@@ -20,6 +20,7 @@ export interface IfinalTutorialExam {
   totatlMarks: number;
   parcentage: number;
   position: number;
+  class: string;
   parcentageTotal: number;
   finalParcentTotal: number;
   teacherId: mongoose.Types.ObjectId;

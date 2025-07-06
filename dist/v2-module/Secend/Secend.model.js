@@ -57,7 +57,8 @@ const SecendTutorialExamSchema = new mongoose_1.Schema({
     examYear: { type: Date, required: true, default: new Date().getFullYear() },
     totatlMarks: { type: Number, required: true },
     parcentage: { type: Number, required: true },
-    position: { type: Number, required: true },
+    position: { type: Number, required: false },
+    class: { type: String, default: 'not set' },
     teacherId: {
         type: mongoose_1.Schema.Types.ObjectId,
         ref: 'teacher',

@@ -18,5 +18,6 @@ export interface IFirstTutorialExam {
   position: number;
   teacherId: mongoose.Types.ObjectId;
   isDeleted?: boolean;
+  class: string;
   subject: ISubject[];
 }

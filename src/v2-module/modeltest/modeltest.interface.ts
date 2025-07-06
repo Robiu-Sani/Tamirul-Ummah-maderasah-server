@@ -13,6 +13,7 @@ export interface ImodeltestTutorialExam {
   examYear: Date;
   releasDate: Date;
   totatlMarks: number;
+  class: string;
   parcentage: number;
   position: number;
   teacherId: mongoose.Types.ObjectId;

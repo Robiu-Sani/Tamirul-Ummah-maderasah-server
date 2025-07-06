@@ -29,11 +29,12 @@ const finalTutorialExamSchema = new Schema<IfinalTutorialExam>(
     examYear: { type: Date, required: true, default: new Date().getFullYear() },
     totatlMarks: { type: Number, required: true },
     parcentage: { type: Number, required: true },
-    position: { type: Number, required: true },
+    position: { type: Number, required: false },
     parcentageTotal: { type: Number, required: true },
     finalParcentTotal: { type: Number, required: true },
     teacherId: { type: Schema.Types.ObjectId, required: true, ref: 'User' },
     isDeleted: { type: Boolean, default: false },
+    class: { type: String, default: 'not set' },
     subject: { type: [subjectSchema], required: true },
   },
   {

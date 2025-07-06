@@ -28,7 +28,8 @@ const healfTutorialExamSchema: Schema = new Schema<IhealfTutorialExam>(
     totatlMarks: { type: Number, required: true },
     parcentage: { type: Number, required: true },
     parcentageTotal: { type: Number, required: true },
-    position: { type: Number, required: true },
+    class: { type: String, default: 'not set' },
+    position: { type: Number, required: false },
     teacherId: {
       type: Schema.Types.ObjectId,
       ref: 'teacher',

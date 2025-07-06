@@ -25,7 +25,8 @@ const SecendTutorialExamSchema: Schema = new Schema<ISecendTutorialExam>(
     examYear: { type: Date, required: true, default: new Date().getFullYear() },
     totatlMarks: { type: Number, required: true },
     parcentage: { type: Number, required: true },
-    position: { type: Number, required: true },
+    position: { type: Number, required: false },
+    class: { type: String, default: 'not set' },
     teacherId: {
       type: Schema.Types.ObjectId,
       ref: 'teacher',

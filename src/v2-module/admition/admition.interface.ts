@@ -13,6 +13,7 @@ export interface IadmitionTutorialExam {
   examName: string;
   releasDate: Date;
   examYear: Date;
+  class: string;
   totatlMarks: number;
   parcentage: number;
   position: number;

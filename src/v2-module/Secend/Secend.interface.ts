@@ -16,6 +16,7 @@ export interface ISecendTutorialExam {
   totatlMarks: number;
   parcentage: number;
   position: number;
+  class: string;
   teacherId: mongoose.Types.ObjectId;
   isDeleted?: boolean;
   subject: ISubject[];
