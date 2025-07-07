@@ -22,11 +22,18 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.healfTutorialExamService = void 0;
 const Healf_model_1 = require("./Healf.model");
+const firstTu_model_1 = require("../firstTu/firstTu.model");
 exports.healfTutorialExamService = {
-    // Create new exam
     createExam(examData) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield Healf_model_1.healfTutiral.create(examData);
+            var _a;
+            const firstTutiral = yield firstTu_model_1.FirstTutiral.findOne({
+                examName: `First Tutorial ${new Date().getFullYear()}`,
+                userId: examData.userId,
+            });
+            const parcentageFromFirst = (_a = firstTutiral === null || firstTutiral === void 0 ? void 0 : firstTutiral.parcentage) !== null && _a !== void 0 ? _a : 0;
+            const finalData = Object.assign(Object.assign({}, examData), { parcentageTotal: parcentageFromFirst + examData.parcentage });
+            return yield Healf_model_1.healfTutiral.create(finalData);
         });
     },
     // Get all exams with pagination and search

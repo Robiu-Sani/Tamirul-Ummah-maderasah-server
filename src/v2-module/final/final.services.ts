@@ -2,6 +2,8 @@
 import { SortOrder } from 'mongoose';
 import { IfinalTutorialExam } from './final.interface';
 import FinalTutorialExamModel from './final.model';
+import { SecendTutiral } from '../Secend/Secend.model';
+import { healfTutiral } from '../Healf/Healf.model';
 
 // Basic pagination interface
 interface PaginationOptions {
@@ -21,7 +23,25 @@ interface PaginationResult<T> {
 export const healfTutorialExamService = {
   // Create new exam
   async createExam(examData: IfinalTutorialExam): Promise<IfinalTutorialExam> {
-    return await FinalTutorialExamModel.create(examData);
+    const firstTutiral = await SecendTutiral.findOne({
+      examName: `Second Tutorial ${new Date().getFullYear()}`,
+      userId: examData.userId,
+    });
+    const halfyearly = await healfTutiral.findOne({
+      examName: `Half Yearly Exam ${new Date().getFullYear()}`,
+      userId: examData.userId,
+    });
+    const parcentageFromFirst = firstTutiral?.parcentage ?? 0;
+    const parcentageFromsecond = halfyearly?.parcentageTotal ?? 0;
+    const parcentage = parcentageFromFirst + examData.parcentage;
+    const finalParcentage = parcentage + parcentageFromsecond;
+    const finalData = {
+      ...examData,
+      parcentageTotal: parcentage,
+      finalParcentTotal: finalParcentage,
+    };
+
+    return await FinalTutorialExamModel.create(finalData);
   },
 
   // Get all exams with pagination and search

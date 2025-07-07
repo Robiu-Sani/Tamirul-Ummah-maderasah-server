@@ -2,6 +2,7 @@
 import { SortOrder } from 'mongoose';
 import { IhealfTutorialExam } from './Healf.interface';
 import { healfTutiral } from './Healf.model';
+import { FirstTutiral } from '../firstTu/firstTu.model';
 
 // Basic pagination interface
 interface PaginationOptions {
@@ -19,9 +20,17 @@ interface PaginationResult<T> {
 }
 
 export const healfTutorialExamService = {
-  // Create new exam
   async createExam(examData: IhealfTutorialExam): Promise<IhealfTutorialExam> {
-    return await healfTutiral.create(examData);
+    const firstTutiral = await FirstTutiral.findOne({
+      examName: `First Tutorial ${new Date().getFullYear()}`,
+      userId: examData.userId,
+    });
+    const parcentageFromFirst = firstTutiral?.parcentage ?? 0;
+    const finalData = {
+      ...examData,
+      parcentageTotal: parcentageFromFirst + examData.parcentage,
+    };
+    return await healfTutiral.create(finalData);
   },
 
   // Get all exams with pagination and search

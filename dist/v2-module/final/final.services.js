@@ -25,11 +25,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.healfTutorialExamService = void 0;
 const final_model_1 = __importDefault(require("./final.model"));
+const Secend_model_1 = require("../Secend/Secend.model");
+const Healf_model_1 = require("../Healf/Healf.model");
 exports.healfTutorialExamService = {
     // Create new exam
     createExam(examData) {
         return __awaiter(this, void 0, void 0, function* () {
-            return yield final_model_1.default.create(examData);
+            var _a, _b;
+            const firstTutiral = yield Secend_model_1.SecendTutiral.findOne({
+                examName: `Second Tutorial ${new Date().getFullYear()}`,
+                userId: examData.userId,
+            });
+            const halfyearly = yield Healf_model_1.healfTutiral.findOne({
+                examName: `Half Yearly Exam ${new Date().getFullYear()}`,
+                userId: examData.userId,
+            });
+            const parcentageFromFirst = (_a = firstTutiral === null || firstTutiral === void 0 ? void 0 : firstTutiral.parcentage) !== null && _a !== void 0 ? _a : 0;
+            const parcentageFromsecond = (_b = halfyearly === null || halfyearly === void 0 ? void 0 : halfyearly.parcentageTotal) !== null && _b !== void 0 ? _b : 0;
+            const parcentage = parcentageFromFirst + examData.parcentage;
+            const finalParcentage = parcentage + parcentageFromsecond;
+            const finalData = Object.assign(Object.assign({}, examData), { parcentageTotal: parcentage, finalParcentTotal: finalParcentage });
+            return yield final_model_1.default.create(finalData);
         });
     },
     // Get all exams with pagination and search

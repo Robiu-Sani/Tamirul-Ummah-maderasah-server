@@ -4,8 +4,6 @@ export interface ISubject {
   subjectName: string;
   marks: number;
   parcentage: number;
-  firstTutiralParcentage: number;
-  totalParcentage: number;
   heightNumber: number;
   grade: string;
 }
